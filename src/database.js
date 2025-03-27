@@ -1,0 +1,113 @@
+import imageKnowledgeChat from "./assets/reaktor-images/undraw_chat_qmyo.svg";
+import imageOrderManager from "./assets/reaktor-images/undraw_order-delivered_puaw.svg";
+import imageICP from "./assets/reaktor-images/undraw_to-do_06xe.svg"
+import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.svg'
+ 
+ export const blueprints = [
+  {
+    id: "op.demo.knowledge-chat",
+    label: "Knowledge Chat",
+    description:
+      "A chat-based application that is able to retrieve data from a knowledge base.",
+    imageSrc: imageKnowledgeChat,
+    official: true,
+    type: "Blueprint",
+    tags: ["Tag 1", "Tag 2", "Tag 3"],
+    group: "Chat",
+    version: "v1",
+    deployments: [
+      {id: "95QDRrfaYg7sqHgwP", version: "v1", label: "Knowledge Chat for Sales", description: "This deployment is a knowledge chat for sales teams to chat with sales documents.", group: "Sales", tags: ['demo', 'sales'], imageSrc: imageKnowledgeChat}
+    ]
+  },
+  {
+    id: "op.demo.order-manager",
+    label: "Order Manager",
+    description:
+      "Automates the processing of customer orders.",
+    imageSrc: imageOrderManager,
+    official: false,
+    type: "Blueprint",
+    tags: [],
+    group: "Backoffice",
+    version: "v1",
+    deployments: []
+  },
+  {
+    id: "op.demo.icp-searcher",
+    label: "ICP Identification Agent",
+    description:
+      "Researches companies and contacts based on your ICP definition.",
+    imageSrc: imageICP,
+    official: false,
+    type: "Blueprint",
+    tags: [],
+    group: "Sales",
+    version: "v1",
+    deployments: []
+  },
+  {
+    id: "op.demo.lead-nurturer",
+    label: "Lead-Nurturing Agent",
+    description:
+      "Researches all relevant data and information about your prospects.",
+    imageSrc: imageLeadNurturer,
+    official: false,
+    type: "Blueprint",
+    tags: [],
+    group: "Sales",
+    version: "v1",
+    deployments: []
+  },
+  {
+    id: "op.demo.sales-contact-listener",
+    label: "Sales Contact Listener",
+    description:
+      "Listens to updates of your contacts and informs you when to reach out.",
+    imageSrc: imageKnowledgeChat,
+    official: true,
+    type: "Blueprint",
+    tags: [],
+    group: "Sales",
+    version: "v1",
+    deployments: []
+  },
+  {
+    id: "op.demo.sales-coach",
+    label: "Sales Coach",
+    description:
+      "Simulates real-life sales situations and improves your skills.",
+    imageSrc: imageKnowledgeChat,
+    official: true,
+    type: "Blueprint",
+    tags: [],
+    group: "Sales",
+    version: "v1",
+    deployments: []
+  },
+  {
+    id: "op.demo.customer-support-agent",
+    label: "Customer Support Agent",
+    description:
+      "Takes care of your customers' questions and increases satisfaction.",
+    imageSrc: imageKnowledgeChat,
+    official: false,
+    type: "Blueprint",
+    tags: [],
+    group: "Customer Support",
+    version: "v1",
+    deployments: []
+  },
+  {
+    id: "op.demo.virtual-accountant",
+    label: "Virtual Accountant",
+    description:
+      "Prevents paying bills twice by checking all your suppliers invoices.",
+    imageSrc: imageKnowledgeChat,
+    official: true,
+    type: "Blueprint",
+    tags: [],
+    group: "Accounting",
+    version: "v1",
+    deployments: []
+  },
+];
