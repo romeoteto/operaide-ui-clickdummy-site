@@ -82,7 +82,7 @@ export default function DeploymentDetails() {
       <TabNav
         tabs={tabs}
         activeKey={activeKey}
-        setActiveKey={(key) => setActiveKey(key)}
+        onTabClick={(key) => setActiveKey(key)}
       />
       {activeKey === 0 && (
         <InfoPanel

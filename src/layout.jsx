@@ -10,18 +10,24 @@ import {
   Blocks,
   Settings2,
   MonitorCog,
+  TrendingUp,
+  FileText,
 } from "lucide-react";
-import { Button, Layout, Menu, Tag, Flex, theme } from "antd";
+import { Button, Layout, Menu, Tag, Flex, Divider, theme } from "antd";
 import { useLocation } from "wouter";
 
 import logo from "./assets/logo.svg";
 import signet from "./assets/signet.svg";
-import UserMenu from "./components/userMenu";
 import Breadcrumbs from "./components/breadcrumbs";
+import UserMenu3 from "./components/userMenu3";
 
 const { Header, Sider, Content } = Layout;
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({
+  children,
+  currentOrganization,
+  setCurrentOrganization,
+}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
   const {
@@ -36,7 +42,7 @@ const AppLayout = ({ children }) => {
     );
   };
 
-  const mainMenuKeys = [
+  const menuKeys = [
     "/",
     "/reaktor-ai-engine",
     "/data-studio",
@@ -46,9 +52,9 @@ const AppLayout = ({ children }) => {
     "/integrations",
     "/integrations/ai-provider",
     "/integrations/services",
+    "/settings",
+    "/system-admin",
   ];
-
-  const settingsMenuKeys = ["/settings", "/system-admin"];
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -96,8 +102,8 @@ const AppLayout = ({ children }) => {
         >
           <Menu
             theme="light"
-            mode="inline"
-            selectedKeys={[findSelectedKey(location, mainMenuKeys)]}
+            mode="vertical"
+            selectedKeys={[findSelectedKey(location, menuKeys)]}
             onClick={({ key }) => navigate(key)}
             style={{ border: "none", backgroundColor: "transparent" }}
             items={[
@@ -111,11 +117,11 @@ const AppLayout = ({ children }) => {
                 icon: <Atom size={"1em"} />,
                 label: "Reaktor AI Engine",
               },
+
               {
                 key: "/data-studio",
                 label: "Data Studio",
-                icon: collapsed && <Database size={"1em"} />,
-                type: !collapsed && "group",
+                icon: <Database size={"1em"} />,
                 children: [
                   {
                     key: "/data-studio/documents",
@@ -134,11 +140,11 @@ const AppLayout = ({ children }) => {
                   },
                 ],
               },
+
               {
                 key: "/integrations",
-                label: !collapsed && "Integrations",
-                icon: collapsed && <Blocks size={"1em"} />,
-                type: !collapsed && "group",
+                label: "Integrations",
+                icon: <Blocks size={"1em"} />,
                 children: [
                   {
                     key: "/integrations/ai-provider",
@@ -152,27 +158,61 @@ const AppLayout = ({ children }) => {
                   },
                 ],
               },
+              {
+                type: "divider",
+              },
+              {
+                key: "/settings",
+                label: "Settings",
+                icon: <Settings2 size="1em" />,
+              },
             ]}
           />
           <Flex vertical>
             <Menu
               theme="light"
-              mode="inline"
-              selectedKeys={[findSelectedKey(location, settingsMenuKeys)]}
-              onClick={({ key }) => navigate(key)}
+              mode="vertical"
+              selectedKeys={[findSelectedKey(location, menuKeys)]}
               style={{ border: "none" }}
               items={[
                 {
-                  key: "/settings",
-                  icon: <Settings2 size={"1em"} />,
-                  label: "Settings",
+                  key: "documentation",
+                  icon: <FileText size="1em" />,
+                  label: (
+                    <a
+                      href="https://staging.demo.operaide.ai/op-docs/docs/overview/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Documentation
+                    </a>
+                  ),
+                },
+                {
+                  key: "changelog",
+                  icon: <TrendingUp size="1em" />,
+                  label: (
+                    <a
+                      href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Changelog
+                    </a>
+                  ),
                 },
                 {
                   key: "/system-admin",
-                  icon: <MonitorCog size={"1em"} />,
+                  icon: <MonitorCog size="1em" />,
                   label: "System Admin",
+                  onClick: ({ key }) => navigate(key),
                 },
               ]}
+            />
+            <UserMenu3
+              currentOrganization={currentOrganization}
+              collapsed={collapsed}
+              setCurrentOrganization={(value) => setCurrentOrganization(value)}
             />
           </Flex>
         </Flex>
@@ -205,24 +245,23 @@ const AppLayout = ({ children }) => {
               type="text"
               icon={<PanelLeft size={"1em"} />}
               onClick={() => setCollapsed(!collapsed)}
-              style={{ fontSize: "14px" }}
+              style={{ fontSize: "16px" }}
             />
+
             <div style={{ marginLeft: marginXS }}>
-              <Breadcrumbs />
+              <Breadcrumbs currentOrganization={currentOrganization} />
             </div>
           </Flex>
-          <Flex>
-            <Flex align="center">
-              <Tag color="magenta">Super Admin</Tag>
-            </Flex>
-            <UserMenu />
+          <Flex align="center">
+            <Tag color="magenta">Super Admin</Tag>
           </Flex>
         </Header>
 
         <Content
           style={{
             marginTop: 58,
-            padding: "0px 24px 24px 24px",
+            padding: 24,
+            paddingTop: 0,
             overflowY: "auto",
             height: "calc(100vh - 58px)",
             background: colorBgContainer,

@@ -4,11 +4,11 @@ const { Title, Text } = Typography;
 
 export default function PageHeader({ title, subtitle }) {
   const {
-    token: { margin, marginLG },
+    token: { marginLG },
   } = theme.useToken();
 
   return (
-    <Flex vertical>
+    <Flex vertical style={{ paddingTop: 24 }}>
       <Title level={3}>{title}</Title>
       {subtitle && (
         <div style={{ maxWidth: "500px", marginBottom: marginLG }}>

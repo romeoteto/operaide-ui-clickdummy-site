@@ -90,7 +90,7 @@ export default function ReaktorDetails() {
       <TabNav
         tabs={tabs}
         activeKey={activeKey}
-        setActiveKey={(key) => setActiveKey(key)}
+        onTabClick={(key) => setActiveKey(key)}
       />
       {activeKey === 0 && (
         <Flex vertical gap="middle">

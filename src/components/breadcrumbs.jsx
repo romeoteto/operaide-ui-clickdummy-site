@@ -2,9 +2,9 @@ import { Breadcrumb } from "antd";
 import { Link, useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
 import { blueprints } from "../database";
+import { organizations } from "../utils";
 
 const routeNameMap = {
-  "": "Home",
   "reaktor-ai-engine": "Reaktor AI Engine",
   "data-studio": "Data Studio",
   documents: "Documents",
@@ -14,6 +14,15 @@ const routeNameMap = {
   "ai-provider": "AI Provider",
   services: "Services",
   settings: "Settings",
+  "system-admin": "System Admin",
+  organizations: "Organizations",
+  "all-users": "All Users",
+  migrations: "Migrations",
+  permissions: "Permissions",
+  general: "General",
+  members: "Members",
+  registration: "Registration",
+  "api-keys": "API Keys",
 };
 
 const dynamicNameMap = {
@@ -23,22 +32,54 @@ const dynamicNameMap = {
   [":deployment-id"]: (id) => `${id}`,
 };
 
-const Breadcrumbs = () => {
+const nonClickableSegments = [
+  "data-studio",
+  "integrations",
+  "system-admin",
+  "settings",
+  // add more segments here that shouldn't be clickable
+];
+
+const Breadcrumbs = ({ currentOrganization }) => {
   const [location] = useLocation();
   const pathSnippets = location.split("/").filter(Boolean);
 
-  if (pathSnippets.length < 2) {
-    return null;
-  }
+  const currentOrgLabel = organizations.find(
+    (organization) => organization.value === currentOrganization
+  ).label;
 
   const breadcrumbItems = [];
+
+  const isHome = pathSnippets.length === 0;
+  const isSystemAdmin = pathSnippets[0] === "system-admin";
+
+  // Show currentOrgLabel (as plain text on home, as link otherwise)
+  if (!isSystemAdmin) {
+    breadcrumbItems.push({
+      title: isHome ? (
+        currentOrgLabel
+      ) : (
+        <Link href={`/`}>{currentOrgLabel}</Link>
+      ),
+    });
+  }
+
+  // If it's just home, return now with only the org label
+  if (isHome) {
+    return (
+      <Breadcrumb
+        items={breadcrumbItems}
+        separator={<ChevronRight size="1em" style={{ height: "100%" }} />}
+      />
+    );
+  }
+
   let accumulatedPath = "";
 
   pathSnippets.forEach((segment, index) => {
     accumulatedPath += `/${segment}`;
     const prevSegment = pathSnippets[index - 1];
 
-    // If previous segment has a dynamic name formatter
     let title;
     if (dynamicNameMap[prevSegment]) {
       title = dynamicNameMap[prevSegment](segment);
@@ -46,9 +87,12 @@ const Breadcrumbs = () => {
       title = routeNameMap[segment] || segment;
     }
 
+    const isLast = index === pathSnippets.length - 1;
+    const isNonClickable = nonClickableSegments.includes(segment);
+
     breadcrumbItems.push({
       title:
-        index === pathSnippets.length - 1 ? (
+        isLast || isNonClickable ? (
           title
         ) : (
           <Link href={accumulatedPath}>{title}</Link>

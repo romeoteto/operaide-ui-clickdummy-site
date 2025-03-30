@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, theme } from "antd";
-export default function TabNav({ tabs, activeKey, setActiveKey }) {
+export default function TabNav({ tabs, activeKey, onTabClick }) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -14,7 +14,7 @@ export default function TabNav({ tabs, activeKey, setActiveKey }) {
     >
       <Tabs
         activeKey={activeKey}
-        onTabClick={(key) => setActiveKey(key)}
+        onTabClick={(key) => onTabClick(key)}
         items={tabs.map((tab, index) => ({
           key: index,
           label: tab.label,

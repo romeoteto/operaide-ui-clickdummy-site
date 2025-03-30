@@ -5,29 +5,41 @@ import PageHeader from "./components/pageHeader";
 import Home from "./pages/home";
 import PageReaktorAIEngine from "./pages/reaktorAiEngine";
 
-import { Route, Switch } from "wouter";
+import { Route, Switch, Redirect } from "wouter";
 import PageSettings from "./pages/settings";
 import ReaktorDetails from "./pages/reaktorDetails";
 import DeploymentDetails from "./pages/deploymentDetails";
 import PageLogin from "./pages/login";
+import PageSystemAdmin from "./pages/system-admin";
+
+function RedirectToReaktorDashboard() {
+  const { "reaktor-id": reaktorId } = useParams();
+  return <Redirect to={`/reaktor-ai-engine/${reaktorId}/dashboard`} />;
+}
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentOrganization, setCurrentOrganization] = useState(26);
 
   return (
     <>
       {isLoggedIn ? (
-        <AppLayout>
+        <AppLayout
+          currentOrganization={currentOrganization}
+          setCurrentOrganization={(value) => setCurrentOrganization(value)}
+        >
           <Switch>
             <Route path="/">
-              <Home />
+              <Home currentOrganization={currentOrganization} />
             </Route>
             <Route path="/reaktor-ai-engine">
               <PageReaktorAIEngine />
             </Route>
-            <Route path="/reaktor-ai-engine/:reaktor-id">
-              <ReaktorDetails />
-            </Route>
+            <Route
+              path="/reaktor-ai-engine/:reaktor-id"
+              component={ReaktorDetails}
+            />
+
             <Route path="/reaktor-ai-engine/:reaktor-id/:deployment-id">
               <DeploymentDetails />
             </Route>
@@ -46,9 +58,22 @@ export default function App() {
             <Route path="/integrations/services">
               <PageHeader title="Services" subtitle="Some text." />
             </Route>
-            <Route path="/settings">
-              <PageSettings />
-            </Route>
+            <Route
+              path="/settings"
+              component={() => <Redirect to="/settings/general" />}
+            />
+            <Route
+              path="/settings/*"
+              component={() => (
+                <PageSettings currentOrganization={currentOrganization} />
+              )}
+            />
+
+            <Route
+              path="/system-admin"
+              component={() => <Redirect to="/system-admin/organizations" />}
+            />
+            <Route path="/system-admin/*" component={PageSystemAdmin} />
           </Switch>
         </AppLayout>
       ) : (

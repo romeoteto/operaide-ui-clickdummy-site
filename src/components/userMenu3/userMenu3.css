@@ -1,0 +1,11 @@
+.user-menu-container {
+    margin: var(--margin-xxs);
+    padding: var(--padding-xs);
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-menu-container:hover {
+    background-color: var(--color-bg-hover);
+    cursor: pointer;
+  }
