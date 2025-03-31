@@ -107,7 +107,7 @@ const Breadcrumbs = () => {
       const isOverviewOrOtherStatic = [
         "overview",
         "diagram",
-        "settings",
+        "default-settings",
         "deployments",
       ].includes(thirdSegment);
 
