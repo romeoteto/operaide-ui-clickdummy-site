@@ -95,13 +95,35 @@ const Breadcrumbs = () => {
     }
 
     const isLast = index === pathSnippets.length - 1;
+    let isNonClickable = nonClickableSegments.includes(segment);
 
-    // Special handling for dynamic segments under "reaktor-ai-engine"
-    const isDynamicReaktorSegment =
-      pathSnippets[0] === "reaktor-ai-engine" && (index === 1 || index === 2);
+    // Reaktor path special logic
+    const isReaktorPath = pathSnippets[0] === "reaktor-ai-engine";
 
-    const isNonClickable =
-      nonClickableSegments.includes(segment) || isDynamicReaktorSegment;
+    if (isReaktorPath) {
+      const hasThirdSegment = pathSnippets.length >= 3;
+      const thirdSegment = pathSnippets[2];
+
+      const isOverviewOrOtherStatic = [
+        "overview",
+        "diagram",
+        "settings",
+        "deployments",
+      ].includes(thirdSegment);
+
+      if (index === 1) {
+        // reaktor-id
+        // only clickable if next segment is a deployment ID
+        if (!hasThirdSegment || isOverviewOrOtherStatic) {
+          isNonClickable = true;
+        }
+      }
+
+      if (index === 2) {
+        // deployment-id is always non-clickable
+        isNonClickable = true;
+      }
+    }
 
     breadcrumbItems.push({
       title:
