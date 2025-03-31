@@ -1,5 +1,5 @@
 import { Flex, Typography, Button, Form, Input, Row, Col, theme } from "antd";
-import signet from "../assets/signet.svg";
+import signet from "../assets/signet-light.svg";
 
 import { Mail, Lock } from "lucide-react";
 
