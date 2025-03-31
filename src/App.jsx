@@ -29,6 +29,20 @@ export default function App() {
 
   const dispatch = useDispatch();
 
+  function RedirectToReaktorDetailsOverview({ params }) {
+    const { "reaktor-id": reaktorId } = params;
+    return <Redirect to={`/reaktor-ai-engine/${reaktorId}/overview`} />;
+  }
+
+  function RedirectToDeploymentDetailsOverview({ params }) {
+    const { "reaktor-id": reaktorId, "deployment-id": deploymentId } = params;
+    return (
+      <Redirect
+        to={`/reaktor-ai-engine/${reaktorId}/${deploymentId}/overview`}
+      />
+    );
+  }
+
   return (
     <>
       <ConfigProvider
@@ -64,12 +78,49 @@ export default function App() {
               </Route>
               <Route
                 path="/reaktor-ai-engine/:reaktor-id"
+                component={RedirectToReaktorDetailsOverview}
+              />
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/overview"
+                component={ReaktorDetails}
+              />
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/diagram"
+                component={ReaktorDetails}
+              />
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/default-settings"
+                component={ReaktorDetails}
+              />
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/deployments"
                 component={ReaktorDetails}
               />
 
-              <Route path="/reaktor-ai-engine/:reaktor-id/:deployment-id">
-                <DeploymentDetails />
-              </Route>
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/:deployment-id"
+                component={RedirectToDeploymentDetailsOverview}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/overview"
+                component={DeploymentDetails}
+              />
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/metrics"
+                component={DeploymentDetails}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/api"
+                component={DeploymentDetails}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/settings"
+                component={DeploymentDetails}
+              />
+
               <Route path="/data-studio/documents">
                 <PageHeader title="Documents" subtitle="Some text." />
               </Route>

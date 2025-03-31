@@ -103,7 +103,7 @@ export default function PageReaktorAIEngine() {
         <Flex gap="large" wrap>
           {viewTypeGrid ? (
             filteredBlueprints.map((blueprint) => (
-              <Link href={`/reaktor-ai-engine/${blueprint.id}`}>
+              <Link href={`/reaktor-ai-engine/${blueprint.id}/overview`}>
                 <ReaktorCard
                   id={blueprint.id}
                   key={blueprint.id}

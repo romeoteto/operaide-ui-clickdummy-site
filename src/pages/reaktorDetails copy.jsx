@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, useLocation } from "wouter";
+import { useState } from "react";
+import { useParams, Link } from "wouter";
 import { blueprints } from "../database";
 import PageHeader from "../components/pageHeader";
 import { LayoutDashboard, Workflow, Settings2, Rocket } from "lucide-react";
@@ -19,45 +19,20 @@ import InfoPanel from "../components/infoPanel";
 const { Link: AntLink, Text } = Typography;
 const { Search } = Input;
 
+const tabs = [
+  { icon: LayoutDashboard, label: "Overview" },
+  { icon: Workflow, label: "Diagram" },
+  { icon: Settings2, label: "Default Settings" },
+  { icon: Rocket, label: "Deployments" },
+];
+
 export default function ReaktorDetails() {
   const params = useParams();
   const [activeKey, setActiveKey] = useState(0);
 
-  const [location, navigate] = useLocation();
-
-  useEffect(() => {
-    const index = tabs.findIndex((tab) => tab.href === location);
-    if (index !== -1) {
-      setActiveKey(index);
-    }
-  }, [location]);
-
   const { "reaktor-id": reaktorId } = params;
 
   const blueprint = blueprints.find((bp) => bp.id === reaktorId);
-
-  const tabs = [
-    {
-      icon: LayoutDashboard,
-      label: "Overview",
-      href: `/reaktor-ai-engine/${reaktorId}/overview`,
-    },
-    {
-      icon: Workflow,
-      label: "Diagram",
-      href: `/reaktor-ai-engine/${reaktorId}/diagram`,
-    },
-    {
-      icon: Settings2,
-      label: "Default Settings",
-      href: `/reaktor-ai-engine/${reaktorId}/default-settings`,
-    },
-    {
-      icon: Rocket,
-      label: "Deployments",
-      href: `/reaktor-ai-engine/${reaktorId}/deployments`,
-    },
-  ];
 
   const tableColumns = [
     {
@@ -109,18 +84,13 @@ export default function ReaktorDetails() {
     },
   ];
 
-  const onTabClick = (key) => {
-    const href = tabs[key].href;
-    navigate(href);
-  };
-
   return (
     <div>
       <PageHeader title={blueprint.label} />
       <TabNav
         tabs={tabs}
         activeKey={activeKey}
-        onTabClick={(key) => onTabClick(key)}
+        onTabClick={(key) => setActiveKey(key)}
       />
       {activeKey === 0 && (
         <Flex vertical gap="middle">

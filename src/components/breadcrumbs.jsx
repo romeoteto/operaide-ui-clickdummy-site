@@ -1,8 +1,8 @@
 import { Breadcrumb } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
-import { blueprints, organizations } from "../database";
+import { blueprints } from "../database";
 
 const routeNameMap = {
   "reaktor-ai-engine": "Reaktor AI Engine",
@@ -24,6 +24,12 @@ const routeNameMap = {
   registration: "Registration",
   "api-keys": "API Keys",
   themes: "Themes",
+  overview: "Overview",
+  diagram: "Diagram",
+  "default-settings": "Default Settings",
+  deployments: "Deployments",
+  metrics: "Metrics",
+  api: "API",
 };
 
 const dynamicNameMap = {
@@ -89,7 +95,13 @@ const Breadcrumbs = () => {
     }
 
     const isLast = index === pathSnippets.length - 1;
-    const isNonClickable = nonClickableSegments.includes(segment);
+
+    // Special handling for dynamic segments under "reaktor-ai-engine"
+    const isDynamicReaktorSegment =
+      pathSnippets[0] === "reaktor-ai-engine" && (index === 1 || index === 2);
+
+    const isNonClickable =
+      nonClickableSegments.includes(segment) || isDynamicReaktorSegment;
 
     breadcrumbItems.push({
       title:
