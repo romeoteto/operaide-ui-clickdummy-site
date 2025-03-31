@@ -1,22 +1,44 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "wouter";
 
-import { Settings2, Users, UserPlus, KeyRound } from "lucide-react";
+import { Settings2, Users, UserPlus, KeyRound, Palette } from "lucide-react";
 import PageHeader from "../../components/pageHeader";
 import TabNav from "../../components/tabNav";
 
-import { organizations } from "../../utils";
-
 const tabs = [
-  { icon: Settings2, label: "General", href: "/settings/general" },
-  { icon: Users, label: "Members", href: "/settings/members" },
-  { icon: UserPlus, label: "Registration", href: "/settings/registration" },
-  { icon: KeyRound, label: "API Keys", href: "/settings/api-keys" },
+  {
+    icon: Settings2,
+    label: "General",
+    href: "/settings/general",
+    component: <div />,
+  },
+  {
+    icon: Users,
+    label: "Members",
+    href: "/settings/members",
+    component: <div />,
+  },
+  {
+    icon: UserPlus,
+    label: "Registration",
+    href: "/settings/registration",
+    component: <div />,
+  },
+  {
+    icon: KeyRound,
+    label: "API Keys",
+    href: "/settings/api-keys",
+    component: <div />,
+  },
 ];
 
-export default function PageSettings({ currentOrganization }) {
+export default function PageSettings() {
   const [activeKey, setActiveKey] = useState(0);
   const [location, navigate] = useLocation();
+  const currentOrganization = useSelector(
+    (state) => state.appSettings.currentOrganization
+  );
 
   useEffect(() => {
     const index = tabs.findIndex((tab) => tab.href === location);
@@ -30,9 +52,7 @@ export default function PageSettings({ currentOrganization }) {
     navigate(href);
   };
 
-  const orgName = organizations.find(
-    (organization) => organization.value === currentOrganization
-  ).label;
+  const orgName = currentOrganization.label;
 
   return (
     <>
@@ -45,9 +65,7 @@ export default function PageSettings({ currentOrganization }) {
         activeKey={activeKey}
         onTabClick={(key) => onTabClick(key)}
       />
-      <div style={{ height: "2000px", backgroundColor: "#f5f5f5" }}>
-        Some content here
-      </div>
+      {tabs[activeKey]?.component}
     </>
   );
 }

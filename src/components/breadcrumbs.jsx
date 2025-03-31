@@ -1,8 +1,8 @@
 import { Breadcrumb } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
-import { blueprints } from "../database";
-import { organizations } from "../utils";
+import { blueprints, organizations } from "../database";
 
 const routeNameMap = {
   "reaktor-ai-engine": "Reaktor AI Engine",
@@ -23,6 +23,7 @@ const routeNameMap = {
   members: "Members",
   registration: "Registration",
   "api-keys": "API Keys",
+  themes: "Themes",
 };
 
 const dynamicNameMap = {
@@ -40,12 +41,12 @@ const nonClickableSegments = [
   // add more segments here that shouldn't be clickable
 ];
 
-const Breadcrumbs = ({ currentOrganization }) => {
+const Breadcrumbs = () => {
   const [location] = useLocation();
   const pathSnippets = location.split("/").filter(Boolean);
 
-  const currentOrgLabel = organizations.find(
-    (organization) => organization.value === currentOrganization
+  const currentOrgLabel = useSelector(
+    (state) => state.appSettings.currentOrganization
   ).label;
 
   const breadcrumbItems = [];

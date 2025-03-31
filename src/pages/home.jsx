@@ -1,19 +1,18 @@
+import { useSelector } from "react-redux";
 import PageHeader from "../components/pageHeader";
 import { Card, Flex, Typography, Row, Col, theme } from "antd";
 import { FileText, Users } from "lucide-react";
 
-import { organizations } from "../utils";
-
 const { Text, Title } = Typography;
 
-export default function Home({ currentOrganization }) {
+export default function Home() {
   const {
     token: { paddingXS, colorPrimaryBg },
   } = theme.useToken();
 
-  const { label } = organizations.find(
-    (organization) => organization.value === currentOrganization
-  );
+  const label = useSelector(
+    (state) => state.appSettings.currentOrganization
+  ).label;
 
   return (
     <Flex vertical>

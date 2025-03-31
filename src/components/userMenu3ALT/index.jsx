@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Flex, Divider, Typography, Select, Dropdown, theme } from "antd";
+import {
+  Flex,
+  Divider,
+  Typography,
+  Select,
+  Dropdown,
+  Button,
+  Tag,
+  theme,
+} from "antd";
 import { organizations } from "../../database";
 import {
   User,
@@ -14,27 +23,16 @@ import {
   SunMoon,
 } from "lucide-react";
 import Fuse from "fuse.js";
-import "./userMenu3.css";
 
 import { setOrganization, setAppearance } from "../../state/appSettingsSlice";
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
-export default function UserMenu3({ collapsed }) {
+export default function UserMenu3ALT({ collapsed }) {
   const {
     token: {
-      borderRadius,
-      colorTextBase,
       fontSize,
-      fontSizeLG,
-      paddingXXS,
-      paddingXS,
       paddingSM,
-      padding,
-      colorPrimaryBg,
-      marginXXS,
-      colorBgTextHover,
-      colorBgContainer,
       colorBgElevated,
       borderRadiusLG,
       boxShadowSecondary,
@@ -75,26 +73,22 @@ export default function UserMenu3({ collapsed }) {
       <Flex vertical style={{ width: "300px" }}>
         <Flex
           vertical
-          gap="middle"
-          justify="center"
-          align="center"
-          style={{ padding: padding }}
+          align="flex-start"
+          gap="small"
+          style={{
+            padding: paddingSM,
+            borderTopLeftRadius: borderRadiusLG,
+            borderTopRightRadius: borderRadiusLG,
+          }}
         >
-          <Flex
-            justify="center"
-            align="center"
-            style={{
-              borderRadius: "100%",
-              width: "34px",
-              height: "34px",
-              padding: paddingXS,
-              background: colorTextBase,
-              color: colorBgContainer,
-            }}
-          >
-            <User size="1em" />
+          <Flex vertical>
+            <Title level={4} style={{ marginBottom: 0 }}>
+              Oliver Mayer
+            </Title>
+            <Text>oliver.mayer@objective-partner.com</Text>
           </Flex>
-          <Text>oliver.mayer@objective-partner.com</Text>
+
+          <Tag color="#9D6381">Super Admin</Tag>
         </Flex>
         <Divider style={{ margin: 0 }} />
         <Flex vertical style={{ padding: paddingSM }} gap="small">
@@ -111,7 +105,6 @@ export default function UserMenu3({ collapsed }) {
             value={currentOrganization}
           />
         </Flex>
-        <Divider style={{ margin: 0 }} />
       </Flex>
     );
   };
@@ -140,7 +133,7 @@ export default function UserMenu3({ collapsed }) {
       label: `Language (${selectedLang.toUpperCase()})`,
       icon: (
         <span>
-          <Languages size="1.125em" style={{ marginBottom: "-0.325em" }} />
+          <Languages size={fontSize} style={{ marginBottom: "-0.35em" }} />
         </span>
       ),
       children: languageItems.map((item) => ({
@@ -156,7 +149,7 @@ export default function UserMenu3({ collapsed }) {
       label: `Appearance`,
       icon: (
         <span>
-          <SunMoon size="1.125em" style={{ marginBottom: "-0.325em" }} />
+          <SunMoon size={fontSize} style={{ marginBottom: "-0.35em" }} />
         </span>
       ),
       children: appearanceItems.map((item) => ({
@@ -170,7 +163,7 @@ export default function UserMenu3({ collapsed }) {
     },
     {
       key: "3",
-      icon: <LogOut size="1.125em" />,
+      icon: <LogOut size={fontSize} />,
       label: (
         <a
           target="_blank"
@@ -195,7 +188,7 @@ export default function UserMenu3({ collapsed }) {
           </span>
         ),
       }}
-      placement="topLeft"
+      placement="bottomRight"
       trigger="click"
       dropdownRender={(menu) => (
         <div
@@ -203,7 +196,6 @@ export default function UserMenu3({ collapsed }) {
             backgroundColor: colorBgElevated,
             borderRadius: borderRadiusLG,
             boxShadow: boxShadowSecondary,
-            minWidth: 300,
           }}
         >
           <Content />
@@ -211,68 +203,12 @@ export default function UserMenu3({ collapsed }) {
         </div>
       )}
     >
-      <Flex
-        align="center"
-        justify={collapsed && "center"}
-        gap="small"
-        className="user-menu-container"
-        style={{
-          "--margin-xxs": `${marginXXS}px`,
-          "--padding-xs": `${!collapsed && paddingXS}px`,
-          "--border-radius": `${borderRadius}px`,
-          "--color-bg-hover": colorBgTextHover,
-          "--color-primary-bg": colorPrimaryBg,
-          paddingTop: collapsed && paddingXXS,
-          paddingBottom: collapsed && paddingXXS,
-        }}
-      >
-        <Flex
-          justify="center"
-          align="center"
-          style={{
-            borderRadius: "100%",
-            width: "34px",
-            height: "34px",
-            background: colorTextBase,
-            color: colorBgContainer,
-            flexShrink: 0,
-          }}
-        >
-          <User size={collapsed ? fontSizeLG : fontSize} />
-        </Flex>
-        {!collapsed && (
-          <Flex
-            vertical
-            style={{
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              textOverflow: "ellipsis",
-              maxWidth: "100%",
-            }}
-          >
-            <Text
-              strong
-              style={{
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {currentOrgLabel}
-            </Text>
-            <Text
-              type="secondary"
-              style={{
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-              }}
-            >
-              Oliver Mayer
-            </Text>
-          </Flex>
-        )}
-      </Flex>
+      <Button
+        color="default"
+        variant="filled"
+        shape="circle"
+        icon={<User size="1em" />}
+      />
     </Dropdown>
   );
 }

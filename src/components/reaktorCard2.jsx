@@ -1,4 +1,5 @@
 import { Tag, Card, theme } from "antd";
+import DynamicSVG from "../assets/reaktor-images/dynamicSVG";
 
 const { Meta } = Card;
 
@@ -18,14 +19,15 @@ export default function ReaktorCard({
       hoverable
       style={{ width: reaktorCard.cardWidth }}
       cover={
-        <img
-          src={imageSrc}
+        <div
           style={{
             width: "100%",
             height: reaktorCard.coverHeight,
             padding: paddingXL,
           }}
-        />
+        >
+          <DynamicSVG src={imageSrc} fillColor={colorPrimary} />
+        </div>
       }
       extra={
         <Tag

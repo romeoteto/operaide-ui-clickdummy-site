@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   House,
   Atom,
@@ -16,18 +17,17 @@ import {
 import { Button, Layout, Menu, Tag, Flex, Divider, theme } from "antd";
 import { useLocation } from "wouter";
 
-import logo from "./assets/logo.svg";
-import signet from "./assets/signet.svg";
+import logoLight from "./assets/logo-light.svg";
+import signetLight from "./assets/signet-light.svg";
+import logoDark from "./assets/logo-dark.svg";
+import signetDark from "./assets/signet-dark.svg";
 import Breadcrumbs from "./components/breadcrumbs";
 import UserMenu3 from "./components/userMenu3";
+import UserMenu3ALT from "./components/userMenu3ALT";
 
 const { Header, Sider, Content } = Layout;
 
-const AppLayout = ({
-  children,
-  currentOrganization,
-  setCurrentOrganization,
-}) => {
+const AppLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
   const {
@@ -55,6 +55,8 @@ const AppLayout = ({
     "/settings",
     "/system-admin",
   ];
+
+  const appearance = useSelector((state) => state.appSettings.appearance);
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -86,12 +88,16 @@ const AppLayout = ({
         >
           {collapsed ? (
             <img
-              src={signet}
+              src={appearance === "dark" ? signetDark : signetLight}
               alt="operaide signet"
               style={{ height: "28px" }}
             />
           ) : (
-            <img src={logo} alt="operaide logo" style={{ height: "28px" }} />
+            <img
+              src={appearance === "dark" ? logoDark : logoLight}
+              alt="operaide logo"
+              style={{ height: "28px" }}
+            />
           )}
         </div>
 
@@ -209,11 +215,7 @@ const AppLayout = ({
                 },
               ]}
             />
-            <UserMenu3
-              currentOrganization={currentOrganization}
-              collapsed={collapsed}
-              setCurrentOrganization={(value) => setCurrentOrganization(value)}
-            />
+            {/*             <UserMenu3 collapsed={collapsed} /> */}
           </Flex>
         </Flex>
       </Sider>
@@ -249,15 +251,16 @@ const AppLayout = ({
             />
 
             <div style={{ marginLeft: marginXS }}>
-              <Breadcrumbs currentOrganization={currentOrganization} />
+              <Breadcrumbs />
             </div>
           </Flex>
           <Flex align="center">
-            <Tag color="magenta">Super Admin</Tag>
+            <UserMenu3ALT />
           </Flex>
         </Header>
 
         <Content
+          id="area"
           style={{
             marginTop: 58,
             padding: 24,
