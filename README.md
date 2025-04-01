@@ -14,10 +14,10 @@ You don't need a password on the login screen, just type the email to load the r
 
 ### Definition of users
 
-1. Stefan Superadmin has overall right in the plattform. He can manage global system settings like organizations, users etc.
-2. Oliver Orgadmin is member of two organizations. In one org he has only member rights but in the other he has administration right on organization level.
-3. Anna Endanwenderin is only member of one organization and has no right.
+1. Stefan Superadmin has global rights in the plattform. He can manage global system settings like organizations, users etc. and is also admin in all organizations.
+2. Oliver Orgadmin is member of two organizations. In one org he has only member rights but in the other he has administration rights on organization level.
+3. Anna Endanwenderin is only member of one organization and has no admin rights.
 
 ### Some additional remarks
 
-Currently the roles simulate only some menu entries in the sidebar and the possibility to select organizations in the user menu. There is no logic implemented on Reaktor visibility for example. The role concept should only showcase UI behavior and is NOT a meaningful definition of roles and permissions in the system.
+Currently the roles simulate only the visibility of some menu entries in the sidebar and the possibility to select organizations in the user menu. There is no logic implemented on Reaktor visibility for example or any other defined logic related to roles, rights and permissions. The role concept should only showcase UI behavior and is NOT a meaningful definition of roles and permissions in the system.
