@@ -10,7 +10,7 @@ The clickdummy simulates a user login and roles. Currently three different users
 - oliver.orgadmin@toyota.de
 - stefan.superadmin@toyota.de
 
-You don't need a password on the login screen, just type the email to load the respective user settings.
+You don't need a password on the login screen, just type the email to load the respective user settings. User login is not persisted between browser reload. So if you do, the login screen will show up again.
 
 ### Definition of users
 
