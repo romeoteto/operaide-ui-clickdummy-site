@@ -10,14 +10,14 @@ export default function Home() {
     token: { paddingXS, colorPrimaryBg },
   } = theme.useToken();
 
-  const label = useSelector(
-    (state) => state.appSettings.currentOrganization
-  ).label;
+  const label = useSelector((state) => state.user.currentOrganization).label;
+
+  const prename = useSelector((state) => state.user.currentUser.prename);
 
   return (
     <Flex vertical>
       <PageHeader
-        title="Hi Oliver!"
+        title={`Hi ${prename}!`}
         subtitle={`Welcome to Operaide - your operating system for Agentic Automation at ${label}.`}
       />
 

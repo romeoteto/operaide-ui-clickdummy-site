@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { setLogin } from "../state/userSlice";
+
 import { Flex, Typography, Button, Form, Input, Row, Col, theme } from "antd";
 import signet from "../assets/signet-light.svg";
 
@@ -5,7 +8,7 @@ import { Mail, Lock } from "lucide-react";
 
 const { Title } = Typography;
 
-export default function PageLogin({ onFinish }) {
+export default function PageLogin() {
   const {
     token: {
       colorBgContainer,
@@ -17,6 +20,7 @@ export default function PageLogin({ onFinish }) {
     },
   } = theme.useToken();
 
+  const dispatch = useDispatch();
   return (
     <Flex
       justify="center"
@@ -54,7 +58,7 @@ export default function PageLogin({ onFinish }) {
 
             <Form
               name="signup"
-              onFinish={() => onFinish()}
+              onFinish={(data) => dispatch(setLogin(data.email))}
               layout="vertical"
               style={{ width: "100%" }}
             >

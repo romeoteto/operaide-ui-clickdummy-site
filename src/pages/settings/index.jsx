@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "wouter";
 
-import { Settings2, Users, UserPlus, KeyRound, Palette } from "lucide-react";
+import { Settings2, Users, UserPlus, KeyRound } from "lucide-react";
 import PageHeader from "../../components/pageHeader";
 import TabNav from "../../components/tabNav";
 
@@ -37,7 +37,7 @@ export default function PageSettings() {
   const [activeKey, setActiveKey] = useState(0);
   const [location, navigate] = useLocation();
   const currentOrganization = useSelector(
-    (state) => state.appSettings.currentOrganization
+    (state) => state.user.currentOrganization
   );
 
   useEffect(() => {

@@ -17,13 +17,14 @@ import {
 import { Button, Layout, Menu, Tag, Flex, Divider, theme } from "antd";
 import { useLocation } from "wouter";
 
+import { indicateIfUserIsAdminInCurrentOrganization } from "./helpers";
+
 import logoLight from "./assets/logo-light.svg";
 import signetLight from "./assets/signet-light.svg";
 import logoDark from "./assets/logo-dark.svg";
 import signetDark from "./assets/signet-dark.svg";
 import Breadcrumbs from "./components/breadcrumbs";
 import UserMenu3 from "./components/userMenu3";
-import UserMenu3ALT from "./components/userMenu3ALT";
 
 const { Header, Sider, Content } = Layout;
 
@@ -57,6 +58,129 @@ const AppLayout = ({ children }) => {
   ];
 
   const appearance = useSelector((state) => state.appSettings.appearance);
+  const userIsSuperAdmin = useSelector(
+    (state) => state.user.currentUser.isSuperAdmin
+  );
+
+  const currentOrganization = useSelector(
+    (state) => state.user.currentOrganization
+  );
+
+  const memberships = useSelector(
+    (state) => state.user.currentUser.memberships
+  );
+
+  const isAdminInCurrentOrg = indicateIfUserIsAdminInCurrentOrganization({
+    memberships,
+    currentOrganization,
+  });
+
+  /** Upper menu logic */
+  const upperMenuItems = [
+    {
+      key: "/",
+      icon: <House size={"1em"} />,
+      label: "Home",
+    },
+    {
+      key: "/reaktor-ai-engine",
+      icon: <Atom size={"1em"} />,
+      label: "Reaktor AI Engine",
+    },
+    {
+      key: "/data-studio",
+      label: "Data Studio",
+      icon: <Database size={"1em"} />,
+      children: [
+        {
+          key: "/data-studio/documents",
+          label: "Documents",
+          icon: <Files size={"1em"} />,
+        },
+        {
+          key: "/data-studio/document-groups",
+          label: "Document Groups",
+          icon: <FolderOpen size={"1em"} />,
+        },
+        {
+          key: "/data-studio/vector-db",
+          label: "VectorDB",
+          icon: <Database size={"1em"} />,
+        },
+      ],
+    },
+    {
+      key: "/integrations",
+      label: "Integrations",
+      icon: <Blocks size={"1em"} />,
+      children: [
+        {
+          key: "/integrations/ai-provider",
+          label: "AI Provider",
+          icon: <Brain size={"1em"} />,
+        },
+        {
+          key: "/integrations/services",
+          label: "Services",
+          icon: <Blocks size={"1em"} />,
+        },
+      ],
+    },
+  ];
+
+  // Only add the divider + settings item if the user is an admin
+  if (isAdminInCurrentOrg) {
+    upperMenuItems.push(
+      { type: "divider" },
+      {
+        key: "/settings",
+        label: "Settings",
+        icon: <Settings2 size="1em" />,
+      }
+    );
+  }
+  /** Upper menu logic */
+
+  /** Bottom Menu Logic */
+
+  const bottomMenuItems = [
+    {
+      key: "documentation",
+      icon: <FileText size="1em" />,
+      label: (
+        <a
+          href="https://staging.demo.operaide.ai/op-docs/docs/overview/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Documentation
+        </a>
+      ),
+    },
+    {
+      key: "changelog",
+      icon: <TrendingUp size="1em" />,
+      label: (
+        <a
+          href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Changelog
+        </a>
+      ),
+    },
+  ];
+
+  if (userIsSuperAdmin) {
+    bottomMenuItems.push({
+      key: "/system-admin",
+      icon: <MonitorCog size="1em" />,
+      label: "System Admin",
+      onClick: ({ key }) => navigate(key),
+    });
+  }
+  /** Bottom Menu Logic */
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -112,67 +236,7 @@ const AppLayout = ({ children }) => {
             selectedKeys={[findSelectedKey(location, menuKeys)]}
             onClick={({ key }) => navigate(key)}
             style={{ border: "none", backgroundColor: "transparent" }}
-            items={[
-              {
-                key: "/",
-                icon: <House size={"1em"} />,
-                label: "Home",
-              },
-              {
-                key: "/reaktor-ai-engine",
-                icon: <Atom size={"1em"} />,
-                label: "Reaktor AI Engine",
-              },
-
-              {
-                key: "/data-studio",
-                label: "Data Studio",
-                icon: <Database size={"1em"} />,
-                children: [
-                  {
-                    key: "/data-studio/documents",
-                    label: "Documents",
-                    icon: <Files size={"1em"} />,
-                  },
-                  {
-                    key: "/data-studio/document-groups",
-                    label: "Document Groups",
-                    icon: <FolderOpen size={"1em"} />,
-                  },
-                  {
-                    key: "/data-studio/vector-db",
-                    label: "VectorDB",
-                    icon: <Database size={"1em"} />,
-                  },
-                ],
-              },
-
-              {
-                key: "/integrations",
-                label: "Integrations",
-                icon: <Blocks size={"1em"} />,
-                children: [
-                  {
-                    key: "/integrations/ai-provider",
-                    label: "AI Provider",
-                    icon: <Brain size={"1em"} />,
-                  },
-                  {
-                    key: "/integrations/services",
-                    label: "Services",
-                    icon: <Blocks size={"1em"} />,
-                  },
-                ],
-              },
-              {
-                type: "divider",
-              },
-              {
-                key: "/settings",
-                label: "Settings",
-                icon: <Settings2 size="1em" />,
-              },
-            ]}
+            items={upperMenuItems}
           />
           <Flex vertical>
             <Menu
@@ -180,42 +244,8 @@ const AppLayout = ({ children }) => {
               mode="vertical"
               selectedKeys={[findSelectedKey(location, menuKeys)]}
               style={{ border: "none" }}
-              items={[
-                {
-                  key: "documentation",
-                  icon: <FileText size="1em" />,
-                  label: (
-                    <a
-                      href="https://staging.demo.operaide.ai/op-docs/docs/overview/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Documentation
-                    </a>
-                  ),
-                },
-                {
-                  key: "changelog",
-                  icon: <TrendingUp size="1em" />,
-                  label: (
-                    <a
-                      href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Changelog
-                    </a>
-                  ),
-                },
-                {
-                  key: "/system-admin",
-                  icon: <MonitorCog size="1em" />,
-                  label: "System Admin",
-                  onClick: ({ key }) => navigate(key),
-                },
-              ]}
+              items={bottomMenuItems}
             />
-            {/*             <UserMenu3 collapsed={collapsed} /> */}
           </Flex>
         </Flex>
       </Sider>
@@ -255,7 +285,7 @@ const AppLayout = ({ children }) => {
             </div>
           </Flex>
           <Flex align="center">
-            <UserMenu3ALT />
+            <UserMenu3 />
           </Flex>
         </Header>
 

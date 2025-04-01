@@ -52,7 +52,7 @@ const Breadcrumbs = () => {
   const pathSnippets = location.split("/").filter(Boolean);
 
   const currentOrgLabel = useSelector(
-    (state) => state.appSettings.currentOrganization
+    (state) => state.user.currentOrganization
   ).label;
 
   const breadcrumbItems = [];

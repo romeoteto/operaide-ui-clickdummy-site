@@ -1,7 +1,6 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ConfigProvider, theme } from "antd";
-import { setLogin } from "./state/appSettingsSlice";
 
 import AppLayout from "./layout";
 import PageHeader from "./components/pageHeader";
@@ -17,17 +16,13 @@ import PageLogin from "./pages/login";
 import PageSystemAdmin from "./pages/system-admin";
 
 export default function App() {
-  const userIsLoggedIn = useSelector(
-    (state) => state.appSettings.userIsLoggedIn
-  );
+  const userIsLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const accentColorValue = useSelector(
     (state) => state.appSettings.accentColor
   ).value;
 
   const appearance = useSelector((state) => state.appSettings.appearance);
-
-  const dispatch = useDispatch();
 
   function RedirectToReaktorDetailsOverview({ params }) {
     const { "reaktor-id": reaktorId } = params;
@@ -150,7 +145,7 @@ export default function App() {
             </Switch>
           </AppLayout>
         ) : (
-          <PageLogin onFinish={() => dispatch(setLogin(true))} />
+          <PageLogin />
         )}
       </ConfigProvider>
     </>

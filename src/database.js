@@ -1,9 +1,9 @@
 import imageKnowledgeChat from "./assets/reaktor-images/undraw_chat_qmyo.svg";
 import imageOrderManager from "./assets/reaktor-images/undraw_order-delivered_puaw.svg";
-import imageICP from "./assets/reaktor-images/undraw_to-do_06xe.svg"
-import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.svg'
- 
- export const blueprints = [
+import imageICP from "./assets/reaktor-images/undraw_to-do_06xe.svg";
+import imageLeadNurturer from "./assets/reaktor-images/undraw_web-search_9qqc.svg";
+
+export const blueprints = [
   {
     id: "op.demo.knowledge-chat",
     label: "Knowledge Chat",
@@ -16,21 +16,29 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     group: "Chat",
     version: "v1",
     deployments: [
-      {id: "95QDRrfaYg7sqHgwP", version: "v1", label: "Knowledge Chat for Sales", description: "This deployment is a knowledge chat for sales teams to chat with sales documents.", group: "Sales", tags: ['demo', 'sales'], imageSrc: imageKnowledgeChat}
-    ]
+      {
+        id: "95QDRrfaYg7sqHgwP",
+        version: "v1",
+        label: "Knowledge Chat for Sales",
+        description:
+          "This deployment is a knowledge chat for sales teams to chat with sales documents.",
+        group: "Sales",
+        tags: ["demo", "sales"],
+        imageSrc: imageKnowledgeChat,
+      },
+    ],
   },
   {
     id: "op.demo.order-manager",
-    label: "Order Manager",
-    description:
-      "Automates the processing of customer orders.",
+    label: "Order Manager Agent",
+    description: "Automates the processing of customer orders.",
     imageSrc: imageOrderManager,
     official: false,
     type: "Blueprint",
     tags: [],
     group: "Backoffice",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
   {
     id: "op.demo.icp-searcher",
@@ -43,7 +51,7 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     tags: [],
     group: "Sales",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
   {
     id: "op.demo.lead-nurturer",
@@ -56,7 +64,7 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     tags: [],
     group: "Sales",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
   {
     id: "op.demo.sales-contact-listener",
@@ -69,7 +77,7 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     tags: [],
     group: "Sales",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
   {
     id: "op.demo.sales-coach",
@@ -82,7 +90,7 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     tags: [],
     group: "Sales",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
   {
     id: "op.demo.customer-support-agent",
@@ -95,7 +103,7 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     tags: [],
     group: "Customer Support",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
   {
     id: "op.demo.virtual-accountant",
@@ -108,7 +116,7 @@ import imageLeadNurturer from './assets/reaktor-images/undraw_web-search_9qqc.sv
     tags: [],
     group: "Accounting",
     version: "v1",
-    deployments: []
+    deployments: [],
   },
 ];
 
@@ -151,7 +159,55 @@ export const organizations = [
   { value: 36, label: "Toyota Zentrum Köln" },
   { value: 37, label: "Toyota Zentrum Düsseldorf" },
   { value: 38, label: "Toyota Zentrum Dortmund" },
+  { value: 39, label: "objective partner AG" },
 ];
 
+export const accentColors = [
+  { label: "Operaide Brand", value: "#02C4C0" },
+  { label: "Plum", value: "#C893C7" },
+  { label: "Yellow Green", value: "#B6D369" },
+];
 
-export const accentColors = [{label: "Operaide Brand", value: "#02C4C0"}, {label: "Plum", value: "#C893C7"}, {label: "Yellow Green", value: "#B6D369"}]
+export const orgRoles = [
+  { value: 1, label: "Organization Admin" },
+  { value: 2, label: "Organization Member" },
+];
+
+export const users = [
+  {
+    id: 1,
+    prename: "Stefan",
+    surname: "Superadmin",
+    email: "stefan.superadmin@toyota.de",
+    isSuperAdmin: true,
+    createdAt: "2024-10-03",
+    lastLogin: "2025-03-29",
+    memberships: organizations.map((org) => ({
+      orgValue: org.value,
+      roleValues: [1], // Assuming admin role
+    })),
+  },
+  {
+    id: 2,
+    prename: "Oliver",
+    surname: "Orgadmin",
+    email: "oliver.orgadmin@toyota.de",
+    isSuperAdmin: false,
+    createdAt: "2025-03-11",
+    lastLogin: "2025-03-15",
+    memberships: [
+      { orgValue: 33, roleValues: [1] },
+      { orgValue: 37, roleValues: [2] },
+    ],
+  },
+  {
+    id: 3,
+    prename: "Anna",
+    surname: "Endanwenderin",
+    email: "anna.endanwenderin@toyota.de",
+    isSuperAdmin: false,
+    createdAt: "2025-03-11",
+    lastLogin: "2025-03-15",
+    memberships: [{ orgValue: 23, roleValues: [2] }],
+  },
+];

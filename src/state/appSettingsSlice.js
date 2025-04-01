@@ -1,35 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { organizations, accentColors } from '../database'
+import { createSlice } from "@reduxjs/toolkit";
+import { organizations, accentColors } from "../database";
 
 const initialState = {
   currentOrganization: organizations[0],
-  appearance: 'system',
+  appearance: "system",
   accentColor: accentColors[0],
   userIsLoggedIn: true,
-}
+};
 
 export const appSettingsSlice = createSlice({
-  name: 'appSettings',
+  name: "appSettings",
   initialState,
   reducers: {
     setOrganization: (state, action) => {
-      const foundOrg = organizations.find((org) => org.value === action.payload)
+      const foundOrg = organizations.find(
+        (org) => org.value === action.payload
+      );
       if (foundOrg) {
-        state.currentOrganization = foundOrg
+        state.currentOrganization = foundOrg;
       }
     },
-    setLogin: (state, action) => {
-      state.userIsLoggedIn = action.payload
-    },
     setAccentColor: (state, action) => {
-      state.accentColor = action.payload
+      state.accentColor = action.payload;
     },
-    setAppearance: (state,action) =>  {
-      state.appearance = action.payload
-    }
+    setAppearance: (state, action) => {
+      state.appearance = action.payload;
+    },
   },
-})
+});
 
-export const { setOrganization, setLogin, setAccentColor, setAppearance } = appSettingsSlice.actions
+export const { setOrganization, setAccentColor, setAppearance } =
+  appSettingsSlice.actions;
 
-export default appSettingsSlice.reducer
+export default appSettingsSlice.reducer;
