@@ -1,4 +1,4 @@
-import { organizations } from "./database";
+import { organizations, orgRoles } from "./database";
 
 export function getOrganizationsByMemberships(memberships) {
   return memberships
@@ -8,14 +8,17 @@ export function getOrganizationsByMemberships(memberships) {
     .filter(Boolean); // Filter out any unmatched orgs (just in case)
 }
 
-export function indicateIfUserIsAdminInCurrentOrganization({
-  memberships,
+export function getPermissions({
+  currentUserMemberships,
   currentOrganization,
 }) {
-  const membershipsInCurrentOrganization = memberships
-    .find((membership) => membership.orgValue === currentOrganization.value)
-    .roleValues.map((roleValue) => roleValue);
+  const currentMembership = currentUserMemberships.find(
+    (membership) => membership.orgValue === currentOrganization.value
+  );
 
-  const isOrgAdmin = membershipsInCurrentOrganization.includes(1);
-  return isOrgAdmin;
+  const currentOrgRole = orgRoles.find(
+    (orgRole) => orgRole.value === currentMembership.roleValue
+  );
+
+  return currentOrgRole.permissions;
 }

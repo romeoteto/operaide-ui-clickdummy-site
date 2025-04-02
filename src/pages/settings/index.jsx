@@ -11,25 +11,23 @@ const tabs = [
     icon: Settings2,
     label: "General",
     href: "/settings/general",
-    component: <div />,
+    component: <div>general</div>,
   },
   {
     icon: Users,
     label: "Members",
     href: "/settings/members",
-    component: <div />,
+    component: <div>members</div>,
   },
   {
     icon: UserPlus,
     label: "Registration",
     href: "/settings/registration",
-    component: <div />,
   },
   {
     icon: KeyRound,
     label: "API Keys",
     href: "/settings/api-keys",
-    component: <div />,
   },
 ];
 

@@ -10,6 +10,7 @@ export default function TabNav({ tabs, activeKey, onTabClick }) {
         position: "sticky",
         top: 0,
         backgroundColor: colorBgContainer,
+        zIndex: 1,
       }}
     >
       <Tabs

@@ -102,7 +102,7 @@ export default function UserMenu3() {
             </Title>
             <Text type="secondary">{email}</Text>
           </Flex>
-          {isSuperAdmin && <Tag color="#9D6381">Super Admin</Tag>}
+          {isSuperAdmin && <Tag color="magenta">Super Admin</Tag>}
         </Flex>
         <Divider style={{ margin: marginXXS, marginTop: 0, marginBottom: 0 }} />
         <Flex vertical style={{ padding: paddingSM }} gap="small">

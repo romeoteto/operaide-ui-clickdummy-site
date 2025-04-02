@@ -1,153 +1,173 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { ConfigProvider, theme } from "antd";
+import { Route, Switch, Redirect, useLocation } from "wouter";
 
-import AppLayout from "./layout";
+import PlatformLayout from "./layouts/platform";
 import PageHeader from "./components/pageHeader";
 
 import Home from "./pages/home";
 import PageReaktorAIEngine from "./pages/reaktorAiEngine";
 
-import { Route, Switch, Redirect } from "wouter";
+import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
+
 import PageSettings from "./pages/settings";
 import ReaktorDetails from "./pages/reaktorDetails";
 import DeploymentDetails from "./pages/deploymentDetails";
 import PageLogin from "./pages/login";
 import PageSystemAdmin from "./pages/system-admin";
+import EditUser from "./pages/system-admin/edit-user";
+import AppStoreLayout from "./layouts/appStore";
 
 export default function App() {
+  const [location] = useLocation();
   const userIsLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
   const accentColorValue = useSelector(
     (state) => state.appSettings.accentColor
   ).value;
-
   const appearance = useSelector((state) => state.appSettings.appearance);
 
-  function RedirectToReaktorDetailsOverview({ params }) {
-    const { "reaktor-id": reaktorId } = params;
-    return <Redirect to={`/reaktor-ai-engine/${reaktorId}/overview`} />;
-  }
+  const isPublicRoute = (path) =>
+    ["/app-store"].some((route) => path.startsWith(route));
+  const isNoLayout = isPublicRoute(location);
 
-  function RedirectToDeploymentDetailsOverview({ params }) {
-    const { "reaktor-id": reaktorId, "deployment-id": deploymentId } = params;
-    return (
-      <Redirect
-        to={`/reaktor-ai-engine/${reaktorId}/${deploymentId}/overview`}
-      />
-    );
-  }
+  const platformTheme = {
+    algorithm:
+      appearance === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
+    token: {
+      colorPrimary: accentColorValue,
+      colorInfo: accentColorValue,
+      colorBgLayout: appearance === "dark" ? "#000000" : "#fafafa",
+      reaktorCard: {
+        coverHeight: "200px",
+        metaHeight: "99px",
+        cardWidth: "240px",
+      },
+      reaktorList: {
+        imageHeight: "80px",
+        imageWidth: "100px",
+      },
+    },
+  };
 
-  return (
-    <>
-      <ConfigProvider
-        theme={{
-          algorithm:
-            appearance === "dark"
-              ? theme.darkAlgorithm
-              : theme.defaultAlgorithm,
-          token: {
-            colorPrimary: accentColorValue,
-            colorInfo: accentColorValue,
-            colorBgLayout: appearance === "dark" ? "#000000" : "#fafafa",
-            reaktorCard: {
-              coverHeight: "200px",
-              metaHeight: "99px",
-              cardWidth: "240px",
-            },
-            reaktorList: {
-              imageHeight: "80px",
-              imageWidth: "100px",
-            },
-          },
-        }}
-      >
-        {userIsLoggedIn ? (
-          <AppLayout>
-            <Switch>
-              <Route path="/">
-                <Home />
-              </Route>
-              <Route path="/reaktor-ai-engine">
-                <PageReaktorAIEngine />
-              </Route>
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id"
-                component={RedirectToReaktorDetailsOverview}
-              />
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/overview"
-                component={ReaktorDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/diagram"
-                component={ReaktorDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/default-settings"
-                component={ReaktorDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/deployments"
-                component={ReaktorDetails}
-              />
+  const appStoreTheme = {
+    token: {
+      colorPrimary: "#02C4C0",
+      colorInfo: "#02C4C0",
+    },
+  };
 
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/:deployment-id"
-                component={RedirectToDeploymentDetailsOverview}
-              />
+  return isNoLayout ? (
+    // Public, no-layout routes
+    <ConfigProvider theme={appStoreTheme}>
+      <AppStoreLayout>
+        <Switch>
+          <Route path="/app-store">
+            <div>Welcome to the App Store</div>
+          </Route>
+        </Switch>
+      </AppStoreLayout>
+    </ConfigProvider>
+  ) : userIsLoggedIn ? (
+    // Authenticated + layout-wrapped routes
+    <ConfigProvider theme={platformTheme}>
+      <PlatformLayout>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+          <Route path="/reaktor-ai-engine">
+            <PageReaktorAIEngine />
+          </Route>
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/overview"
+            component={ReaktorDetails}
+          />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/diagram"
+            component={ReaktorDetails}
+          />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/default-settings"
+            component={ReaktorDetails}
+          />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/deployments"
+            component={ReaktorDetails}
+          />
 
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/overview"
-                component={DeploymentDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/metrics"
-                component={DeploymentDetails}
-              />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/:deployment-id/overview"
+            component={DeploymentDetails}
+          />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/:deployment-id/metrics"
+            component={DeploymentDetails}
+          />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/:deployment-id/api"
+            component={DeploymentDetails}
+          />
+          <Route
+            path="/reaktor-ai-engine/:reaktor-id/:deployment-id/settings"
+            component={DeploymentDetails}
+          />
 
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/api"
-                component={DeploymentDetails}
-              />
+          <Route path="/data-studio/documents">
+            <PageHeader title="Documents" subtitle="Some text." />
+          </Route>
+          <Route path="/data-studio/document-groups">
+            <PageHeader title="Document Groups" subtitle="Some text." />
+          </Route>
+          <Route path="/data-studio/vector-db">
+            <PageHeader title="Vector DB" subtitle="Some text." />
+          </Route>
+          <Route path="/integrations/ai-provider">
+            <PageHeader title="AI Provider" subtitle="Some text." />
+          </Route>
+          <Route path="/integrations/services">
+            <PageHeader title="Services" subtitle="Some text." />
+          </Route>
 
-              <Route
-                path="/reaktor-ai-engine/:reaktor-id/:deployment-id/settings"
-                component={DeploymentDetails}
-              />
+          <Route
+            path="/settings"
+            component={() => <Redirect to="/settings/general" />}
+          />
+          <Route path="/settings/*" component={() => <PageSettings />} />
 
-              <Route path="/data-studio/documents">
-                <PageHeader title="Documents" subtitle="Some text." />
-              </Route>
-              <Route path="/data-studio/document-groups">
-                <PageHeader title="Document Groups" subtitle="Some text." />
-              </Route>
-              <Route path="/data-studio/vector-db">
-                <PageHeader title="Vector DB" subtitle="Some text." />
-              </Route>
-              <Route path="/integrations/ai-provider">
-                <PageHeader title="AI Provider" subtitle="Some text." />
-              </Route>
-              <Route path="/integrations/services">
-                <PageHeader title="Services" subtitle="Some text." />
-              </Route>
-              <Route
-                path="/settings"
-                component={() => <Redirect to="/settings/general" />}
-              />
-              <Route path="/settings/*" component={() => <PageSettings />} />
+          {/* System Admin Routes */}
+          <Route
+            path="/system-admin"
+            component={() => <SystemAdminRedirect />}
+          />
+          <Route
+            path="/system-admin/organizations"
+            component={PageSystemAdmin}
+          />
+          <Route path="/system-admin/all-users" component={PageSystemAdmin} />
+          <Route path="/system-admin/migrations" component={PageSystemAdmin} />
+          <Route path="/system-admin/permissions" component={PageSystemAdmin} />
 
-              <Route
-                path="/system-admin"
-                component={() => <Redirect to="/system-admin/organizations" />}
-              />
-              <Route path="/system-admin/*" component={PageSystemAdmin} />
-            </Switch>
-          </AppLayout>
-        ) : (
-          <PageLogin />
-        )}
-      </ConfigProvider>
-    </>
+          {/* Edit User */}
+          <Route
+            path="/system-admin/edit-user/:user-id/account"
+            component={EditUser}
+          />
+          <Route
+            path="/system-admin/edit-user/:user-id/security"
+            component={EditUser}
+          />
+          <Route
+            path="/system-admin/edit-user/:user-id/memberships"
+            component={EditUser}
+          />
+        </Switch>
+      </PlatformLayout>
+    </ConfigProvider>
+  ) : (
+    // Unauthenticated fallback
+    <ConfigProvider theme={platformTheme}>
+      <PageLogin />
+    </ConfigProvider>
   );
 }

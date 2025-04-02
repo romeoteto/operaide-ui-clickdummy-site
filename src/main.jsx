@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
+import { Router } from "wouter";
+
 import App from "./App.jsx";
 import { store } from "./state/store";
 import { Provider } from "react-redux";
@@ -11,7 +13,9 @@ import "antd/dist/reset.css";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </StrictMode>
 );

@@ -162,15 +162,74 @@ export const organizations = [
   { value: 39, label: "objective partner AG" },
 ];
 
+/** EXPERIMENTAL */
 export const accentColors = [
   { label: "Operaide Brand", value: "#02C4C0" },
   { label: "Plum", value: "#C893C7" },
   { label: "Yellow Green", value: "#B6D369" },
 ];
 
+export const globalRoles = [
+  {
+    value: 1,
+    label: "Super Admin",
+    permissions: {
+      systemAdmin: [
+        "canViewUsers",
+        "canViewOrganizations",
+        "canViewMigrations",
+        "canViewPermissions",
+      ],
+    },
+  },
+  { value: 2, label: "Member", permissions: { systemAdmin: [] } },
+];
+
+export const newOrgRoles = [
+  {
+    value: 1,
+    label: "Admin",
+    permissions: {
+      settings: [
+        "canViewGeneral",
+        "canViewMembers",
+        "canViewRegistration",
+        "canViewApiKeys",
+      ],
+    },
+  },
+  {
+    value: 2,
+    label: "Member",
+    permissions: { settings: [] },
+  },
+];
+/** EXPERIMENTAL */
+
 export const orgRoles = [
-  { value: 1, label: "Organization Admin" },
-  { value: 2, label: "Organization Member" },
+  {
+    value: 1,
+    label: "Admin",
+    permissions: {
+      global: { systemAdmin: ["canViewUsers"] }, // canViewOrganizations, canViewMigrations, canViewPermissions
+      org: {
+        settings: [
+          "canViewGeneral",
+          "canViewMembers",
+          "canViewRegistration",
+          "canViewApiKeys",
+        ],
+      },
+    },
+  },
+  {
+    value: 2,
+    label: "Member",
+    permissions: {
+      global: { systemAdmin: [] },
+      org: { settings: [] },
+    },
+  },
 ];
 
 export const users = [
@@ -179,35 +238,38 @@ export const users = [
     prename: "Stefan",
     surname: "Superadmin",
     email: "stefan.superadmin@toyota.de",
-    isSuperAdmin: true,
+    isSuperAdmin: true /**replace with new global role */,
     createdAt: "2024-10-03",
     lastLogin: "2025-03-29",
     memberships: organizations.map((org) => ({
       orgValue: org.value,
-      roleValues: [1], // Assuming admin role
+      roleValue: 1, // Assuming admin role
     })),
+    globalRole: 1,
   },
   {
     id: 2,
     prename: "Oliver",
     surname: "Orgadmin",
     email: "oliver.orgadmin@toyota.de",
-    isSuperAdmin: false,
+    isSuperAdmin: false /**replace with new global role */,
     createdAt: "2025-03-11",
     lastLogin: "2025-03-15",
     memberships: [
-      { orgValue: 33, roleValues: [1] },
-      { orgValue: 37, roleValues: [2] },
+      { orgValue: 33, roleValue: 1 },
+      { orgValue: 37, roleValue: 2 },
     ],
+    globalRole: 2,
   },
   {
     id: 3,
     prename: "Anna",
     surname: "Endanwenderin",
     email: "anna.endanwenderin@toyota.de",
-    isSuperAdmin: false,
+    isSuperAdmin: false /**replace with new global role */,
     createdAt: "2025-03-11",
     lastLogin: "2025-03-15",
-    memberships: [{ orgValue: 23, roleValues: [2] }],
+    memberships: [{ orgValue: 23, roleValue: 2 }],
+    globalRole: 2,
   },
 ];

@@ -13,22 +13,21 @@ import {
   MonitorCog,
   TrendingUp,
   FileText,
+  Store,
 } from "lucide-react";
-import { Button, Layout, Menu, Tag, Flex, Divider, theme } from "antd";
+import { Button, Layout, Menu, Flex, theme } from "antd";
 import { useLocation } from "wouter";
 
-import { indicateIfUserIsAdminInCurrentOrganization } from "./helpers";
-
-import logoLight from "./assets/logo-light.svg";
-import signetLight from "./assets/signet-light.svg";
-import logoDark from "./assets/logo-dark.svg";
-import signetDark from "./assets/signet-dark.svg";
-import Breadcrumbs from "./components/breadcrumbs";
-import UserMenu3 from "./components/userMenu3";
+import logoLight from "../assets/logo-light.svg";
+import signetLight from "../assets/signet-light.svg";
+import logoDark from "../assets/logo-dark.svg";
+import signetDark from "../assets/signet-dark.svg";
+import Breadcrumbs from "../components/breadcrumbs2";
+import UserMenu3 from "../components/userMenu3";
 
 const { Header, Sider, Content } = Layout;
 
-const AppLayout = ({ children }) => {
+const PlatformLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
   const {
@@ -55,6 +54,7 @@ const AppLayout = ({ children }) => {
     "/integrations/services",
     "/settings",
     "/system-admin",
+    "/app-store",
   ];
 
   const appearance = useSelector((state) => state.appSettings.appearance);
@@ -62,18 +62,15 @@ const AppLayout = ({ children }) => {
     (state) => state.user.currentUser.isSuperAdmin
   );
 
-  const currentOrganization = useSelector(
-    (state) => state.user.currentOrganization
+  const currentPermissions = useSelector(
+    (state) => state.user.currentPermissions
   );
 
-  const memberships = useSelector(
-    (state) => state.user.currentUser.memberships
-  );
+  const canSeeSettings =
+    userIsSuperAdmin || currentPermissions.org.settings.length > 0;
 
-  const isAdminInCurrentOrg = indicateIfUserIsAdminInCurrentOrganization({
-    memberships,
-    currentOrganization,
-  });
+  const canSeeSysAdmin =
+    userIsSuperAdmin || currentPermissions.global.systemAdmin.length > 0;
 
   /** Upper menu logic */
   const upperMenuItems = [
@@ -126,10 +123,24 @@ const AppLayout = ({ children }) => {
         },
       ],
     },
+    {
+      key: "/app-store",
+      icon: <Store size={"1em"} />,
+      label: (
+        <a
+          href="/app-store"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          App Store
+        </a>
+      ),
+    },
   ];
 
   // Only add the divider + settings item if the user is an admin
-  if (isAdminInCurrentOrg) {
+  if (canSeeSettings) {
     upperMenuItems.push(
       { type: "divider" },
       {
@@ -172,7 +183,7 @@ const AppLayout = ({ children }) => {
     },
   ];
 
-  if (userIsSuperAdmin) {
+  if (canSeeSysAdmin) {
     bottomMenuItems.push({
       key: "/system-admin",
       icon: <MonitorCog size="1em" />,
@@ -263,7 +274,7 @@ const AppLayout = ({ children }) => {
             top: 0,
             left: collapsed ? 50 : 250,
             right: 0,
-            zIndex: 1,
+            zIndex: 100,
             padding: "0px 14px 0px 14px",
             height: 58,
             background: colorBgContainer,
@@ -307,4 +318,4 @@ const AppLayout = ({ children }) => {
   );
 };
 
-export default AppLayout;
+export default PlatformLayout;

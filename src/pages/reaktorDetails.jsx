@@ -66,7 +66,9 @@ export default function ReaktorDetails() {
       key: "id",
       render: (deploymentId) => (
         <Text>
-          <Link href={`/reaktor-ai-engine/${blueprint.id}/${deploymentId}`}>
+          <Link
+            href={`/reaktor-ai-engine/${blueprint.id}/${deploymentId}/overview`}
+          >
             {deploymentId}
           </Link>
         </Text>
