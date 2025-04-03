@@ -219,6 +219,7 @@ export const orgRoles = [
           "canViewRegistration",
           "canViewApiKeys",
         ],
+        appStore: ["canInstallApps"],
       },
     },
   },
@@ -227,7 +228,7 @@ export const orgRoles = [
     label: "Member",
     permissions: {
       global: { systemAdmin: [] },
-      org: { settings: [] },
+      org: { settings: [], appStore: [] },
     },
   },
 ];

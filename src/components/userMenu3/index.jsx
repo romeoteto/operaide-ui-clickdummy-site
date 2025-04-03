@@ -27,7 +27,7 @@ import {
 import Fuse from "fuse.js";
 
 import { setAppearance } from "../../state/appSettingsSlice";
-import { setCurrentOrganization } from "../../state/userSlice";
+import { setCurrentOrganization, setLogout } from "../../state/userSlice";
 
 const { Text, Title } = Typography;
 
@@ -184,15 +184,8 @@ export default function UserMenu3() {
     {
       key: "3",
       icon: <LogOut size={fontSize} />,
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          Logout
-        </a>
-      ),
+      label: "Logout",
+      onClick: () => dispatch(setLogout()),
     },
   ];
   /* This is the content of the dropdowns menu items */

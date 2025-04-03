@@ -65,6 +65,10 @@ export default function App() {
         <Switch>
           <Route path="/app-store" component={PageAppStoreHome} />
           <Route path="/app-store/sales" component={PageAppStoreHome} />
+          <Route
+            path="/app-store/:app-id"
+            component={<div>I am the app details page</div>}
+          />
         </Switch>
       </AppStoreLayout>
     </ConfigProvider>

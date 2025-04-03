@@ -11,6 +11,7 @@ import {
   Users,
   FileText,
 } from "lucide-react";
+import AppInstall from "./components/appInstall";
 const { Header, Sider, Content } = Layout;
 
 const { Search } = Input;
@@ -31,6 +32,7 @@ const App = ({ children }) => {
   const siderWidth = 200;
   return (
     <Layout style={{ background: colorBgContainer }}>
+      <AppInstall />
       <Sider
         width={siderWidth}
         style={{

@@ -5,6 +5,7 @@ import { Flex, Typography, Button, Form, Input, Row, Col, theme } from "antd";
 import signet from "../assets/signet-light.svg";
 
 import { Mail, Lock } from "lucide-react";
+import LoginForm from "../components/loginForm";
 
 const { Title } = Typography;
 
@@ -56,33 +57,7 @@ export default function PageLogin() {
           >
             <Title level={3}>Login</Title>
 
-            <Form
-              name="signup"
-              onFinish={(data) => dispatch(setLogin(data.email))}
-              layout="vertical"
-              style={{ width: "100%" }}
-            >
-              <Form.Item label="E-Mail" name="email">
-                <Input size="large" prefix={<Mail size="1em" />} />
-              </Form.Item>
-              <Form.Item label="Password" name="password">
-                <Input
-                  size="large"
-                  type="password"
-                  prefix={<Lock size="1em" />}
-                />
-              </Form.Item>
-              <Form.Item style={{ marginBottom: 0 }}>
-                <Button
-                  type="primary"
-                  size="large"
-                  htmlType="submit"
-                  style={{ width: "100%" }}
-                >
-                  Signup
-                </Button>
-              </Form.Item>
-            </Form>
+            <LoginForm />
           </Flex>
         </Col>
       </Row>

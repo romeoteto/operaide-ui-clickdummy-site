@@ -30,6 +30,7 @@ const { Header, Sider, Content } = Layout;
 const PlatformLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
+
   const {
     token: { colorBgContainer, colorSplit, marginXS },
   } = theme.useToken();
