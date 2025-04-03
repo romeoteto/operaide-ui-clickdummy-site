@@ -7,7 +7,7 @@ import PlatformLayout from "./layouts/platform";
 import PageHeader from "./components/pageHeader";
 
 import Home from "./pages/home";
-import PageReaktorAIEngine from "./pages/reaktorAiEngine";
+import PageReaktorAIEngine from "./pages/reaktor-ai-engine";
 
 import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
 
@@ -17,7 +17,8 @@ import DeploymentDetails from "./pages/deploymentDetails";
 import PageLogin from "./pages/login";
 import PageSystemAdmin from "./pages/system-admin";
 import EditUser from "./pages/system-admin/edit-user";
-import AppStoreLayout from "./layouts/appStore";
+import AppStoreLayout from "./appStore/layout";
+import PageAppStoreHome from "./appStore/pages/home";
 
 export default function App() {
   const [location] = useLocation();
@@ -62,9 +63,8 @@ export default function App() {
     <ConfigProvider theme={appStoreTheme}>
       <AppStoreLayout>
         <Switch>
-          <Route path="/app-store">
-            <div>Welcome to the App Store</div>
-          </Route>
+          <Route path="/app-store" component={PageAppStoreHome} />
+          <Route path="/app-store/sales" component={PageAppStoreHome} />
         </Switch>
       </AppStoreLayout>
     </ConfigProvider>

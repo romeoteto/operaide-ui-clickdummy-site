@@ -1,4 +1,4 @@
-import { organizations, orgRoles } from "./database";
+import { organizations, orgRoles } from "./database/database";
 
 export function getOrganizationsByMemberships(memberships) {
   return memberships

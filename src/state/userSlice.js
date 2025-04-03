@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { users, organizations, orgRoles } from "../database";
+import { users, organizations, orgRoles } from "../database/database";
 import { getPermissions } from "../helpers";
 
 const demoState = {
@@ -27,7 +27,7 @@ const devState = {
 };
 //state for development
 
-const initialState = demoState; //switch for development
+const initialState = devState; //switch for development
 
 export const userSlice = createSlice({
   name: "users",

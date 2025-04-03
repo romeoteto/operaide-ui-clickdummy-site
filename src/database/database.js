@@ -1,7 +1,7 @@
-import imageKnowledgeChat from "./assets/reaktor-images/undraw_chat_qmyo.svg";
-import imageOrderManager from "./assets/reaktor-images/undraw_order-delivered_puaw.svg";
-import imageICP from "./assets/reaktor-images/undraw_to-do_06xe.svg";
-import imageLeadNurturer from "./assets/reaktor-images/undraw_web-search_9qqc.svg";
+import imageKnowledgeChat from "../assets/reaktor-images/undraw_chat_qmyo.svg";
+import imageOrderManager from "../assets/reaktor-images/undraw_order-delivered_puaw.svg";
+import imageICP from "../assets/reaktor-images/undraw_to-do_06xe.svg";
+import imageLeadNurturer from "../assets/reaktor-images/undraw_web-search_9qqc.svg";
 
 export const blueprints = [
   {

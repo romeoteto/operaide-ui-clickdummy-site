@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { organizations, accentColors } from "../database";
+import { organizations, accentColors } from "../database/database";
 
 const initialState = {
   appearance: "system",

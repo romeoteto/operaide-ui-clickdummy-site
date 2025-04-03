@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Typography, Tag, Input, Flex } from "antd";
 import { Link } from "wouter";
-import { users } from "../../database";
+import { users } from "../../database/database";
 
 const { Text } = Typography;
 const { Search } = Input;

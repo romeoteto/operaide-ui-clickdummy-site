@@ -5,7 +5,7 @@ import { User, ShieldUser, Building } from "lucide-react";
 
 import PageHeader from "../../../components/pageHeader";
 import TabNav from "../../../components/tabNav";
-import { users } from "../../../database";
+import { users } from "../../../database/database";
 import Account from "./account";
 
 const EditUser = () => {

@@ -4,7 +4,7 @@ import { useLocation, Link } from "wouter";
 import { useSelector } from "react-redux";
 import { breadcrumbConfig } from "./breadcrumbConfig";
 import { getBreadcrumbsFromFlatConfig } from "./getBreadcrumbsFromFlatConfig";
-import { blueprints } from "../../database";
+import { blueprints } from "../../database/database";
 
 const Breadcrumbs = () => {
   const [location] = useLocation();

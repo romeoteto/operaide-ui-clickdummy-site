@@ -1,14 +1,14 @@
 import { useState } from "react";
-import PageHeader from "../components/pageHeader";
+import PageHeader from "../../components/pageHeader";
 
 import { Input, Flex, Segmented, Select } from "antd";
 import { Link } from "wouter";
 import { LayoutList, LayoutGrid, ChevronDown } from "lucide-react";
 
-import ReaktorCard from "../components/reaktorCard2";
+import ReaktorCard from "../../components/reaktorCard2";
 
-import { blueprints } from "../database";
-import ReaktorList from "../components/reaktorList";
+import { blueprints } from "../../database/database";
+import ReaktorList from "../../components/reaktorList";
 
 export default function PageReaktorAIEngine() {
   const [viewTypeGrid, setViewTypeGrid] = useState(true);

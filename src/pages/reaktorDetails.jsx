@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useLocation } from "wouter";
-import { blueprints } from "../database";
+import { blueprints } from "../database/database";
 import PageHeader from "../components/pageHeader";
 import { LayoutDashboard, Workflow, Settings2, Rocket } from "lucide-react";
 import TabNav from "../components/tabNav";
