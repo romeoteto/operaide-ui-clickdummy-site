@@ -10,19 +10,9 @@ export default function InfoPanel({
   version,
   id,
   parentId,
-  group,
-  tags,
-  imageSrc,
 }) {
   const {
-    token: {
-      padding,
-      lineWidth,
-      colorBorderSecondary,
-      borderRadius,
-      colorBgLayout,
-      margin,
-    },
+    token: { padding, lineWidth, colorBorderSecondary, borderRadius },
   } = theme.useToken();
   return (
     <Flex
@@ -32,22 +22,6 @@ export default function InfoPanel({
         borderRadius: borderRadius,
       }}
     >
-      <Flex
-        justify="center"
-        align="center"
-        style={{
-          padding: padding,
-          border: `${lineWidth}px solid ${colorBorderSecondary}`,
-          borderRadius: borderRadius,
-          width: "200px",
-          height: "200px",
-          backgroundColor: colorBgLayout,
-          marginRight: margin,
-          flexShrink: 0,
-        }}
-      >
-        <Image src={imageSrc} preview={false} width="100%" />
-      </Flex>
       <Flex vertical gap="small">
         <Flex vertical>
           <Text type="secondary">Label</Text>
@@ -72,10 +46,7 @@ export default function InfoPanel({
             <Text type="secondary">ID</Text>
             <Text strong>{id}</Text>
           </Flex>
-          <Flex vertical>
-            <Text type="secondary">Group</Text>
-            <Text strong>{group}</Text>
-          </Flex>
+
           {parentId && (
             <Flex vertical>
               <Text type="secondary">Blueprint ID</Text>{" "}
@@ -85,17 +56,6 @@ export default function InfoPanel({
             </Flex>
           )}
         </Flex>
-
-        {tags.length > 0 && (
-          <Flex vertical>
-            <Text type="secondary">Tags</Text>
-            <Flex>
-              {tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </Flex>
-          </Flex>
-        )}
       </Flex>
     </Flex>
   );

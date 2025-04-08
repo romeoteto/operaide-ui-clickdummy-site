@@ -5,64 +5,42 @@ import { Input, Flex, Segmented, Select } from "antd";
 import { Link } from "wouter";
 import { LayoutList, LayoutGrid, ChevronDown } from "lucide-react";
 
-import ReaktorCard from "../../components/reaktorCard2";
+import Card from "../../components/card";
 
-import { blueprints } from "../../database/database";
-import ReaktorList from "../../components/reaktorList";
+import { apps } from "../../database/apps";
 
 export default function PageReaktorAIEngine() {
   const [viewTypeGrid, setViewTypeGrid] = useState(true);
   const [searchString, setSearchString] = useState("");
-  const [selectedGroups, setSelectedGroups] = useState([]);
 
-  const groups = [...new Set(blueprints.map((b) => b.group))].map(
-    (uniqueGroup) => ({
-      label: uniqueGroup,
-      value: uniqueGroup.toLowerCase(),
-    })
-  );
-
-  const hasSearch = searchString.trim().length > 0;
-  const hasGroups = Array.isArray(selectedGroups) && selectedGroups.length > 0;
-
-  const filteredBlueprints = blueprints.filter((blueprint) => {
-    // Only check label/description if search is provided; otherwise default to `true`.
-    const matchesSearch = hasSearch
-      ? blueprint.label.toLowerCase().includes(searchString.toLowerCase()) ||
-        blueprint.description.toLowerCase().includes(searchString.toLowerCase())
-      : true;
-
-    // Only check group if groups are provided; otherwise default to `true`.
-    const matchesGroup = hasGroups
-      ? selectedGroups.includes(blueprint.group.toLowerCase())
-      : true;
-
-    // A blueprint must satisfy BOTH filters (i.e., AND).
-    return matchesSearch && matchesGroup;
-  });
+  /**
+   * here needs to go a filter mechanism that filters only those apps that are installed in this org
+   */
 
   return (
     <div>
       <PageHeader
         title="Reaktor AI Engine"
-        subtitle="Reaktor AI Engine is the home of your agentic applications. Here you can find all your installed Reaktor blueprints."
+        subtitle="Reaktor AI Engine is the home of your AI workforce. Here you can find all your installed agentic applications."
       />
       <Flex vertical gap="large">
         <Flex justify="between" gap="large">
           <Input
-            placeholder="Search blueprint"
+            placeholder="Search app"
             value={searchString}
             onChange={(e) => setSearchString(e.target.value)}
+            variant="filled"
           />
 
           <Select
             mode="multiple"
             allowClear
             style={{ width: "100%" }}
-            placeholder="Filter by group"
-            onChange={(values) => setSelectedGroups(values)}
-            options={groups}
+            placeholder="Filter by category"
+            /* onChange={(values) => setSelectedGroups(values)}
+            options={groups} */
             suffixIcon={<ChevronDown size="1.25em" />}
+            variant="filled"
           />
 
           <Segmented
@@ -101,22 +79,18 @@ export default function PageReaktorAIEngine() {
         </Flex>
 
         <Flex gap="large" wrap>
-          {viewTypeGrid ? (
-            filteredBlueprints.map((blueprint) => (
-              <Link href={`/reaktor-ai-engine/${blueprint.id}/overview`}>
-                <ReaktorCard
-                  id={blueprint.id}
-                  key={blueprint.id}
-                  label={blueprint.label}
-                  description={blueprint.description}
-                  imageSrc={blueprint.imageSrc}
-                  official={blueprint.official}
-                />
-              </Link>
-            ))
-          ) : (
-            <ReaktorList items={filteredBlueprints} />
-          )}
+          {apps.map((app) => (
+            <Link href={`/reaktor-ai-engine/${app.id}`}>
+              <Card
+                id={app.id}
+                key={app.id}
+                label={app.name}
+                description={app.description}
+                imageSrc={app.imageSrc}
+                official={app.official}
+              />
+            </Link>
+          ))}
         </Flex>
       </Flex>
     </div>

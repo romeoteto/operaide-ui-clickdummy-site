@@ -7,8 +7,10 @@ import {
   Typography,
   Select,
   Dropdown,
+  Form,
   Button,
   Tag,
+  Avatar,
   theme,
 } from "antd";
 
@@ -40,6 +42,8 @@ export default function UserMenu3() {
       colorBgElevated,
       borderRadiusLG,
       boxShadowSecondary,
+      paddingXXS,
+      paddingXS,
     },
   } = theme.useToken();
 
@@ -104,21 +108,37 @@ export default function UserMenu3() {
           </Flex>
           {isSuperAdmin && <Tag color="magenta">Super Admin</Tag>}
         </Flex>
-        <Divider style={{ margin: marginXXS, marginTop: 0, marginBottom: 0 }} />
-        <Flex vertical style={{ padding: paddingSM }} gap="small">
-          <Text strong>My Organizations</Text>
-          <Select
-            showSearch
-            placeholder="Select an organization"
-            optionFilterProp="label"
-            onChange={onChange}
-            onSearch={(e) => onSearch(e.target.value)}
-            options={filteredOrganizations}
-            suffixIcon={<ChevronDown size="1.25em" />}
-            size="middle"
-            value={currentOrganization}
-          />
-        </Flex>
+        <div style={{ paddingLeft: paddingXXS, paddingRight: paddingXXS }}>
+          <Divider style={{ marginTop: 0, marginBottom: 0 }} />
+        </div>
+
+        <Form
+          layout="vertical"
+          style={{
+            paddingLeft: paddingSM,
+            paddingRight: paddingSM,
+            paddingBottom: paddingXS,
+            paddingTop: paddingXS,
+          }}
+        >
+          <Form.Item
+            label="My Organizations"
+            name="myOrganizations"
+            style={{ marginBottom: 0 }}
+          >
+            <Select
+              showSearch
+              placeholder="Select an organization"
+              optionFilterProp="label"
+              onChange={onChange}
+              onSearch={(e) => onSearch(e.target.value)}
+              options={filteredOrganizations}
+              suffixIcon={<ChevronDown size="1.25em" />}
+              size="middle"
+              value={currentOrganization}
+            />
+          </Form.Item>
+        </Form>
       </Flex>
     );
   };
@@ -216,12 +236,7 @@ export default function UserMenu3() {
         </div>
       )}
     >
-      <Button
-        color="default"
-        variant="filled"
-        shape="circle"
-        icon={<User size="1em" />}
-      />
+      <Avatar icon={<User size="1em" />} style={{ cursor: "pointer" }} />
     </Dropdown>
   );
 }

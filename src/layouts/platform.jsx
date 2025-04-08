@@ -14,9 +14,10 @@ import {
   TrendingUp,
   FileText,
   Store,
+  Users,
 } from "lucide-react";
 import { Button, Layout, Menu, Flex, theme } from "antd";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 
 import logoLight from "../assets/logo-light.svg";
 import signetLight from "../assets/signet-light.svg";
@@ -127,16 +128,7 @@ const PlatformLayout = ({ children }) => {
     {
       key: "/app-store",
       icon: <Store size={"1em"} />,
-      label: (
-        <a
-          href="/app-store"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-        >
-          App Store
-        </a>
-      ),
+      label: <Link href="/app-store">App Store</Link>,
     },
   ];
 
@@ -170,15 +162,15 @@ const PlatformLayout = ({ children }) => {
       ),
     },
     {
-      key: "changelog",
-      icon: <TrendingUp size="1em" />,
+      key: "community",
+      icon: <Users size="1em" />,
       label: (
         <a
-          href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
+          href="https://operaide.bettermode.io/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Changelog
+          Community
         </a>
       ),
     },

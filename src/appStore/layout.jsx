@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import logo from "../assets/logo-light.svg";
+import React from "react";
 
 import { Button, Layout, Menu, Input, theme } from "antd";
 import {
@@ -10,26 +9,47 @@ import {
   Star,
   Users,
   FileText,
+  ChevronLeft,
 } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import AppInstall from "./components/appInstall";
 const { Header, Sider, Content } = Layout;
 
 const { Search } = Input;
 
 const App = ({ children }) => {
+  const [location, navigate] = useLocation();
+
   const {
     token: {
       colorBgContainer,
-      borderRadiusLG,
       colorSplit,
       padding,
+      paddingLG,
       paddingXXS,
       lineWidth,
       margin,
+      marginXXS,
     },
   } = theme.useToken();
 
   const siderWidth = 200;
+
+  const menuKeys = [
+    "/app-store",
+    "/app-store/sales",
+    "/app-store/customer-service",
+    "/app-store/accounting",
+    "/app-store/chatbots",
+  ];
+
+  const findSelectedKey = (pathname, keys) => {
+    return (
+      keys
+        .filter((key) => pathname === key || pathname.startsWith(key + "/"))
+        .sort((a, b) => b.length - a.length)[0] || "/"
+    );
+  };
   return (
     <Layout style={{ background: colorBgContainer }}>
       <AppInstall />
@@ -49,68 +69,51 @@ const App = ({ children }) => {
         <div
           style={{
             height: "58px",
-            paddingLeft: "14px",
-            paddingRight: "14px",
+            paddingLeft: paddingXXS,
             display: "flex",
             alignItems: "center",
           }}
         >
-          <img src={logo} style={{ height: "28px" }} />
+          <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+            <ChevronLeft size="1.25em" style={{ marginRight: marginXXS }} />
+            Back to platform
+          </Link>
         </div>
         <div style={{ padding: paddingXXS, marginBottom: margin }}>
-          <Search size="small" placeholder="Search app" />
+          <Input placeholder="Search app" variant="filled" />
         </div>
 
         <Menu
           theme="light"
           mode="vertical"
-          defaultSelectedKeys={["discover"]}
+          selectedKeys={[findSelectedKey(location, menuKeys)]}
+          onClick={({ key }) => navigate(key)}
           style={{ border: 0 }}
           items={[
             {
-              key: "discover",
+              key: "/app-store",
               icon: <Star size="1em" />,
               label: "Discover",
             },
             {
-              key: "sales",
+              key: "/app-store/sales",
               icon: <Store size="1em" />,
               label: "Sales",
             },
             {
-              key: "customer-service",
+              key: "/app-store/customer-service",
               icon: <Headset size="1em" />,
               label: "Customer Service",
             },
             {
-              key: "accounting",
+              key: "/app-store/accounting",
               icon: <Landmark size="1em" />,
               label: "Accounting",
             },
             {
-              key: "chatbots",
+              key: "/app-store/chatbots",
               icon: <BotMessageSquare size="1em" />,
               label: "Chatbots",
-            },
-            {
-              type: "divider",
-            },
-            {
-              key: "resources",
-              label: "Resources",
-              type: "group",
-              children: [
-                {
-                  key: "community",
-                  icon: <Users size="1em" />,
-                  label: "Community",
-                },
-                {
-                  key: "documentation",
-                  icon: <FileText size="1em" />,
-                  label: "Documentation",
-                },
-              ],
             },
           ]}
         />
@@ -118,7 +121,7 @@ const App = ({ children }) => {
 
       <Content
         style={{
-          padding: padding,
+          padding: paddingLG,
           marginLeft: siderWidth,
         }}
       >

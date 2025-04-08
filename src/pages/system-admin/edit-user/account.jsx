@@ -32,6 +32,7 @@ const Container = ({
         }`,
         borderRadius,
         maxWidth: "800px",
+        overflow: "hidden",
       }}
     >
       <Flex vertical style={{ padding: paddingLG }}>

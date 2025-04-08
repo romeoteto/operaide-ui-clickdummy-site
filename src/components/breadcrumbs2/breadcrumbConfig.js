@@ -11,6 +11,15 @@ export const breadcrumbConfig = {
     ],
   },
 
+  /** NEW */
+  "/reaktor-ai-engine/:appId": {
+    org: { show: true, clickable: true },
+    breadcrumbs: [
+      { label: "Reaktor AI Engine", clickable: true, hidden: false },
+    ],
+  },
+  /** NEW */
+
   "/reaktor-ai-engine/:reaktorId/overview": {
     org: { show: true, clickable: true },
     breadcrumbs: [

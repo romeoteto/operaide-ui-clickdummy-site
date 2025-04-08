@@ -4,7 +4,6 @@ import { Link } from "wouter";
 import { users } from "../../database/database";
 
 const { Text } = Typography;
-const { Search } = Input;
 
 const AllUsers = () => {
   const usersWithFullNameAndMembershipCount = users.map((user) => ({
@@ -50,7 +49,7 @@ const AllUsers = () => {
 
   return (
     <Flex vertical gap="large">
-      <Search placeholder="Search user" />
+      <Input placeholder="Search user" variant="filled" />
       <Table
         size="middle"
         columns={tableColumns}

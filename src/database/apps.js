@@ -1,116 +1,109 @@
-export const blueprints = [
+import imageKnowledgeChat from "../assets/reaktor-images/undraw_chat_qmyo.svg";
+import imageOrderManager from "../assets/reaktor-images/undraw_order-delivered_puaw.svg";
+import imageICP from "../assets/reaktor-images/undraw_to-do_06xe.svg";
+import imageLeadNurturer from "../assets/reaktor-images/undraw_web-search_9qqc.svg";
+
+export const apps = [
   {
-    id: "op.demo.knowledge-chat",
-    label: "Knowledge Chat",
+    id: "knowledge-chat",
+    name: "Knowledge Chat",
+    version: "1.1",
     description:
       "A chat-based application that is able to retrieve data from a knowledge base.",
+    keywords: ["chat", "knowledge"],
+    categories: ["Chatbot"],
     imageSrc: imageKnowledgeChat,
     official: true,
-    type: "Blueprint",
-    tags: ["Tag 1", "Tag 2", "Tag 3"],
-    group: "Chat",
-    version: "v1",
-    deployments: [
+    expectedOperaideVersion: "^2.0.2",
+    blueprints: [
       {
-        id: "95QDRrfaYg7sqHgwP",
-        version: "v1",
-        label: "Knowledge Chat for Sales",
+        id: "document-chat",
+        version: "1.1",
+        label: "Document Chat",
         description:
-          "This deployment is a knowledge chat for sales teams to chat with sales documents.",
-        group: "Sales",
-        tags: ["demo", "sales"],
-        imageSrc: imageKnowledgeChat,
+          "A chatbot that is able to chat with documents in a vector store.",
+        deployments: [
+          {
+            id: "Xfk3X34k96x9tSfdc",
+            version: "1.1",
+            label: "TechDB Chat",
+            description: "Answers based on documents from TechDB.",
+          },
+          {
+            id: "xqEmaFQsPEWtq8TQX",
+            version: "1.1",
+            label: "Product Chat",
+            description: "Answers based on product folders.",
+          },
+        ],
       },
     ],
   },
   {
-    id: "op.demo.order-manager",
-    label: "Order Manager Agent",
+    id: "order-manager",
+    name: "Order Manager",
+    version: "2.1.3",
     description: "Automates the processing of customer orders.",
+    keywords: ["customer service", "erp", "chat", "order management"],
+    categories: ["Customer Service", "Administration", "Chatbot"],
     imageSrc: imageOrderManager,
-    official: false,
-    type: "Blueprint",
-    tags: [],
-    group: "Backoffice",
-    version: "v1",
-    deployments: [],
+    expectedOperaideVersion: "^2.0.2",
+    blueprints: [
+      {
+        id: "analyze-orders",
+        version: "2.1.3",
+        label: "Analyzing Orders Agent",
+        description:
+          "An agent that takes orders from e-mails, extracts data and puts them to an ERP system.",
+        deployments: [],
+      },
+      {
+        id: "status-chat",
+        version: "1.2",
+        label: "Order Status Chat",
+        description:
+          "This agent connects to ERP systems and can answer customer questions about order status.",
+        deployments: [],
+      },
+    ],
   },
+
   {
-    id: "op.demo.icp-searcher",
-    label: "ICP Identification Agent",
+    id: "virtual-sdr",
+    name: "Virtual SDR",
+    version: "3.0",
     description:
-      "Researches companies and contacts based on your ICP definition.",
+      "A virtual sales development representative that identifies and nurtures leads, keeps them updated in your CRM and constantly listens for new updates from your contacts.",
+    keywords: ["sales", "leads", "nurturing", "contact updates"],
+    categories: ["Sales"],
     imageSrc: imageICP,
-    official: false,
-    type: "Blueprint",
-    tags: [],
-    group: "Sales",
-    version: "v1",
-    deployments: [],
-  },
-  {
-    id: "op.demo.lead-nurturer",
-    label: "Lead-Nurturing Agent",
-    description:
-      "Researches all relevant data and information about your prospects.",
-    imageSrc: imageLeadNurturer,
-    official: false,
-    type: "Blueprint",
-    tags: [],
-    group: "Sales",
-    version: "v1",
-    deployments: [],
-  },
-  {
-    id: "op.demo.sales-contact-listener",
-    label: "Sales Contact Listener",
-    description:
-      "Listens to updates of your contacts and informs you when to reach out.",
-    imageSrc: imageKnowledgeChat,
-    official: true,
-    type: "Blueprint",
-    tags: [],
-    group: "Sales",
-    version: "v1",
-    deployments: [],
-  },
-  {
-    id: "op.demo.sales-coach",
-    label: "Sales Coach",
-    description:
-      "Simulates real-life sales situations and improves your skills.",
-    imageSrc: imageKnowledgeChat,
-    official: true,
-    type: "Blueprint",
-    tags: [],
-    group: "Sales",
-    version: "v1",
-    deployments: [],
-  },
-  {
-    id: "op.demo.customer-support-agent",
-    label: "Customer Support Agent",
-    description:
-      "Takes care of your customers' questions and increases satisfaction.",
-    imageSrc: imageKnowledgeChat,
-    official: false,
-    type: "Blueprint",
-    tags: [],
-    group: "Customer Support",
-    version: "v1",
-    deployments: [],
-  },
-  {
-    id: "op.demo.virtual-accountant",
-    label: "Virtual Accountant",
-    description:
-      "Prevents paying bills twice by checking all your suppliers invoices.",
-    imageSrc: imageKnowledgeChat,
-    official: true,
-    type: "Blueprint",
-    tags: [],
-    group: "Accounting",
-    version: "v1",
-    deployments: [],
+    expectedOperaideVersion: "^2.0.2",
+    blueprints: [
+      {
+        id: "icp-searcher",
+        version: "3.0",
+        label: "ICP Searcher",
+        description:
+          "Researches companies and contacts based on your ICP definition.",
+        deployments: [],
+      },
+      {
+        id: "lead-nurturer",
+        version: "2.7",
+        label: "Lead Nurturer",
+        description:
+          "Researches all relevant data and information about your prospects and enters them into your CRM.",
+        deployments: [],
+      },
+      ,
+      {
+        id: "sales-contact-listener",
+        version: "1.0",
+        label: "Sales Contact Listener",
+        description:
+          "Listens to updates of your contacts and informs you when to reach out.",
+        deployments: [],
+      },
+    ],
   },
 ];

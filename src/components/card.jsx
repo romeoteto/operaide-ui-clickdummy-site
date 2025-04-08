@@ -1,20 +1,21 @@
-import { Tag, Card, theme } from "antd";
+import { Tag, Card as AntCard, theme } from "antd";
 import DynamicSVG from "../assets/reaktor-images/dynamicSVG";
 
-const { Meta } = Card;
+const { Meta } = AntCard;
 
-export default function ReaktorCard({
-  label,
-  description,
-  imageSrc,
-  official,
-}) {
+export default function Card({ label, description, imageSrc, official }) {
   const {
-    token: { paddingXL, colorPrimary, colorTextBase, reaktorCard },
+    token: {
+      paddingXL,
+      colorPrimary,
+      colorTextBase,
+      reaktorCard,
+      colorFillQuaternary,
+    },
   } = theme.useToken();
 
   return (
-    <Card
+    <AntCard
       size="small"
       hoverable
       style={{ width: reaktorCard.cardWidth }}
@@ -24,6 +25,8 @@ export default function ReaktorCard({
             width: "100%",
             height: reaktorCard.coverHeight,
             padding: paddingXL,
+            background: colorFillQuaternary,
+            borderRadius: 0,
           }}
         >
           <DynamicSVG src={imageSrc} fillColor={colorPrimary} />
@@ -44,6 +47,6 @@ export default function ReaktorCard({
         description={description}
         style={{ height: reaktorCard.metaHeight }}
       />
-    </Card>
+    </AntCard>
   );
 }

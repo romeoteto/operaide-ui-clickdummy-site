@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal, Typography, Flex, Select, theme } from "antd";
+import React, { useState } from "react";
+import { Modal, Typography, Flex, Select, theme } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "wouter";
 import { setAppInstallVisible } from "../../state/appStoreSlice";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, User } from "lucide-react";
 import { organizations, orgRoles } from "../../database/database";
 import LoginForm from "../../components/loginForm";
 import { setCurrentOrganization } from "../../state/userSlice";
 import { installApp } from "../../state/installedAppsSlice";
 
+//**
+// This component is prepared to be rendered publically without a logged in user.
+// It will show a functioning login component once a non-authenticated user wants to install an app.
+// This is experimental and currently not implemented in the clickdummy.*/
+
 const { Text } = Typography;
+
 const AppInstall = () => {
   const [confirmLoading, setConfirmLoading] = useState(false);
 
@@ -22,7 +28,18 @@ const AppInstall = () => {
   const [_, navigate] = useLocation();
 
   const {
-    token: { marginXL },
+    token: {
+      marginXL,
+      colorBorderSecondary,
+      padding,
+      borderRadiusLG,
+      lineWidth,
+      marginXS,
+      margin,
+      fontSizeLG,
+      colorTextBase,
+      colorBgBase,
+    },
   } = theme.useToken();
 
   const memberships = useSelector(
@@ -34,6 +51,7 @@ const AppInstall = () => {
   );
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const orgsWithInstallStatus =
     isLoggedIn &&
@@ -98,15 +116,49 @@ const AppInstall = () => {
                   <strong>Note:</strong> You can only install apps in
                   organizations where you have the right permissions.
                 </Text>
-                <Select
-                  placeholder="Select an organization"
-                  value={currentOrganization.value}
-                  onChange={(value) => onChange(value)}
-                  style={{ width: "100%" }}
-                  size="large"
-                  suffixIcon={<ChevronDown size="1.25em" />}
-                  options={orgsWithInstallStatus}
-                />
+                <Flex
+                  style={{
+                    border: `${lineWidth}px solid ${colorBorderSecondary}`,
+                    borderRadius: borderRadiusLG,
+                    padding,
+                  }}
+                >
+                  <Flex
+                    justify="center"
+                    align="center"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      backgroundColor: colorTextBase,
+                      borderRadius: "50%",
+                      marginRight: margin,
+                    }}
+                  >
+                    <User size="1.5em" style={{ color: colorBgBase }} />
+                  </Flex>
+                  <Flex vertical>
+                    <Text strong style={{ fontSize: fontSizeLG }}>
+                      {currentUser.prename} {currentUser.surname}
+                    </Text>
+                    <Text type="secondary" style={{ fontSize: fontSizeLG }}>
+                      {currentUser.email}
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex vertical>
+                  <Text strong style={{ marginBottom: marginXS }}>
+                    My Organizations
+                  </Text>
+                  <Select
+                    placeholder="Select an organization"
+                    value={currentOrganization.value}
+                    onChange={(value) => onChange(value)}
+                    style={{ width: "100%" }}
+                    size="large"
+                    suffixIcon={<ChevronDown size="1.25em" />}
+                    options={orgsWithInstallStatus}
+                  />
+                </Flex>
               </Flex>
             ) : (
               <LoginForm />

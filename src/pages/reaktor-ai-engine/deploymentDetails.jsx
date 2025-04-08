@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useLocation } from "wouter";
-import { blueprints } from "../database/database";
-import PageHeader from "../components/pageHeader";
+import { blueprints } from "../../database/database";
+import { apps } from "../../database/apps";
+import PageHeader from "../../components/pageHeader";
 import { LayoutDashboard, CircleGauge, Cloud, Settings2 } from "lucide-react";
-import TabNav from "../components/tabNav";
+import TabNav from "../../components/tabNav";
 import { Flex, Typography, Table, Tag, Image, Input, Button } from "antd";
-import InfoPanel from "../components/infoPanel";
+import InfoPanel from "../../components/infoPanel";
 
-export default function DeploymentDetails() {
+export default function PageDeploymentDetails() {
   const params = useParams();
   const [activeKey, setActiveKey] = useState(0);
 
@@ -20,12 +21,23 @@ export default function DeploymentDetails() {
     }
   }, [location]);
 
-  const { "reaktor-id": reaktorId, "deployment-id": deploymentId } = params;
+  const {
+    "reaktor-id": reaktorId,
+    "deployment-id": deploymentId,
+    "app-id": appId,
+  } = params;
 
-  const blueprint = blueprints.find((bp) => bp.id === reaktorId);
+  //** Update here */
+
+  const app = apps.find((app) => app.id === appId);
+  const blueprint = app.blueprints.find(
+    (blueprint) => blueprint.id === reaktorId
+  );
   const deployment = blueprint.deployments.find(
     (deployment) => deployment.id === deploymentId
   );
+
+  //** Update here */
 
   const tabs = [
     {
@@ -70,9 +82,9 @@ export default function DeploymentDetails() {
           description={deployment.description}
           type="Deployment"
           version={deployment.version}
-          group={deployment.group}
-          tags={deployment.tags}
-          imageSrc={deployment.imageSrc}
+          group={deployment.group} // delete
+          tags={deployment.tags} // delete
+          imageSrc={deployment.imageSrc} // delete --> use image from app
           parentId={blueprint.id}
         />
       )}

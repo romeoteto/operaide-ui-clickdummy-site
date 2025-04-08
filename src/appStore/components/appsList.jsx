@@ -7,6 +7,8 @@ import {
   setAppToBeInstalled,
 } from "../../state/appStoreSlice";
 
+import { Box } from "lucide-react";
+
 const data = Array.from({ length: 23 }).map((_, i) => ({
   id: i,
   href: "/app-store/12345/install",
@@ -33,7 +35,6 @@ const AppsList = () => {
   return (
     <List
       itemLayout="vertical"
-      size="large"
       pagination={{
         onChange: (page) => {
           console.log(page);
@@ -41,11 +42,6 @@ const AppsList = () => {
         pageSize: 3,
       }}
       dataSource={data}
-      footer={
-        <div>
-          <b>ant design</b> footer part
-        </div>
-      }
       renderItem={(item) => (
         <List.Item
           key={item.title}
@@ -67,7 +63,11 @@ const AppsList = () => {
             />,
           ]}
           extra={
-            <Button onClick={() => installApp(item)} type="primary">
+            <Button
+              onClick={() => installApp(item)}
+              type="default"
+              icon={<Box size="1em" />}
+            >
               Install
             </Button>
           }

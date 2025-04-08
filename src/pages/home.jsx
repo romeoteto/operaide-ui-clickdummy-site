@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import PageHeader from "../components/pageHeader";
 import { Card, Flex, Typography, Row, Col, theme } from "antd";
-import { FileText, Users } from "lucide-react";
+import { FileText, Users, Store } from "lucide-react";
+import { Link } from "wouter";
 
 const { Text, Title } = Typography;
 
@@ -70,6 +71,26 @@ export default function Home() {
               </Flex>
             </Card>
           </a>
+        </Col>
+        <Col span={8}>
+          <Link href="/app-store">
+            <Card hoverable>
+              <Flex align="center" gap="small">
+                <Flex
+                  justify="center"
+                  align="center"
+                  style={{
+                    borderRadius: "100%",
+                    padding: paddingXS,
+                    background: colorPrimaryBg,
+                  }}
+                >
+                  <Store size="1.25em" />
+                </Flex>
+                <Text>Visit the App Store</Text>
+              </Flex>
+            </Card>
+          </Link>
         </Col>
       </Row>
     </Flex>
