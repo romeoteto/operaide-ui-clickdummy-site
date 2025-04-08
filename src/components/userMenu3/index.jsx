@@ -121,17 +121,13 @@ export default function UserMenu3() {
             paddingTop: paddingXS,
           }}
         >
-          <Form.Item
-            label="My Organizations"
-            name="myOrganizations"
-            style={{ marginBottom: 0 }}
-          >
+          <Form.Item label="My Organizations" style={{ marginBottom: 0 }}>
             <Select
               showSearch
               placeholder="Select an organization"
               optionFilterProp="label"
               onChange={onChange}
-              onSearch={(e) => onSearch(e.target.value)}
+              onSearch={onSearch}
               options={filteredOrganizations}
               suffixIcon={<ChevronDown size="1.25em" />}
               size="middle"
