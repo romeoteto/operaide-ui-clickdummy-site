@@ -8,7 +8,7 @@ const { Text, Title } = Typography;
 
 export default function Home() {
   const {
-    token: { paddingXS, colorPrimaryBg },
+    token: { paddingXS, colorPrimaryBg, colorPrimary },
   } = theme.useToken();
 
   const label = useSelector((state) => state.user.currentOrganization).label;
@@ -41,7 +41,7 @@ export default function Home() {
                     background: colorPrimaryBg,
                   }}
                 >
-                  <FileText size="1.25em" />
+                  <FileText size="1.25em" style={{ color: colorPrimary }} />
                 </Flex>
                 <Text>Read the documentation</Text>
               </Flex>
@@ -65,7 +65,7 @@ export default function Home() {
                     background: colorPrimaryBg,
                   }}
                 >
-                  <Users size="1.25em" />
+                  <Users size="1.25em" style={{ color: colorPrimary }} />
                 </Flex>
                 <Text>Meet with the community</Text>
               </Flex>
@@ -85,7 +85,7 @@ export default function Home() {
                     background: colorPrimaryBg,
                   }}
                 >
-                  <Store size="1.25em" />
+                  <Store size="1.25em" style={{ color: colorPrimary }} />
                 </Flex>
                 <Text>Visit the App Store</Text>
               </Flex>
