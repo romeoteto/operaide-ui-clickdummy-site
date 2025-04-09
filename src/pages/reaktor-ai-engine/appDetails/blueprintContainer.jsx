@@ -17,6 +17,7 @@ const BlueprintContainer = ({ data }) => {
   const {
     token: {
       padding,
+      paddingSM,
       colorFillQuaternary,
       lineWidth,
       borderRadius,
@@ -73,7 +74,7 @@ const BlueprintContainer = ({ data }) => {
     >
       <Flex
         style={{
-          padding: padding,
+          padding: paddingSM,
           background: colorFillQuaternary,
           borderBottom: `${lineWidth}px solid ${colorBorderSecondary}`,
         }}
@@ -88,18 +89,23 @@ const BlueprintContainer = ({ data }) => {
           </Flex>
           <Space>
             <Button
+              size="small"
+              color="default"
+              variant="filled"
               onClick={() =>
-                navigate(`/reaktor-ai-engine/${appId}/${blueprintId}`)
+                navigate(`/reaktor-ai-engine/${appId}/${blueprintId}/overview`)
               }
             >
               Open
             </Button>
-            <Button type="primary">Deploy</Button>
+            <Button size="small" type="primary">
+              Deploy
+            </Button>
           </Space>
         </Flex>
       </Flex>
 
-      <div style={{ padding: padding }}>
+      <div style={{ padding: paddingSM }}>
         <Table
           size="small"
           columns={tableColumns}

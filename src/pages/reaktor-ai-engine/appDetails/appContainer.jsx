@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Descriptions, Flex, Tag, Typography, theme } from "antd";
+import {
+  Button,
+  Descriptions,
+  Divider,
+  Flex,
+  Tag,
+  Typography,
+  theme,
+} from "antd";
 import { Download } from "lucide-react";
 
 import DynamicSVG from "../../../assets/reaktor-images/dynamicSVG";
@@ -20,6 +28,7 @@ const AppContainer = ({ data, children }) => {
   const {
     token: {
       paddingXL,
+      paddingSM,
       colorPrimary,
       colorFillQuaternary,
       marginXS,
@@ -69,18 +78,17 @@ const AppContainer = ({ data, children }) => {
       style={{
         borderRadius,
         border: `${lineWidth}px solid ${colorBorderSecondary}`,
-        marginTop: 8,
       }}
     >
       <Flex
         gap="large"
         style={{
           background: colorFillQuaternary,
-          padding: padding,
+          padding: paddingSM,
           borderBottom: `${lineWidth}px solid ${colorBorderSecondary}`,
         }}
       >
-        {/*       <div
+        {/*     <div
           style={{
             width: "180px",
             height: "180px",
@@ -101,12 +109,17 @@ const AppContainer = ({ data, children }) => {
 
           <Descriptions size="small" items={items} column={2} />
         </Flex>
-        <Button size="small" type="text" icon={<Download size="1em" />}>
+        <Button
+          size="small"
+          color="default"
+          variant="filled"
+          icon={<Download size="1em" />}
+        >
           Download
         </Button>
       </Flex>
 
-      <div style={{ padding }}>{children}</div>
+      <div style={{ padding: paddingSM }}>{children}</div>
     </div>
   );
 };

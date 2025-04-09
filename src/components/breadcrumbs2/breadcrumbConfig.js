@@ -5,88 +5,116 @@ export const breadcrumbConfig = {
   },
 
   "/reaktor-ai-engine": {
-    org: { show: true, clickable: true },
-    breadcrumbs: [
-      { label: "Reaktor AI Engine", clickable: true, hidden: false },
-    ],
+    org: { show: true, clickable: false },
+    breadcrumbs: [],
   },
 
   /** NEW */
   "/reaktor-ai-engine/:appId": {
+    org: { show: true, clickable: false },
+    breadcrumbs: [
+      {
+        label: ({ appId, getAppLabel }) => getAppLabel(appId),
+      },
+    ],
+  },
+
+  "/reaktor-ai-engine/:appId/:reaktorId/overview": {
     org: { show: true, clickable: true },
     breadcrumbs: [
-      { label: "Reaktor AI Engine", clickable: true, hidden: false },
+      {
+        label: ({ appId, getAppLabel }) => getAppLabel(appId),
+        href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
+        clickable: true,
+      },
+      {
+        label: ({ appId, reaktorId, getBlueprintLabel }) =>
+          getBlueprintLabel(appId, reaktorId),
+        href: ({ appId, reaktorId }) =>
+          `/reaktor-ai-engine/${appId}/${reaktorId}/overview`,
+        clickable: false,
+      },
+    ],
+  },
+  "/reaktor-ai-engine/:appId/:reaktorId/diagram": {
+    org: { show: true, clickable: true },
+    breadcrumbs: [
+      {
+        label: ({ appId, getAppLabel }) => getAppLabel(appId),
+        href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
+        clickable: true,
+      },
+      {
+        label: ({ appId, reaktorId, getBlueprintLabel }) =>
+          getBlueprintLabel(appId, reaktorId),
+        href: ({ appId, reaktorId }) =>
+          `/reaktor-ai-engine/${appId}/${reaktorId}/overview`,
+        clickable: false,
+      },
+    ],
+  },
+  "/reaktor-ai-engine/:appId/:reaktorId/default-settings": {
+    org: { show: true, clickable: true },
+    breadcrumbs: [
+      {
+        label: ({ appId, getAppLabel }) => getAppLabel(appId),
+        href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
+        clickable: true,
+      },
+      {
+        label: ({ appId, reaktorId, getBlueprintLabel }) =>
+          getBlueprintLabel(appId, reaktorId),
+        href: ({ appId, reaktorId }) =>
+          `/reaktor-ai-engine/${appId}/${reaktorId}/overview`,
+        clickable: false,
+      },
+    ],
+  },
+  "/reaktor-ai-engine/:appId/:reaktorId/deployments": {
+    org: { show: true, clickable: true },
+    breadcrumbs: [
+      {
+        label: ({ appId, getAppLabel }) => getAppLabel(appId),
+        href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
+        clickable: true,
+      },
+      {
+        label: ({ appId, reaktorId, getBlueprintLabel }) =>
+          getBlueprintLabel(appId, reaktorId),
+        href: ({ appId, reaktorId }) =>
+          `/reaktor-ai-engine/${appId}/${reaktorId}/overview`,
+        clickable: false,
+      },
+    ],
+  },
+
+  "/reaktor-ai-engine/:appId/:reaktorId/:deploymentId/overview": {
+    org: { show: true, clickable: true },
+    breadcrumbs: [
+      {
+        label: ({ appId, getAppLabel }) => getAppLabel(appId),
+        href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
+        clickable: true,
+      },
+      {
+        label: ({ appId, reaktorId, getBlueprintLabel }) =>
+          getBlueprintLabel(appId, reaktorId),
+        href: ({ appId, reaktorId }) =>
+          `/reaktor-ai-engine/${appId}/${reaktorId}/overview`,
+        clickable: true,
+      },
+      {
+        label: ({ deploymentId }) => deploymentId,
+      },
     ],
   },
   /** NEW */
 
-  "/reaktor-ai-engine/:reaktorId/overview": {
-    org: { show: true, clickable: true },
-    breadcrumbs: [
-      {
-        label: "Reaktor AI Engine",
-        href: "/reaktor-ai-engine",
-        clickable: true,
-      },
-      {
-        label: ({ reaktorId, getReaktorLabel }) => getReaktorLabel(reaktorId),
-        href: ({ reaktorId }) => `/reaktor-ai-engine/${reaktorId}`,
-        clickable: false,
-      },
-      { label: "Overview", clickable: true, hidden: true },
-    ],
-  },
+  /* 
 
-  "/reaktor-ai-engine/:reaktorId/diagram": {
-    org: { show: true, clickable: true },
-    breadcrumbs: [
-      {
-        label: "Reaktor AI Engine",
-        href: "/reaktor-ai-engine",
-        clickable: true,
-      },
-      {
-        label: ({ reaktorId, getReaktorLabel }) => getReaktorLabel(reaktorId),
-        href: ({ reaktorId }) => `/reaktor-ai-engine/${reaktorId}`,
-        clickable: false,
-      },
-      { label: "Diagram", clickable: true, hidden: true },
-    ],
-  },
 
-  "/reaktor-ai-engine/:reaktorId/default-settings": {
-    org: { show: true, clickable: true },
-    breadcrumbs: [
-      {
-        label: "Reaktor AI Engine",
-        href: "/reaktor-ai-engine",
-        clickable: true,
-      },
-      {
-        label: ({ reaktorId, getReaktorLabel }) => getReaktorLabel(reaktorId),
-        href: ({ reaktorId }) => `/reaktor-ai-engine/${reaktorId}`,
-        clickable: false,
-      },
-      { label: "Default Settings", clickable: true, hidden: true },
-    ],
-  },
 
-  "/reaktor-ai-engine/:reaktorId/deployments": {
-    org: { show: true, clickable: true },
-    breadcrumbs: [
-      {
-        label: "Reaktor AI Engine",
-        href: "/reaktor-ai-engine",
-        clickable: true,
-      },
-      {
-        label: ({ reaktorId, getReaktorLabel }) => getReaktorLabel(reaktorId),
-        href: ({ reaktorId }) => `/reaktor-ai-engine/${reaktorId}`,
-        clickable: false,
-      },
-      { label: "Deployments", clickable: true, hidden: true },
-    ],
-  },
+
 
   "/reaktor-ai-engine/:reaktorId/:deploymentId/overview": {
     org: { show: true, clickable: true },
@@ -130,7 +158,7 @@ export const breadcrumbConfig = {
     ],
   },
 
-  "/reaktor-ai-engine/:reaktorId/:deploymentId/api": {
+ "/reaktor-ai-engine/:reaktorId/:deploymentId/api": {
     org: { show: true, clickable: true },
     breadcrumbs: [
       {
@@ -149,7 +177,7 @@ export const breadcrumbConfig = {
       },
       { label: "API", clickable: true, hidden: true },
     ],
-  },
+  }, 
 
   "/reaktor-ai-engine/:reaktorId/:deploymentId/settings": {
     org: { show: true, clickable: true },
@@ -241,10 +269,7 @@ export const breadcrumbConfig = {
     ],
   },
 
-  /* THIS GETS REDIRECTED "/system-admin": {
-    org: { show: false },
-    breadcrumbs: [{ label: "System Admin", clickable: false }],
-  }, */
+
 
   "/system-admin/organizations": {
     org: { show: false },
@@ -320,5 +345,5 @@ export const breadcrumbConfig = {
       { label: "System Admin", href: "/system-admin", clickable: true },
       { label: "Edit User", clickable: false },
     ],
-  },
+  },*/
 };

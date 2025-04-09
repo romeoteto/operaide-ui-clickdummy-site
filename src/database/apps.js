@@ -19,7 +19,7 @@ export const apps = [
       {
         id: "document-chat",
         version: "1.1",
-        label: "Document Chat",
+        label: "Chat with Vector Store",
         description:
           "A chatbot that is able to chat with documents in a vector store.",
         deployments: [
@@ -95,7 +95,6 @@ export const apps = [
           "Researches all relevant data and information about your prospects and enters them into your CRM.",
         deployments: [],
       },
-      ,
       {
         id: "sales-contact-listener",
         version: "1.0",

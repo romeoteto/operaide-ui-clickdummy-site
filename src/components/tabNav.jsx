@@ -8,7 +8,7 @@ export default function TabNav({ tabs, activeKey, onTabClick }) {
     <div
       style={{
         position: "sticky",
-        top: 0,
+        top: -24,
         backgroundColor: colorBgContainer,
         zIndex: 1,
       }}

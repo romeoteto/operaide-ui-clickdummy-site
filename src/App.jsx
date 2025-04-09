@@ -12,7 +12,7 @@ import PageReaktorAIEngine from "./pages/reaktor-ai-engine";
 import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
 
 import PageSettings from "./pages/settings";
-import ReaktorDetails from "./pages/reaktorDetails";
+
 import PageDeploymentDetails from "./pages/reaktor-ai-engine/deploymentDetails";
 import PageLogin from "./pages/login";
 import PageSystemAdmin from "./pages/system-admin";
@@ -22,6 +22,7 @@ import PageAppStoreHome from "./appStore/pages/home";
 import PageAppStoreCategory from "./appStore/pages/category";
 
 import PageAppDetails from "./pages/reaktor-ai-engine/appDetails";
+import ReaktorDetails from "./pages/reaktor-ai-engine/reaktorDetails";
 
 export default function App() {
   const [location] = useLocation();
@@ -93,8 +94,23 @@ export default function App() {
               />
 
               <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id"
-                component={() => <div>Blueprint Details</div>}
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/overview"
+                component={ReaktorDetails}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/diagram"
+                component={ReaktorDetails}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/default-settings"
+                component={ReaktorDetails}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/deployments"
+                component={ReaktorDetails}
               />
 
               <Route

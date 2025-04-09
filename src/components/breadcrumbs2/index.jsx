@@ -4,7 +4,7 @@ import { useLocation, Link } from "wouter";
 import { useSelector } from "react-redux";
 import { breadcrumbConfig } from "./breadcrumbConfig";
 import { getBreadcrumbsFromFlatConfig } from "./getBreadcrumbsFromFlatConfig";
-import { blueprints } from "../../database/database";
+import { apps } from "../../database/apps";
 
 const Breadcrumbs = () => {
   const [location] = useLocation();
@@ -13,12 +13,24 @@ const Breadcrumbs = () => {
     (state) => state.user.currentOrganization?.label
   );
 
+  const getAppLabel = (appId) => {
+    const app = apps.find((a) => a.id === appId);
+    return app?.name || appId;
+  };
+
+  const getBlueprintLabel = (appId, reaktorId) => {
+    const app = apps.find((a) => a.id === appId);
+    const blueprint = app?.blueprints?.find((bp) => bp.id === reaktorId);
+    return blueprint?.label || reaktorId;
+  };
+
   const { org, breadcrumbs } = getBreadcrumbsFromFlatConfig(
     location,
     breadcrumbConfig,
     {
       org: currentOrgLabel,
-      getReaktorLabel: (id) => blueprints.find((b) => b.id === id)?.label || id,
+      getAppLabel,
+      getBlueprintLabel,
     }
   );
 

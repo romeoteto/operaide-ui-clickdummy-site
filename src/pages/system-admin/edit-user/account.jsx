@@ -14,7 +14,6 @@ const Container = ({
   const {
     token: {
       padding,
-      paddingLG,
       colorBorderSecondary,
       borderRadius,
       lineWidth,
@@ -35,15 +34,15 @@ const Container = ({
         overflow: "hidden",
       }}
     >
-      <Flex vertical style={{ padding: paddingLG }}>
+      <Flex vertical style={{ padding: padding }}>
         <Title level={4}>{title}</Title>
         {subtext && <Text>{subtext}</Text>}
       </Flex>
       <div
         style={{
-          paddingLeft: paddingLG,
-          paddingRight: paddingLG,
-          paddingBottom: paddingLG,
+          paddingLeft: padding,
+          paddingRight: padding,
+          paddingBottom: padding,
         }}
       >
         {children}
@@ -53,8 +52,8 @@ const Container = ({
         align="center"
         style={{
           background: danger ? colorErrorBg : colorBgLayout,
-          paddingLeft: paddingLG,
-          paddingRight: paddingLG,
+          paddingLeft: padding,
+          paddingRight: padding,
           paddingBottom: padding,
           paddingTop: padding,
           borderTop: `${lineWidth}px solid ${

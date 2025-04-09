@@ -11,12 +11,21 @@ import {
   Blocks,
   Settings2,
   MonitorCog,
-  TrendingUp,
   FileText,
-  Store,
+  Box,
   Users,
+  Info,
 } from "lucide-react";
-import { Button, Layout, Menu, Flex, theme } from "antd";
+import {
+  Button,
+  Layout,
+  Menu,
+  Flex,
+  theme,
+  Tooltip,
+  Divider,
+  Typography,
+} from "antd";
 import { useLocation, Link } from "wouter";
 
 import logoLight from "../assets/logo-light.svg";
@@ -27,13 +36,25 @@ import Breadcrumbs from "../components/breadcrumbs2";
 import UserMenu3 from "../components/userMenu3";
 
 const { Header, Sider, Content } = Layout;
+const { Text, Link: AntLink } = Typography;
 
 const PlatformLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
 
   const {
-    token: { colorBgContainer, colorSplit, marginXS },
+    token: {
+      colorBgContainer,
+      colorSplit,
+      marginXS,
+      fontSizeSM,
+      fontSizeLG,
+      paddingXS,
+      paddingMD,
+      paddingXXS,
+      padding,
+      paddingSM,
+    },
   } = theme.useToken();
 
   const findSelectedKey = (pathname, keys) => {
@@ -127,7 +148,7 @@ const PlatformLayout = ({ children }) => {
     },
     {
       key: "/app-store",
-      icon: <Store size={"1em"} />,
+      icon: <Box size={"1em"} />,
       label: <Link href="/app-store">App Store</Link>,
     },
   ];
@@ -185,6 +206,8 @@ const PlatformLayout = ({ children }) => {
     });
   }
   /** Bottom Menu Logic */
+
+  const version = "Ada 2.0";
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -250,6 +273,42 @@ const PlatformLayout = ({ children }) => {
               style={{ border: "none" }}
               items={bottomMenuItems}
             />
+            <Divider style={{ margin: 0 }} />
+
+            {collapsed ? (
+              <Tooltip placement="right" title={version}>
+                <AntLink
+                  href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ lineHeight: 0 }}
+                  type="secondary"
+                >
+                  <Flex
+                    align="center"
+                    justify="center"
+                    style={{ padding: paddingSM }}
+                  >
+                    <Info size="1em" style={{ fontSize: fontSizeLG }} />
+                  </Flex>
+                </AntLink>
+              </Tooltip>
+            ) : (
+              <AntLink
+                href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
+                target="_blank"
+                rel="noopener noreferrer"
+                type="secondary"
+                style={{
+                  fontSize: fontSizeSM,
+                  paddingTop: paddingXS,
+                  paddingBottom: paddingXS,
+                  paddingLeft: paddingMD,
+                }}
+              >
+                {version}
+              </AntLink>
+            )}
           </Flex>
         </Flex>
       </Sider>
@@ -298,7 +357,6 @@ const PlatformLayout = ({ children }) => {
           style={{
             marginTop: 58,
             padding: 24,
-            paddingTop: 0,
             overflowY: "auto",
             height: "calc(100vh - 58px)",
             background: colorBgContainer,
