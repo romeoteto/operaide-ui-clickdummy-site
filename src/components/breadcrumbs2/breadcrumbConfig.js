@@ -25,7 +25,7 @@ export const breadcrumbConfig = {
       {
         label: ({ appId, getAppLabel }) => getAppLabel(appId),
         href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
-        clickable: true,
+        clickable: false,
       },
       {
         label: ({ appId, reaktorId, getBlueprintLabel }) =>
@@ -42,7 +42,7 @@ export const breadcrumbConfig = {
       {
         label: ({ appId, getAppLabel }) => getAppLabel(appId),
         href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
-        clickable: true,
+        clickable: false,
       },
       {
         label: ({ appId, reaktorId, getBlueprintLabel }) =>
@@ -59,7 +59,7 @@ export const breadcrumbConfig = {
       {
         label: ({ appId, getAppLabel }) => getAppLabel(appId),
         href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
-        clickable: true,
+        clickable: false,
       },
       {
         label: ({ appId, reaktorId, getBlueprintLabel }) =>
@@ -76,7 +76,7 @@ export const breadcrumbConfig = {
       {
         label: ({ appId, getAppLabel }) => getAppLabel(appId),
         href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
-        clickable: true,
+        clickable: false,
       },
       {
         label: ({ appId, reaktorId, getBlueprintLabel }) =>
@@ -94,7 +94,7 @@ export const breadcrumbConfig = {
       {
         label: ({ appId, getAppLabel }) => getAppLabel(appId),
         href: ({ appId }) => `/reaktor-ai-engine/${appId}`,
-        clickable: true,
+        clickable: false,
       },
       {
         label: ({ appId, reaktorId, getBlueprintLabel }) =>

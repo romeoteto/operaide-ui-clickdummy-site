@@ -5,11 +5,10 @@ import { Route, Switch, Redirect, useLocation } from "wouter";
 
 import PlatformLayout from "./layouts/platform";
 import PageHeader from "./components/pageHeader";
+import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
 
 import Home from "./pages/home";
-import PageAppsIndex from "./pages/reaktor-ai-engine/appsIndex";
-
-import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
+import PageAppIndex from "./pages/reaktor-ai-engine/apps";
 
 import PageSettings from "./pages/settings";
 
@@ -20,8 +19,7 @@ import EditUser from "./pages/system-admin/edit-user";
 import AppStoreLayout from "./appStore/layout";
 import PageAppStoreHome from "./appStore/pages/home";
 import PageAppStoreCategory from "./appStore/pages/category";
-
-import PageAppDetails from "./pages/reaktor-ai-engine/appDetails";
+import PageReaktors from "./pages/reaktor-ai-engine/reaktors";
 import ReaktorDetails from "./pages/reaktor-ai-engine/reaktorDetails";
 
 export default function App() {
@@ -83,128 +81,69 @@ export default function App() {
           <PlatformLayout>
             <Switch>
               <Route path="/" component={Home} />
-              <Route path="/reaktor-ai-engine" component={PageAppsIndex} />
 
-              <Route path="/reaktor-ai-engine/apps" component={PageAppsIndex} />
+              {/** Reaktor AI Engine Index */}
+              <Route path="/reaktor-ai-engine/apps" component={PageAppIndex} />
+              {/** Reaktor AI Engine Index */}
 
+              {/** Reaktor AI Engine Index */}
               <Route
                 path="/reaktor-ai-engine/reaktors"
-                component={() => <div>i am the reaktors overview</div>}
+                component={PageReaktors}
               />
+              {/** Reaktor AI Engine Index */}
 
+              {/** Reaktor AI Engine Index */}
               <Route
                 path="/reaktor-ai-engine/deployments"
-                component={() => <div>i am the deployments overview</div>}
+                component={PageAppIndex}
               />
+              {/** Reaktor AI Engine Index */}
 
+              {/** Reaktor Details */}
               <Route
-                path="/reaktor-ai-engine/:app-id"
-                component={PageAppDetails}
-              />
-
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/overview"
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/:page"
                 component={ReaktorDetails}
               />
+              {/** Reaktor Details */}
 
+              {/** Deployment Details */}
               <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/diagram"
-                component={ReaktorDetails}
-              />
-
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/default-settings"
-                component={ReaktorDetails}
-              />
-
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/deployments"
-                component={ReaktorDetails}
-              />
-
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/overview"
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/:page"
                 component={PageDeploymentDetails}
               />
+              {/** Deployment Details */}
 
-              {/**This may be deleted */}
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/overview"
-                component={ReaktorDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/diagram"
-                component={ReaktorDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/default-settings"
-                component={ReaktorDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/deployments"
-                component={ReaktorDetails}
-              />
-
-              {/*    <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/overview"
-                component={DeploymentDetails}
-              /> 
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/metrics"
-                component={DeploymentDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/api"
-                component={DeploymentDetails}
-              />
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/settings"
-                component={DeploymentDetails}
-              />*/}
-              {/**This may be deleted */}
-
-              <Route path="/data-studio/documents">
+              {/** Data Studio */}
+              <Route path="/data-studio/:page">
                 <PageHeader title="Documents" subtitle="Some text." />
               </Route>
-              <Route path="/data-studio/document-groups">
-                <PageHeader title="Document Groups" subtitle="Some text." />
-              </Route>
-              <Route path="/data-studio/vector-db">
-                <PageHeader title="Vector DB" subtitle="Some text." />
-              </Route>
+              {/** Data Studio */}
+
+              {/** Integrations */}
               <Route path="/integrations/ai-provider">
                 <PageHeader title="AI Provider" subtitle="Some text." />
               </Route>
               <Route path="/integrations/services">
                 <PageHeader title="Services" subtitle="Some text." />
               </Route>
+              {/** Integrations */}
 
+              {/** Settings */}
               <Route
                 path="/settings"
                 component={() => <Redirect to="/settings/general" />}
               />
               <Route path="/settings/*" component={() => <PageSettings />} />
+              {/** Settings */}
 
+              {/** System Admin */}
               <Route
                 path="/system-admin"
                 component={() => <SystemAdminRedirect />}
               />
-              <Route
-                path="/system-admin/organizations"
-                component={PageSystemAdmin}
-              />
-              <Route
-                path="/system-admin/all-users"
-                component={PageSystemAdmin}
-              />
-              <Route
-                path="/system-admin/migrations"
-                component={PageSystemAdmin}
-              />
-              <Route
-                path="/system-admin/permissions"
-                component={PageSystemAdmin}
-              />
+              <Route path="/system-admin/:page" component={PageSystemAdmin} />
+
               <Route
                 path="/system-admin/edit-user/:user-id/account"
                 component={EditUser}
@@ -217,6 +156,7 @@ export default function App() {
                 path="/system-admin/edit-user/:user-id/memberships"
                 component={EditUser}
               />
+              {/** System Admin */}
             </Switch>
           </PlatformLayout>
         </ConfigProvider>

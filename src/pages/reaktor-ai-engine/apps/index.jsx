@@ -1,17 +1,15 @@
 import { useState } from "react";
-import PageHeader from "../../components/pageHeader";
+import PageHeader from "../../../components/pageHeader";
 
-import { Input, Flex, Segmented, Select } from "antd";
-import { Link } from "wouter";
-import { LayoutList, LayoutGrid, ChevronDown } from "lucide-react";
+import { Input, Flex, Segmented } from "antd";
 
-import Card from "../../components/card";
+import { LayoutList, LayoutGrid } from "lucide-react";
 
-import { apps } from "../../database/apps";
-import AppList from "../../components/appList";
+import AppList from "./appList";
+import AppGrid from "./appGrid";
 
-export default function PageAppsIndex() {
-  const [viewTypeGrid, setViewTypeGrid] = useState(false);
+export default function PageAppIndex() {
+  const [viewTypeGrid, setViewTypeGrid] = useState(true);
   const [searchString, setSearchString] = useState("");
 
   /**
@@ -21,8 +19,8 @@ export default function PageAppsIndex() {
   return (
     <div>
       <PageHeader
-        title="Apps"
-        subtitle="Agentic apps cluster one or more Reaktors for a business use case. Here you can find all your installed agentic apps."
+        title="Reaktor AI Engine"
+        subtitle="Reaktor AI Engine is the home of your agentic applications. Here you can find all installed apps."
       />
       <Flex vertical gap="large">
         <Flex justify="between" gap="large">
@@ -30,17 +28,6 @@ export default function PageAppsIndex() {
             placeholder="Search app"
             value={searchString}
             onChange={(e) => setSearchString(e.target.value)}
-            variant="filled"
-          />
-
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: "100%" }}
-            placeholder="Filter by category"
-            /* onChange={(values) => setSelectedGroups(values)}
-            options={groups} */
-            suffixIcon={<ChevronDown size="1.25em" />}
             variant="filled"
           />
 
@@ -79,24 +66,7 @@ export default function PageAppsIndex() {
           />
         </Flex>
 
-        {viewTypeGrid ? (
-          <Flex gap="large" wrap>
-            {apps.map((app) => (
-              <Link href={`/reaktor-ai-engine/${app.id}`}>
-                <Card
-                  id={app.id}
-                  key={app.id}
-                  label={app.name}
-                  description={app.description}
-                  imageSrc={app.imageSrc}
-                  official={app.official}
-                />
-              </Link>
-            ))}
-          </Flex>
-        ) : (
-          <AppList />
-        )}
+        {viewTypeGrid ? <AppGrid /> : <AppList />}
       </Flex>
     </div>
   );
