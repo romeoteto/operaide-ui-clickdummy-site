@@ -19,8 +19,8 @@ export default function PageAppIndex() {
   return (
     <div>
       <PageHeader
-        title="Reaktor AI Engine"
-        subtitle="Reaktor AI Engine is the home of your agentic applications. Here you can find all installed apps."
+        title="Apps"
+        subtitle="Agentic apps are packaged Reaktors for specific business use cases. Here you can find all your installed apps."
       />
       <Flex vertical gap="large">
         <Flex justify="between" gap="large">
