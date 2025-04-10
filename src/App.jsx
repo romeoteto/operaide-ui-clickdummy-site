@@ -8,7 +8,7 @@ import PageHeader from "./components/pageHeader";
 import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
 
 import Home from "./pages/home";
-import PageAppIndex from "./pages/reaktor-ai-engine/apps";
+import PageAppsIndex from "./pages/reaktor-ai-engine/apps";
 
 import PageSettings from "./pages/settings";
 
@@ -19,8 +19,9 @@ import EditUser from "./pages/system-admin/edit-user";
 import AppStoreLayout from "./appStore/layout";
 import PageAppStoreHome from "./appStore/pages/home";
 import PageAppStoreCategory from "./appStore/pages/category";
-import PageReaktors from "./pages/reaktor-ai-engine/reaktors";
+import PageReaktorsIndex from "./pages/reaktor-ai-engine/reaktors";
 import ReaktorDetails from "./pages/reaktor-ai-engine/reaktorDetails";
+import PageDeploymentsIndex from "./pages/reaktor-ai-engine/deployments";
 
 export default function App() {
   const [location] = useLocation();
@@ -83,20 +84,20 @@ export default function App() {
               <Route path="/" component={Home} />
 
               {/** Reaktor AI Engine Index */}
-              <Route path="/reaktor-ai-engine/apps" component={PageAppIndex} />
+              <Route path="/reaktor-ai-engine/apps" component={PageAppsIndex} />
               {/** Reaktor AI Engine Index */}
 
               {/** Reaktor AI Engine Index */}
               <Route
                 path="/reaktor-ai-engine/reaktors"
-                component={PageReaktors}
+                component={PageReaktorsIndex}
               />
               {/** Reaktor AI Engine Index */}
 
               {/** Reaktor AI Engine Index */}
               <Route
                 path="/reaktor-ai-engine/deployments"
-                component={PageAppIndex}
+                component={PageDeploymentsIndex}
               />
               {/** Reaktor AI Engine Index */}
 

@@ -15,16 +15,18 @@ import {
 import { useSearchParams, Link } from "wouter";
 import {
   Ellipsis,
-  Rocket,
   Settings2,
   LayoutDashboard,
-  Workflow,
   ChevronDown,
+  GaugeCircle,
+  Cloud,
+  Trash2,
+  Play,
 } from "lucide-react";
 import { apps } from "../../../database/apps";
 import PageHeader from "../../../components/pageHeader";
 
-const PageReaktorsIndex = () => {
+const PageDeploymentsIndex = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const appId = searchParams.get("appId");
@@ -41,24 +43,39 @@ const PageReaktorsIndex = () => {
     }))
   );
 
+  const deployments = apps.flatMap((app) =>
+    app.blueprints.flatMap((blueprint) =>
+      blueprint.deployments.map((deployment) => ({
+        ...deployment,
+        appId: app.id,
+        appName: app.name,
+        blueprintId: blueprint.id,
+        blueprintLabel: blueprint.label,
+      }))
+    )
+  );
+
+  console.log(deployments);
+
   const filteredReaktors = appId
     ? reaktors.filter((reaktor) => reaktor.appId === appId)
     : reaktors;
 
   const handleChange = (value) => {
-    setSearchParams({ appId: value });
-  };
-
-  const clearFilters = () => {
-    setSearchParams({});
+    if (value === "all") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ appId: value });
+    }
   };
 
   const selectOptions = [
+    { value: "all", label: "All Reaktors" },
     ...Array.from(
       new Map(
-        reaktors.map((reaktor) => [
-          reaktor.appId,
-          { value: reaktor.appId, label: reaktor.appName },
+        deployments.map((deployment) => [
+          deployment.blueprintId,
+          { value: deployment.blueprintId, label: deployment.blueprintLabel },
         ])
       ).values()
     ),
@@ -69,9 +86,11 @@ const PageReaktorsIndex = () => {
       title: "Label",
       dataIndex: "label",
       key: "label",
-      render: (_, reaktor) => (
-        <Link to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/overview`}>
-          {reaktor.label}
+      render: (_, deployment) => (
+        <Link
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/overview`}
+        >
+          {deployment.label}
         </Link>
       ),
     },
@@ -94,50 +113,67 @@ const PageReaktorsIndex = () => {
       key: "id",
     },
     {
-      title: "Parent App",
-      dataIndex: "appName",
-      key: "appName",
+      title: "Parent Reaktor",
+      dataIndex: "blueprintLabel",
+      key: "blueprintLabel",
+      render: (_, deployment) => (
+        <Link
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/overview`}
+        >
+          {deployment.blueprintLabel}
+        </Link>
+      ),
     },
     {
-      title: "Status",
-      key: "state",
-      render: (_, reaktor) => {
-        const hasDeployments =
-          reaktor.deployments && reaktor.deployments.length > 0;
-        return (
-          <Badge
-            status={hasDeployments ? "success" : "default"}
-            text={hasDeployments ? "Deployed" : "Not Deployed"}
-          />
-        );
-      },
-    },
-    {
-      align: "right",
       key: "operation",
-      render: (_, reaktor) => {
-        const reaktorActions = [
+      align: "right",
+      render: (_, deployment) => {
+        const deploymentActions = [
           {
-            key: "inspect",
+            key: "overview",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/overview`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/overview`}
                 style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
                 <LayoutDashboard size="1em" />
-                Inspect Reaktor
+                Inspect Deployment
               </Link>
             ),
           },
           {
-            key: "diagram",
+            key: "metrics",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/diagram`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/metrics`}
                 style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
-                <Workflow size="1em" />
-                Show Diagram
+                <GaugeCircle size="1em" />
+                Show Metrics
+              </Link>
+            ),
+          },
+          {
+            key: "api",
+            label: (
+              <Link
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/api`}
+                style={{ display: "flex", alignItems: "center", gap: 6 }}
+              >
+                <Cloud size="1em" />
+                Show API Endpoints
+              </Link>
+            ),
+          },
+          {
+            key: "execute",
+            label: (
+              <Link
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/execute`}
+                style={{ display: "flex", alignItems: "center", gap: 6 }}
+              >
+                <Play size="1em" />
+                Execute Deployment
               </Link>
             ),
           },
@@ -145,11 +181,11 @@ const PageReaktorsIndex = () => {
             key: "settings",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/default-settings`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/settings`}
                 style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
                 <Settings2 size="1em" />
-                Show Settings
+                Edit Settings
               </Link>
             ),
           },
@@ -160,14 +196,13 @@ const PageReaktorsIndex = () => {
           borderRadius: borderRadiusLG,
           boxShadow: boxShadowSecondary,
         };
-
         const menuStyle = {
           boxShadow: "none",
         };
 
         return (
           <Dropdown
-            menu={{ items: reaktorActions }}
+            menu={{ items: deploymentActions }}
             dropdownRender={(menu) => (
               <div style={contentStyle}>
                 {React.cloneElement(menu, { style: menuStyle })}
@@ -175,10 +210,11 @@ const PageReaktorsIndex = () => {
                 <Space style={{ padding: 8 }}>
                   <Button
                     type="primary"
+                    danger
                     size="small"
-                    icon={<Rocket size="1em" />}
+                    icon={<Trash2 size="1em" />}
                   >
-                    Deploy
+                    Delete
                   </Button>
                 </Space>
               </div>
@@ -198,13 +234,13 @@ const PageReaktorsIndex = () => {
   return (
     <>
       <PageHeader
-        title="Reaktors"
-        subtitle="Reaktors are the core building blocks of your agentic applications. They encapsulate isolated business processes."
+        title="Deployments"
+        subtitle="Reaktors that are deployed are ready for action. They can be externally triggered through API REST endpoints."
       />
       <Flex vertical gap="large">
         <Flex justify="between" gap="large">
           <Input
-            placeholder="Search Reaktor"
+            placeholder="Search deployment"
             value=""
             onChange={(e) => console.log(e.target.value)}
             variant="filled"
@@ -212,26 +248,23 @@ const PageReaktorsIndex = () => {
           />
           <Select
             variant="filled"
-            placeholder="Filter by app"
-            value={appId} // fallback to "all" if no param
+            placeholder="Filter by Reaktor"
+            value={appId || "all"} // fallback to "all" if no param
             style={{ flex: 1 }}
             onChange={handleChange}
             options={selectOptions}
             suffixIcon={<ChevronDown size="1.25em" />}
           />
-          <Button type="text" onClick={() => clearFilters()}>
-            Clear Filters
-          </Button>
         </Flex>
         <Table
           size="middle"
           bordered
           columns={tableColumns}
-          dataSource={filteredReaktors}
+          dataSource={deployments}
         />
       </Flex>
     </>
   );
 };
 
-export default PageReaktorsIndex;
+export default PageDeploymentsIndex;

@@ -298,38 +298,51 @@ const PlatformLayout = ({ children }) => {
             <Divider style={{ margin: 0 }} />
 
             {collapsed ? (
-              <Tooltip placement="right" title={version}>
-                <AntLink
+              <Flex
+                align="center"
+                justify="center"
+                style={{
+                  paddingLeft: paddingXS,
+                  paddingRight: paddingXS,
+                  paddingTop: paddingXS,
+                  paddingBottom: paddingXS,
+                }}
+              >
+                <Tooltip placement="right" title={version}>
+                  <Button
+                    color="default"
+                    variant="link"
+                    size="small"
+                    href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    icon={<Info size="1em" style={{ fontSize: fontSizeLG }} />}
+                  />
+                </Tooltip>
+              </Flex>
+            ) : (
+              <Flex
+                align="center"
+                justify="flex-start"
+                style={{
+                  paddingLeft: paddingSM,
+                  paddingRight: paddingSM,
+                  paddingTop: paddingXS,
+                  paddingBottom: paddingXS,
+                }}
+              >
+                <Button
+                  color="default"
+                  size="small"
+                  variant="link"
                   href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ lineHeight: 0 }}
-                  type="secondary"
+                  style={{ fontSize: fontSizeSM }}
                 >
-                  <Flex
-                    align="center"
-                    justify="center"
-                    style={{ padding: paddingSM }}
-                  >
-                    <Info size="1em" style={{ fontSize: fontSizeLG }} />
-                  </Flex>
-                </AntLink>
-              </Tooltip>
-            ) : (
-              <AntLink
-                href="https://operaide.bettermode.io/release-announcements-nf2jhzfa"
-                target="_blank"
-                rel="noopener noreferrer"
-                type="secondary"
-                style={{
-                  fontSize: fontSizeSM,
-                  paddingTop: paddingXS,
-                  paddingBottom: paddingXS,
-                  paddingLeft: paddingMD,
-                }}
-              >
-                {version}
-              </AntLink>
+                  {version}
+                </Button>
+              </Flex>
             )}
           </Flex>
         </Flex>

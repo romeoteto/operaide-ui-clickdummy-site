@@ -8,7 +8,7 @@ import { LayoutList, LayoutGrid } from "lucide-react";
 import AppList from "./appList";
 import AppGrid from "./appGrid";
 
-export default function PageAppIndex() {
+export default function PageAppsIndex() {
   const [viewTypeGrid, setViewTypeGrid] = useState(true);
   const [searchString, setSearchString] = useState("");
 
