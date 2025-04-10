@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageHeader from "../../../components/pageHeader";
+import { useSearchParams } from "wouter";
 
 import { Input, Flex, Segmented } from "antd";
 
@@ -9,12 +10,23 @@ import AppList from "./appList";
 import AppGrid from "./appGrid";
 
 export default function PageAppsIndex() {
-  const [viewTypeGrid, setViewTypeGrid] = useState(true);
   const [searchString, setSearchString] = useState("");
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const viewType = searchParams.get("viewType");
+
+  useEffect(() => {
+    !viewType && setSearchParams({ viewType: "cards" });
+  }, [viewType]);
 
   /**
    * here needs to go a filter mechanism that filters only those apps that are installed in this org
    */
+
+  const handleViewChange = (value) => {
+    setSearchParams({ viewType: value });
+  };
 
   return (
     <div>
@@ -32,10 +44,11 @@ export default function PageAppsIndex() {
           />
 
           <Segmented
-            onChange={() => setViewTypeGrid(!viewTypeGrid)}
+            onChange={(value) => handleViewChange(value)}
+            value={viewType}
             options={[
               {
-                value: "Cards",
+                value: "cards",
                 icon: (
                   <span
                     style={{
@@ -49,7 +62,7 @@ export default function PageAppsIndex() {
                 ),
               },
               {
-                value: "List",
+                value: "list",
                 icon: (
                   <span
                     style={{
@@ -66,7 +79,7 @@ export default function PageAppsIndex() {
           />
         </Flex>
 
-        {viewTypeGrid ? <AppGrid /> : <AppList />}
+        {viewType === "list" ? <AppList /> : <AppGrid />}
       </Flex>
     </div>
   );

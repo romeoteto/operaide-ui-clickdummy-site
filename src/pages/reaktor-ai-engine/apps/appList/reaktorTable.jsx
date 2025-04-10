@@ -13,19 +13,7 @@ import {
   Tooltip,
   theme,
 } from "antd";
-import {
-  Ellipsis,
-  LayoutDashboard,
-  Workflow,
-  Settings2,
-  Rocket,
-  GaugeCircle,
-  Cloud,
-  Play,
-  Trash2,
-  Download,
-  Box,
-} from "lucide-react";
+import { Ellipsis, Rocket, Trash2, Download, Box } from "lucide-react";
 import { Link } from "wouter";
 
 const { Text, Title: AntTitle } = Typography;
@@ -60,7 +48,7 @@ const ReaktorTable = ({ app }) => {
         key: "label",
         render: (_, deployment) => (
           <Link
-            to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/overview`}
+            to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/dashboard`}
           >
             {deployment.label}
           </Link>
@@ -74,49 +62,37 @@ const ReaktorTable = ({ app }) => {
         render: (_, deployment) => {
           const deploymentActions = [
             {
-              key: "overview",
+              key: "dashboard",
               label: (
                 <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/overview`}
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
+                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/dashboard`}
                 >
-                  <LayoutDashboard size="1em" />
                   Inspect Deployment
                 </Link>
               ),
             },
             {
-              key: "metrics",
-              label: (
-                <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/metrics`}
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
-                >
-                  <GaugeCircle size="1em" />
-                  Show Metrics
-                </Link>
-              ),
+              key: "openApi",
+              label: <Link to={""}>Show OpenAPI Definition</Link>,
             },
             {
               key: "api",
               label: (
-                <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/api`}
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
+                <a
+                  href={"https://petstore.swagger.io/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Cloud size="1em" />
                   Show API Endpoints
-                </Link>
+                </a>
               ),
             },
             {
-              key: "execute",
+              key: "execution",
               label: (
                 <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/execute`}
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
+                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/execution`}
                 >
-                  <Play size="1em" />
                   Execute Deployment
                 </Link>
               ),
@@ -126,9 +102,7 @@ const ReaktorTable = ({ app }) => {
               label: (
                 <Link
                   to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/settings`}
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
                 >
-                  <Settings2 size="1em" />
                   Edit Settings
                 </Link>
               ),
@@ -187,7 +161,7 @@ const ReaktorTable = ({ app }) => {
       dataIndex: "label",
       key: "label",
       render: (_, reaktor) => (
-        <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/overview`}>
+        <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/diagram`}>
           {reaktor.label}
         </Link>
       ),
@@ -215,7 +189,7 @@ const ReaktorTable = ({ app }) => {
           reaktor.deployments && reaktor.deployments.length > 0;
         return (
           <Badge
-            status={hasDeployments ? "success" : "default"}
+            status={hasDeployments ? "processing" : "default"}
             text={hasDeployments ? "Deployed" : "Not Deployed"}
           />
         );
@@ -227,26 +201,10 @@ const ReaktorTable = ({ app }) => {
       render: (_, reaktor) => {
         const reaktorActions = [
           {
-            key: "inspect",
-            label: (
-              <Link
-                to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/overview`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
-              >
-                <LayoutDashboard size="1em" />
-                Inspect Reaktor
-              </Link>
-            ),
-          },
-          {
             key: "diagram",
             label: (
-              <Link
-                to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/diagram`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
-              >
-                <Workflow size="1em" />
-                Show Diagram
+              <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/diagram`}>
+                Inspect Reaktor
               </Link>
             ),
           },
@@ -255,9 +213,7 @@ const ReaktorTable = ({ app }) => {
             label: (
               <Link
                 to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/default-settings`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
-                <Settings2 size="1em" />
                 Show Settings
               </Link>
             ),

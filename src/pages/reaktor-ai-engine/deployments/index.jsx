@@ -22,6 +22,7 @@ import {
   Trash2,
   Play,
   Atom,
+  Workflow,
 } from "lucide-react";
 import { apps } from "../../../database/apps";
 import PageHeader from "../../../components/pageHeader";
@@ -39,6 +40,7 @@ const PageDeploymentsIndex = () => {
     app.blueprints.flatMap((blueprint) =>
       blueprint.deployments.map((deployment) => ({
         ...deployment,
+        key: deployment.id,
         appId: app.id,
         appName: app.name,
         blueprintId: blueprint.id,
@@ -73,7 +75,7 @@ const PageDeploymentsIndex = () => {
       key: "label",
       render: (_, deployment) => (
         <Link
-          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/overview`}
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/dashboard`}
         >
           {deployment.label}
         </Link>
@@ -103,7 +105,7 @@ const PageDeploymentsIndex = () => {
       key: "blueprintLabel",
       render: (_, deployment) => (
         <Link
-          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/overview`}
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/diagram`}
         >
           {deployment.blueprintLabel}
         </Link>
@@ -115,49 +117,37 @@ const PageDeploymentsIndex = () => {
       render: (_, deployment) => {
         const deploymentActions = [
           {
-            key: "overview",
+            key: "dashboard",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/overview`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/dashboard`}
               >
-                <LayoutDashboard size="1em" />
                 Inspect Deployment
               </Link>
             ),
           },
           {
-            key: "metrics",
-            label: (
-              <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/metrics`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
-              >
-                <GaugeCircle size="1em" />
-                Show Metrics
-              </Link>
-            ),
+            key: "openApi",
+            label: <Link to={""}>Show OpenAPI Definition</Link>,
           },
           {
             key: "api",
             label: (
-              <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/api`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
+              <a
+                href={"https://petstore.swagger.io/"}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Cloud size="1em" />
                 Show API Endpoints
-              </Link>
+              </a>
             ),
           },
           {
-            key: "execute",
+            key: "execution",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/execute`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/execution`}
               >
-                <Play size="1em" />
                 Execute Deployment
               </Link>
             ),
@@ -166,10 +156,8 @@ const PageDeploymentsIndex = () => {
             key: "settings",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.reaktorId}/${deployment.id}/settings`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/settings`}
               >
-                <Settings2 size="1em" />
                 Edit Settings
               </Link>
             ),
@@ -181,10 +169,8 @@ const PageDeploymentsIndex = () => {
             key: "reaktor",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/overview`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/diagram`}
               >
-                <Atom size="1em" />
                 Inspect Parent Reaktor
               </Link>
             ),

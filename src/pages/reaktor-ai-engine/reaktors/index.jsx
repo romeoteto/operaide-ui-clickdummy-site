@@ -13,14 +13,7 @@ import {
   theme,
 } from "antd";
 import { useSearchParams, Link } from "wouter";
-import {
-  Ellipsis,
-  Rocket,
-  Settings2,
-  LayoutDashboard,
-  Workflow,
-  ChevronDown,
-} from "lucide-react";
+import { Ellipsis, Rocket, ChevronDown } from "lucide-react";
 import { apps } from "../../../database/apps";
 import PageHeader from "../../../components/pageHeader";
 
@@ -35,6 +28,7 @@ const PageReaktorsIndex = () => {
 
   const reaktors = apps.flatMap((app) =>
     app.blueprints.map((blueprint) => ({
+      key: blueprint.id,
       appId: app.id,
       appName: app.name,
       ...blueprint,
@@ -70,7 +64,7 @@ const PageReaktorsIndex = () => {
       dataIndex: "label",
       key: "label",
       render: (_, reaktor) => (
-        <Link to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/overview`}>
+        <Link to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/diagram`}>
           {reaktor.label}
         </Link>
       ),
@@ -106,7 +100,7 @@ const PageReaktorsIndex = () => {
           reaktor.deployments && reaktor.deployments.length > 0;
         return (
           <Badge
-            status={hasDeployments ? "success" : "default"}
+            status={hasDeployments ? "processing" : "default"}
             text={hasDeployments ? "Deployed" : "Not Deployed"}
           />
         );
@@ -118,26 +112,12 @@ const PageReaktorsIndex = () => {
       render: (_, reaktor) => {
         const reaktorActions = [
           {
-            key: "inspect",
-            label: (
-              <Link
-                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/overview`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
-              >
-                <LayoutDashboard size="1em" />
-                Inspect Reaktor
-              </Link>
-            ),
-          },
-          {
             key: "diagram",
             label: (
               <Link
                 to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/diagram`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
-                <Workflow size="1em" />
-                Show Diagram
+                Inspect Reaktor
               </Link>
             ),
           },
@@ -146,9 +126,7 @@ const PageReaktorsIndex = () => {
             label: (
               <Link
                 to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/default-settings`}
-                style={{ display: "flex", alignItems: "center", gap: 6 }}
               >
-                <Settings2 size="1em" />
                 Show Settings
               </Link>
             ),

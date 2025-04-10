@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, useLocation } from "wouter";
+import { useParams, useLocation } from "wouter";
 import { apps } from "../../../database/apps";
-import { LayoutDashboard, Workflow, Settings2, Rocket } from "lucide-react";
+import { Workflow, Settings2, Rocket, Info } from "lucide-react";
 import TabNav from "../../../components/tabNav";
-import { Flex, Typography, Descriptions, theme } from "antd";
 import Diagram from "./diagram";
-
-const { Text, Title } = Typography;
+import PageHeader from "../../../components/pageHeader";
+import ReaktorInfo from "./info";
 
 export default function ReaktorDetails() {
   const params = useParams();
@@ -26,17 +25,7 @@ export default function ReaktorDetails() {
   const app = apps.find((app) => app.id === appId);
   const blueprint = app?.blueprints?.find((bp) => bp.id === reaktorId);
 
-  const { id, version, label, description, deployments } = blueprint;
-
-  const {
-    token: {
-      paddingSM,
-      colorFillQuaternary,
-      lineWidth,
-      borderRadius,
-      colorBorderSecondary,
-    },
-  } = theme.useToken();
+  const { label, description, deployments } = blueprint;
 
   const diagram = String.raw`
 graph TD
@@ -75,11 +64,6 @@ graph TD
 
   const tabs = [
     {
-      icon: LayoutDashboard,
-      label: "Overview",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/overview`,
-    },
-    {
       icon: Workflow,
       label: "Diagram",
       href: `/reaktor-ai-engine/${appId}/${reaktorId}/diagram`,
@@ -95,6 +79,13 @@ graph TD
       label: "Deployments",
       href: `/reaktor-ai-engine/${appId}/${reaktorId}/deployments`,
     },
+
+    {
+      icon: Info,
+      label: "Info",
+      href: `/reaktor-ai-engine/${appId}/${reaktorId}/info`,
+      component: <ReaktorInfo blueprint={blueprint} app={app} />,
+    },
   ];
 
   const onTabClick = (key) => {
@@ -102,48 +93,10 @@ graph TD
     navigate(href);
   };
 
-  const descriptionItems = [
-    {
-      key: "1",
-      label: "ID",
-      children: id,
-    },
-    {
-      key: "2",
-      label: "Version",
-      children: version,
-    },
-    {
-      key: "3",
-      label: "App",
-      children: <Link href={`/reaktor-ai-engine/${app.id}`}>{app.name}</Link>,
-    },
-    {
-      key: "4",
-      label: "Number of deployments",
-      children: deployments.length,
-    },
-  ];
-
   return (
-    <Flex vertical gap="large">
-      <Flex
-        vertical
-        gap="large"
-        style={{
-          background: colorFillQuaternary,
-          padding: paddingSM,
-          border: `${lineWidth}px solid ${colorBorderSecondary}`,
-          borderRadius,
-        }}
-      >
-        <Flex vertical>
-          <Title level={3}>{label}</Title>
-          <Text>{description}</Text>
-        </Flex>
+    <>
+      <PageHeader title={label} subtitle={description} />
 
-        <Descriptions size="small" items={descriptionItems} column={2} />
-      </Flex>
       <div>
         <TabNav
           tabs={tabs}
@@ -152,6 +105,6 @@ graph TD
         />
         {tabs[activeKey]?.component}
       </div>
-    </Flex>
+    </>
   );
 }
