@@ -12,9 +12,11 @@ import {
   Settings2,
   MonitorCog,
   FileText,
-  Box,
+  Boxes,
   Users,
   Info,
+  Store,
+  Rocket,
 } from "lucide-react";
 import {
   Button,
@@ -68,6 +70,9 @@ const PlatformLayout = ({ children }) => {
   const menuKeys = [
     "/",
     "/reaktor-ai-engine",
+    "/reaktor-ai-engine/apps",
+    "/reaktor-ai-engine/reaktors",
+    "/reaktor-ai-engine/deployments",
     "/data-studio",
     "/data-studio/documents",
     "/data-studio/document-groups",
@@ -106,6 +111,23 @@ const PlatformLayout = ({ children }) => {
       key: "/reaktor-ai-engine",
       icon: <Atom size={"1em"} />,
       label: "Reaktor AI Engine",
+      children: [
+        {
+          key: "/reaktor-ai-engine/apps",
+          label: "Apps",
+          icon: <Boxes size={"1em"} />,
+        },
+        {
+          key: "/reaktor-ai-engine/reaktors",
+          label: "Reaktors",
+          icon: <Atom size={"1em"} />,
+        },
+        {
+          key: "/reaktor-ai-engine/deployments",
+          label: "Deployments",
+          icon: <Rocket size={"1em"} />,
+        },
+      ],
     },
     {
       key: "/data-studio",
@@ -148,7 +170,7 @@ const PlatformLayout = ({ children }) => {
     },
     {
       key: "/app-store",
-      icon: <Box size={"1em"} />,
+      icon: <Store size={"1em"} />,
       label: <Link href="/app-store">App Store</Link>,
     },
   ];

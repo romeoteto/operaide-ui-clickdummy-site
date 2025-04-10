@@ -37,6 +37,21 @@ export const apps = [
           },
         ],
       },
+      {
+        id: "vecorization-reaktor",
+        version: "1.1",
+        label: "Document Vectorization Reaktor",
+        description:
+          "A Reaktor that takes documents and builds a knowledge base for the chat.",
+        deployments: [
+          {
+            id: "PdF3X89096x7sStdc",
+            version: "1.1",
+            label: "PDF Vectorizer",
+            description: "Vectorizes PDF files.",
+          },
+        ],
+      },
     ],
   },
   {
@@ -73,7 +88,7 @@ export const apps = [
     name: "Virtual SDR",
     version: "3.0",
     description:
-      "A virtual sales development representative that identifies and nurtures leads, keeps them updated in your CRM and constantly listens for new updates from your contacts.",
+      "A virtual sales development representative that boosts your sales activity.",
     keywords: ["sales", "leads", "nurturing", "contact updates"],
     categories: ["Sales"],
     imageSrc: imageICP,

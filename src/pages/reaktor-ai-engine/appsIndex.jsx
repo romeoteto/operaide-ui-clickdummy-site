@@ -8,9 +8,10 @@ import { LayoutList, LayoutGrid, ChevronDown } from "lucide-react";
 import Card from "../../components/card";
 
 import { apps } from "../../database/apps";
+import AppList from "../../components/appList";
 
-export default function PageReaktorAIEngine() {
-  const [viewTypeGrid, setViewTypeGrid] = useState(true);
+export default function PageAppsIndex() {
+  const [viewTypeGrid, setViewTypeGrid] = useState(false);
   const [searchString, setSearchString] = useState("");
 
   /**
@@ -20,8 +21,8 @@ export default function PageReaktorAIEngine() {
   return (
     <div>
       <PageHeader
-        title="Reaktor AI Engine"
-        subtitle="Reaktor AI Engine is the home of your AI workforce. Here you can find all your installed agentic applications."
+        title="Apps"
+        subtitle="Agentic apps cluster one or more Reaktors for a business use case. Here you can find all your installed agentic apps."
       />
       <Flex vertical gap="large">
         <Flex justify="between" gap="large">
@@ -78,20 +79,24 @@ export default function PageReaktorAIEngine() {
           />
         </Flex>
 
-        <Flex gap="large" wrap>
-          {apps.map((app) => (
-            <Link href={`/reaktor-ai-engine/${app.id}`}>
-              <Card
-                id={app.id}
-                key={app.id}
-                label={app.name}
-                description={app.description}
-                imageSrc={app.imageSrc}
-                official={app.official}
-              />
-            </Link>
-          ))}
-        </Flex>
+        {viewTypeGrid ? (
+          <Flex gap="large" wrap>
+            {apps.map((app) => (
+              <Link href={`/reaktor-ai-engine/${app.id}`}>
+                <Card
+                  id={app.id}
+                  key={app.id}
+                  label={app.name}
+                  description={app.description}
+                  imageSrc={app.imageSrc}
+                  official={app.official}
+                />
+              </Link>
+            ))}
+          </Flex>
+        ) : (
+          <AppList />
+        )}
       </Flex>
     </div>
   );

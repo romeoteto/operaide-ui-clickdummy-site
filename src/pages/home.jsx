@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import PageHeader from "../components/pageHeader";
-import { Card, Flex, Typography, Row, Col, theme } from "antd";
+import { Card, Flex, Typography, Row, Col, Avatar, theme } from "antd";
 import { FileText, Users, Store } from "lucide-react";
 import { Link } from "wouter";
 
@@ -32,17 +32,11 @@ export default function Home() {
           >
             <Card size="middle" hoverable>
               <Flex align="center" gap="small">
-                <Flex
-                  justify="center"
-                  align="center"
-                  style={{
-                    borderRadius: "100%",
-                    padding: paddingXS,
-                    background: colorPrimaryBg,
-                  }}
-                >
-                  <FileText size="1.25em" style={{ color: colorPrimary }} />
-                </Flex>
+                <Avatar
+                  icon={<FileText size="1em" />}
+                  style={{ background: colorPrimaryBg, color: colorPrimary }}
+                />
+
                 <Text>Read the documentation</Text>
               </Flex>
             </Card>
@@ -56,17 +50,10 @@ export default function Home() {
           >
             <Card hoverable>
               <Flex align="center" gap="small">
-                <Flex
-                  justify="center"
-                  align="center"
-                  style={{
-                    borderRadius: "100%",
-                    padding: paddingXS,
-                    background: colorPrimaryBg,
-                  }}
-                >
-                  <Users size="1.25em" style={{ color: colorPrimary }} />
-                </Flex>
+                <Avatar
+                  icon={<Users size="1em" />}
+                  style={{ background: colorPrimaryBg, color: colorPrimary }}
+                />
                 <Text>Meet with the community</Text>
               </Flex>
             </Card>
@@ -76,17 +63,10 @@ export default function Home() {
           <Link href="/app-store">
             <Card hoverable>
               <Flex align="center" gap="small">
-                <Flex
-                  justify="center"
-                  align="center"
-                  style={{
-                    borderRadius: "100%",
-                    padding: paddingXS,
-                    background: colorPrimaryBg,
-                  }}
-                >
-                  <Store size="1.25em" style={{ color: colorPrimary }} />
-                </Flex>
+                <Avatar
+                  icon={<Store size="1em" />}
+                  style={{ background: colorPrimaryBg, color: colorPrimary }}
+                />
                 <Text>Visit the App Store</Text>
               </Flex>
             </Card>

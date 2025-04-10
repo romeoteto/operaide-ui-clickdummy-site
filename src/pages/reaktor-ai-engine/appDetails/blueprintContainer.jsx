@@ -16,7 +16,7 @@ const { Title, Text } = Typography;
 const BlueprintContainer = ({ data }) => {
   const {
     token: {
-      padding,
+      paddingXS,
       paddingSM,
       colorFillQuaternary,
       lineWidth,
@@ -96,7 +96,7 @@ const BlueprintContainer = ({ data }) => {
                 navigate(`/reaktor-ai-engine/${appId}/${blueprintId}/overview`)
               }
             >
-              Open
+              Details
             </Button>
             <Button size="small" type="primary">
               Deploy
@@ -105,13 +105,12 @@ const BlueprintContainer = ({ data }) => {
         </Flex>
       </Flex>
 
-      <div style={{ padding: paddingSM }}>
+      <div style={{ padding: paddingXS }}>
         <Table
           size="small"
           columns={tableColumns}
           dataSource={deployments}
           title={() => <Text strong>Deployments</Text>}
-          bordered
         />
       </div>
     </Flex>

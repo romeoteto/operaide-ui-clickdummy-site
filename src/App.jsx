@@ -7,7 +7,7 @@ import PlatformLayout from "./layouts/platform";
 import PageHeader from "./components/pageHeader";
 
 import Home from "./pages/home";
-import PageReaktorAIEngine from "./pages/reaktor-ai-engine";
+import PageAppsIndex from "./pages/reaktor-ai-engine/appsIndex";
 
 import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
 
@@ -83,9 +83,18 @@ export default function App() {
           <PlatformLayout>
             <Switch>
               <Route path="/" component={Home} />
+              <Route path="/reaktor-ai-engine" component={PageAppsIndex} />
+
+              <Route path="/reaktor-ai-engine/apps" component={PageAppsIndex} />
+
               <Route
-                path="/reaktor-ai-engine"
-                component={PageReaktorAIEngine}
+                path="/reaktor-ai-engine/reaktors"
+                component={() => <div>i am the reaktors overview</div>}
+              />
+
+              <Route
+                path="/reaktor-ai-engine/deployments"
+                component={() => <div>i am the deployments overview</div>}
               />
 
               <Route
