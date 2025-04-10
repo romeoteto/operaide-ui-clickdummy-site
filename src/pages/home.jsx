@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import PageHeader from "../components/pageHeader";
-import { Card, Flex, Typography, Row, Col, Avatar, theme } from "antd";
+import { Card, Flex, Space, Typography, Row, Col, Avatar, theme } from "antd";
 import { FileText, Users, Store } from "lucide-react";
 import { Link } from "wouter";
 
@@ -31,14 +31,14 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Card size="middle" hoverable>
-              <Flex align="center" gap="small">
+              <Space>
                 <Avatar
                   icon={<FileText size="1em" />}
                   style={{ background: colorPrimaryBg, color: colorPrimary }}
                 />
 
                 <Text>Read the documentation</Text>
-              </Flex>
+              </Space>
             </Card>
           </a>
         </Col>
@@ -49,26 +49,26 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Card hoverable>
-              <Flex align="center" gap="small">
+              <Space>
                 <Avatar
                   icon={<Users size="1em" />}
                   style={{ background: colorPrimaryBg, color: colorPrimary }}
                 />
                 <Text>Meet with the community</Text>
-              </Flex>
+              </Space>
             </Card>
           </a>
         </Col>
         <Col span={8}>
           <Link href="/app-store">
             <Card hoverable>
-              <Flex align="center" gap="small">
+              <Space>
                 <Avatar
                   icon={<Store size="1em" />}
                   style={{ background: colorPrimaryBg, color: colorPrimary }}
                 />
                 <Text>Visit the App Store</Text>
-              </Flex>
+              </Space>
             </Card>
           </Link>
         </Col>
