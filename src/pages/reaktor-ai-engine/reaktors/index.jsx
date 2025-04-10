@@ -30,7 +30,7 @@ const PageReaktorsIndex = () => {
   const appId = searchParams.get("appId");
 
   const {
-    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary },
+    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary, fontSizeSM },
   } = theme.useToken();
 
   const reaktors = apps.flatMap((app) =>
@@ -202,7 +202,7 @@ const PageReaktorsIndex = () => {
         subtitle="Reaktors are the core building blocks of your agentic applications. They encapsulate isolated business processes."
       />
       <Flex vertical gap="large">
-        <Flex justify="between" gap="large">
+        <Flex justify="between" align="center" gap="large">
           <Input
             placeholder="Search Reaktor"
             value=""
@@ -219,8 +219,15 @@ const PageReaktorsIndex = () => {
             options={selectOptions}
             suffixIcon={<ChevronDown size="1.25em" />}
           />
-          <Button type="text" onClick={() => clearFilters()}>
-            Clear Filters
+          <Button
+            size="small"
+            color="default"
+            variant="link"
+            onClick={() => clearFilters()}
+            style={{ fontSize: fontSizeSM }}
+            disabled={!appId}
+          >
+            Clear
           </Button>
         </Flex>
         <Table

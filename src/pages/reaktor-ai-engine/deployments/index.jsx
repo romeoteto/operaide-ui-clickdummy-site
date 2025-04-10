@@ -5,7 +5,6 @@ import {
   Select,
   Table,
   Tooltip,
-  Badge,
   Dropdown,
   Divider,
   Space,
@@ -22,6 +21,7 @@ import {
   Cloud,
   Trash2,
   Play,
+  Atom,
 } from "lucide-react";
 import { apps } from "../../../database/apps";
 import PageHeader from "../../../components/pageHeader";
@@ -29,19 +29,11 @@ import PageHeader from "../../../components/pageHeader";
 const PageDeploymentsIndex = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const appId = searchParams.get("appId");
+  const blueprintId = searchParams.get("blueprintId");
 
   const {
-    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary },
+    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary, fontSizeSM },
   } = theme.useToken();
-
-  const reaktors = apps.flatMap((app) =>
-    app.blueprints.map((blueprint) => ({
-      appId: app.id,
-      appName: app.name,
-      ...blueprint,
-    }))
-  );
 
   const deployments = apps.flatMap((app) =>
     app.blueprints.flatMap((blueprint) =>
@@ -55,22 +47,15 @@ const PageDeploymentsIndex = () => {
     )
   );
 
-  console.log(deployments);
-
-  const filteredReaktors = appId
-    ? reaktors.filter((reaktor) => reaktor.appId === appId)
-    : reaktors;
+  const filteredDeployments = blueprintId
+    ? deployments.filter((deployment) => deployment.blueprintId === blueprintId)
+    : deployments;
 
   const handleChange = (value) => {
-    if (value === "all") {
-      setSearchParams({});
-    } else {
-      setSearchParams({ appId: value });
-    }
+    setSearchParams({ blueprintId: value });
   };
 
   const selectOptions = [
-    { value: "all", label: "All Reaktors" },
     ...Array.from(
       new Map(
         deployments.map((deployment) => [
@@ -189,6 +174,21 @@ const PageDeploymentsIndex = () => {
               </Link>
             ),
           },
+          {
+            type: "divider",
+          },
+          {
+            key: "reaktor",
+            label: (
+              <Link
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/overview`}
+                style={{ display: "flex", alignItems: "center", gap: 6 }}
+              >
+                <Atom size="1em" />
+                Inspect Parent Reaktor
+              </Link>
+            ),
+          },
         ];
 
         const contentStyle = {
@@ -231,6 +231,10 @@ const PageDeploymentsIndex = () => {
     },
   ];
 
+  const clearFilters = () => {
+    setSearchParams({});
+  };
+
   return (
     <>
       <PageHeader
@@ -238,7 +242,7 @@ const PageDeploymentsIndex = () => {
         subtitle="Reaktors that are deployed are ready for action. They can be externally triggered through API REST endpoints."
       />
       <Flex vertical gap="large">
-        <Flex justify="between" gap="large">
+        <Flex justify="between" align="center" gap="large">
           <Input
             placeholder="Search deployment"
             value=""
@@ -249,18 +253,28 @@ const PageDeploymentsIndex = () => {
           <Select
             variant="filled"
             placeholder="Filter by Reaktor"
-            value={appId || "all"} // fallback to "all" if no param
+            value={blueprintId} // fallback to "all" if no param
             style={{ flex: 1 }}
             onChange={handleChange}
             options={selectOptions}
             suffixIcon={<ChevronDown size="1.25em" />}
           />
+          <Button
+            size="small"
+            color="default"
+            variant="link"
+            onClick={() => clearFilters()}
+            style={{ fontSize: fontSizeSM }}
+            disabled={!blueprintId}
+          >
+            Clear
+          </Button>
         </Flex>
         <Table
           size="middle"
           bordered
           columns={tableColumns}
-          dataSource={deployments}
+          dataSource={filteredDeployments}
         />
       </Flex>
     </>
