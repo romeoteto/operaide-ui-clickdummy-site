@@ -26,6 +26,7 @@ const ReaktorTable = ({ app }) => {
       boxShadowSecondary,
       colorPrimary,
       paddingXS,
+      paddingSM,
       padding,
       margin,
     },
@@ -150,7 +151,7 @@ const ReaktorTable = ({ app }) => {
         columns={expandColumns}
         dataSource={expandDataSource}
         pagination={false}
-        size="middle"
+        size="small"
       />
     );
   };
@@ -260,8 +261,8 @@ const ReaktorTable = ({ app }) => {
       style={{
         paddingLeft: padding,
         paddingRight: padding,
-        paddingTop: paddingXS,
-        paddingBottom: paddingXS,
+        paddingTop: paddingSM,
+        paddingBottom: paddingSM,
       }}
     >
       <Avatar
@@ -284,7 +285,7 @@ const ReaktorTable = ({ app }) => {
   return (
     <Table
       columns={columns}
-      size="middle"
+      size="small"
       expandable={{
         expandedRowRender,
         defaultExpandedRowKeys: ["0"],

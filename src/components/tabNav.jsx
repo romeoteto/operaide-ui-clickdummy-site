@@ -14,6 +14,7 @@ export default function TabNav({ tabs, activeKey, onTabClick }) {
       }}
     >
       <Tabs
+        size="small"
         activeKey={activeKey}
         onTabClick={(key) => onTabClick(key)}
         items={tabs.map((tab, index) => ({

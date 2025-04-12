@@ -37,16 +37,9 @@ export default function App() {
     token: {
       colorPrimary: accentColorValue,
       colorInfo: accentColorValue,
+      colorWarning: "#EEE3AB",
+      colorError: "#ED6E90",
       colorBgLayout: appearance === "dark" ? "#000000" : "#fafafa",
-      reaktorCard: {
-        coverHeight: "200px",
-        metaHeight: "99px",
-        cardWidth: "240px",
-      },
-      reaktorList: {
-        imageHeight: "80px",
-        imageWidth: "100px",
-      },
     },
   };
 
