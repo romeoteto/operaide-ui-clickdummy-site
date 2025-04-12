@@ -71,7 +71,7 @@ const Dashboard = () => {
     }
   };
 
-  const handleChangeRangePicker = (dates, dateStrings) => {
+  const handleChangeRangePicker = (dates) => {
     setRange(dates);
 
     // If manual range differs from current preset, switch to "custom"
@@ -154,6 +154,8 @@ const Dashboard = () => {
   }, [totals]);
   // This is the dummy data generation
 
+  console.log(selectedPreset);
+
   return (
     <Flex vertical gap="large">
       <Flex justify="flex-end">
@@ -185,6 +187,7 @@ const Dashboard = () => {
                 size={filterSize}
                 value={range}
                 format={dateFormat}
+                disabled={selectedPreset !== "custom"}
                 onChange={handleChangeRangePicker}
                 disabledDate={(current) =>
                   current.isBefore(availableDates.min, "day") ||
@@ -238,7 +241,7 @@ const Dashboard = () => {
                       100 || 0
                   }
                   end={(totals.successful / totals.total) * 100 || 0}
-                  decimals={2}
+                  decimals={1}
                   suffix="%"
                   duration={animationDuration / 1000}
                 />
@@ -273,7 +276,7 @@ const Dashboard = () => {
                       100 || 0
                   }
                   end={(totals.failed / totals.total) * 100 || 0}
-                  decimals={2}
+                  decimals={1}
                   suffix="%"
                   duration={animationDuration / 1000}
                 />

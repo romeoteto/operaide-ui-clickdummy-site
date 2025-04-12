@@ -2,41 +2,52 @@ import { match } from "path-to-regexp";
 
 export const getBreadcrumbsFromFlatConfig = (
   location,
-  config,
+  configArray,
   context = {}
 ) => {
-  for (const [pattern, routeMeta] of Object.entries(config)) {
-    const matcher = match(pattern, { decode: decodeURIComponent });
-    const matchResult = matcher(location);
+  for (const entry of configArray) {
+    const { patterns, org = { show: false }, breadcrumbs = [] } = entry;
 
-    if (matchResult) {
-      const params = matchResult.params;
-      const { org = { show: false }, breadcrumbs = [] } = routeMeta;
+    for (const pattern of patterns) {
+      try {
+        const matcher = match(pattern, {
+          decode: decodeURIComponent,
+          end: false,
+        });
+        const matchResult = matcher(location);
 
-      const resolved = breadcrumbs
-        .filter((item) => item.hidden !== true)
-        .map((item) => {
-          const label =
-            typeof item.label === "function"
-              ? item.label({ ...context, ...params })
-              : item.label;
+        if (matchResult) {
+          const params = matchResult.params;
 
-          const href =
-            typeof item.href === "function"
-              ? item.href({ ...context, ...params })
-              : item.href;
+          const resolved = breadcrumbs
+            .filter((item) => item.hidden !== true)
+            .map((item) => {
+              const label =
+                typeof item.label === "function"
+                  ? item.label({ ...context, ...params })
+                  : item.label;
+
+              const href =
+                typeof item.href === "function"
+                  ? item.href({ ...context, ...params })
+                  : item.href;
+
+              return {
+                label,
+                href,
+                clickable: item.href !== undefined,
+              };
+            });
 
           return {
-            label,
-            href,
-            clickable: item.clickable !== false,
+            org,
+            breadcrumbs: resolved,
           };
-        });
-
-      return {
-        org,
-        breadcrumbs: resolved,
-      };
+        }
+      } catch (err) {
+        console.error("Invalid breadcrumb pattern:", pattern);
+        console.error("Error:", err.message);
+      }
     }
   }
 

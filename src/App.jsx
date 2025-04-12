@@ -37,6 +37,7 @@ export default function App() {
     token: {
       colorPrimary: accentColorValue,
       colorInfo: accentColorValue,
+      colorSuccess: "#05FDBB",
       colorWarning: "#EEE3AB",
       colorError: "#ED6E90",
       colorBgLayout: appearance === "dark" ? "#000000" : "#fafafa",

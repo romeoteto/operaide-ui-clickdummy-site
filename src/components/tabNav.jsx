@@ -2,7 +2,7 @@ import React from "react";
 import { Tabs, theme } from "antd";
 export default function TabNav({ tabs, activeKey, onTabClick }) {
   const {
-    token: { colorBgContainer },
+    token: { colorBgContainer, marginXS },
   } = theme.useToken();
   return (
     <div
@@ -16,6 +16,7 @@ export default function TabNav({ tabs, activeKey, onTabClick }) {
       <Tabs
         size="small"
         activeKey={activeKey}
+        style={{ marginBottom: marginXS }}
         onTabClick={(key) => onTabClick(key)}
         items={tabs.map((tab, index) => ({
           key: index,

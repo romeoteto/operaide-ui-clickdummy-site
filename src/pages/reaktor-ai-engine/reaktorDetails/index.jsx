@@ -6,6 +6,7 @@ import TabNav from "../../../components/tabNav";
 import Diagram from "./diagram";
 import PageHeader from "../../../components/pageHeader";
 import ReaktorInfo from "./info";
+import Deployments from "./deployments";
 
 export default function ReaktorDetails() {
   const params = useParams();
@@ -78,6 +79,7 @@ graph TD
       icon: Rocket,
       label: "Deployments",
       href: `/reaktor-ai-engine/${appId}/${reaktorId}/deployments`,
+      component: <Deployments />,
     },
 
     {

@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  LineChart as ReChart,
-  Line,
+  AreaChart as ReChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -9,12 +9,15 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { theme } from "antd";
+import dayjs from "dayjs";
+import { theme, Typography, Flex } from "antd";
 
-const LineChart = ({ data, animationDuration }) => {
+const { Text } = Typography;
+
+const AreaChart = ({ data, animationDuration }) => {
   const {
     token: {
-      colorPrimary,
+      colorSuccess,
       colorError,
       colorText,
       colorTextSecondary,
@@ -23,6 +26,10 @@ const LineChart = ({ data, animationDuration }) => {
       colorBorderSecondary,
       fontSizeSM,
       fontFamily,
+      lineWidth,
+      paddingSM,
+      borderRadius,
+      marginXS,
     },
   } = theme.useToken();
 
@@ -30,13 +37,10 @@ const LineChart = ({ data, animationDuration }) => {
     <div style={{ width: "100%", height: 350 }}>
       <ResponsiveContainer width="100%" height="100%">
         <ReChart data={data}>
-          {/* Grid lines */}
           <CartesianGrid strokeDasharray="3 3" stroke={colorSplit} />
-
-          {/* X Axis */}
           <XAxis
             dataKey="date"
-            tickFormatter={(tick) => (data.length <= 10 ? tick : tick.slice(5))}
+            tickFormatter={(tick) => dayjs(tick).format("D MMM YYYY")}
             interval="preserveStartEnd"
             minTickGap={20}
             stroke={colorTextSecondary}
@@ -44,7 +48,6 @@ const LineChart = ({ data, animationDuration }) => {
             tickLine={false}
           />
 
-          {/* Y Axis */}
           <YAxis
             stroke={colorTextSecondary}
             tick={{ fill: colorText, fontSize: fontSizeSM, fontFamily }}
@@ -52,18 +55,51 @@ const LineChart = ({ data, animationDuration }) => {
             tickLine={false}
           />
 
-          {/* Tooltip */}
           <Tooltip
-            contentStyle={{
-              backgroundColor: colorBgElevated,
-              borderColor: colorBorderSecondary,
-              fontSize: fontSizeSM,
-              fontFamily,
-              color: colorText,
+            content={({ label, payload }) => {
+              if (!payload || payload.length === 0) return null;
+
+              const successful =
+                payload.find((p) => p.dataKey === "successful")?.value || 0;
+              const failed =
+                payload.find((p) => p.dataKey === "failed")?.value || 0;
+              const total = successful + failed;
+
+              return (
+                <Flex
+                  vertical
+                  style={{
+                    backgroundColor: colorBgElevated,
+                    border: `${lineWidth}px solid ${colorBorderSecondary}`,
+                    padding: paddingSM,
+                    fontFamily,
+                    fontSize: fontSizeSM,
+                    color: colorText,
+                    borderRadius,
+                  }}
+                >
+                  <Text
+                    strong
+                    style={{ fontSize: fontSizeSM, marginBottom: marginXS }}
+                  >
+                    {dayjs(label).format("D MMM YYYY")}
+                  </Text>
+                  <Text style={{ fontSize: fontSizeSM }}>
+                    Successful: {successful}
+                  </Text>
+                  <Text
+                    style={{ fontSize: fontSizeSM, marginBottom: marginXS }}
+                  >
+                    Failed: {failed}
+                  </Text>
+                  <Text strong style={{ fontSize: fontSizeSM }}>
+                    Total: {total}
+                  </Text>
+                </Flex>
+              );
             }}
           />
 
-          {/* Legend */}
           <Legend
             wrapperStyle={{
               color: colorText,
@@ -71,22 +107,26 @@ const LineChart = ({ data, animationDuration }) => {
               fontFamily,
             }}
           />
-
-          {/* Lines */}
-          <Line
-            type="monotone"
-            dataKey="total"
-            stroke={colorPrimary}
-            dot={false}
-            name="Total"
-            animationDuration={animationDuration}
-          />
-          <Line
+          <Area
             type="monotone"
             dataKey="failed"
+            stackId="executions"
             stroke={colorError}
-            dot={false}
+            fill={colorError}
+            fillOpacity={0.1}
             name="Failed"
+            animationDuration={animationDuration}
+          />
+
+          {/* Stacked Areas */}
+          <Area
+            type="monotone"
+            dataKey="successful"
+            stackId="executions"
+            stroke={colorSuccess}
+            fill={colorSuccess}
+            fillOpacity={0.05}
+            name="Successful"
             animationDuration={animationDuration}
           />
         </ReChart>
@@ -95,4 +135,4 @@ const LineChart = ({ data, animationDuration }) => {
   );
 };
 
-export default LineChart;
+export default AreaChart;

@@ -1,28 +1,25 @@
 import React from "react";
 import {
-  Flex,
-  Input,
-  Select,
   Table,
   Tooltip,
+  Flex,
   Dropdown,
+  Button,
   Divider,
   Space,
-  Button,
   theme,
 } from "antd";
-import { useSearchParams, Link } from "wouter";
-import { Ellipsis, ChevronDown, Trash2 } from "lucide-react";
+import { useParams, Link } from "wouter";
+import { Ellipsis, Trash2, Rocket } from "lucide-react";
+
 import { apps } from "../../../database/apps";
-import PageHeader from "../../../components/pageHeader";
 
-const PageDeploymentsIndex = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const blueprintId = searchParams.get("blueprintId");
+const Deployments = () => {
+  const params = useParams();
+  const { "reaktor-id": reaktorId } = params;
 
   const {
-    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary, fontSizeSM },
+    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary },
   } = theme.useToken();
 
   const deployments = apps.flatMap((app) =>
@@ -38,24 +35,9 @@ const PageDeploymentsIndex = () => {
     )
   );
 
-  const filteredDeployments = blueprintId
-    ? deployments.filter((deployment) => deployment.blueprintId === blueprintId)
-    : deployments;
-
-  const handleChange = (value) => {
-    setSearchParams({ blueprintId: value });
-  };
-
-  const selectOptions = [
-    ...Array.from(
-      new Map(
-        deployments.map((deployment) => [
-          deployment.blueprintId,
-          { value: deployment.blueprintId, label: deployment.blueprintLabel },
-        ])
-      ).values()
-    ),
-  ];
+  const filteredDeployments = deployments.filter(
+    (deployment) => deployment.blueprintId === reaktorId
+  );
 
   const tableColumns = [
     {
@@ -88,18 +70,7 @@ const PageDeploymentsIndex = () => {
       dataIndex: "id",
       key: "id",
     },
-    {
-      title: "Parent Reaktor",
-      dataIndex: "blueprintLabel",
-      key: "blueprintLabel",
-      render: (_, deployment) => (
-        <Link
-          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/diagram`}
-        >
-          {deployment.blueprintLabel}
-        </Link>
-      ),
-    },
+
     {
       key: "operation",
       align: "right",
@@ -151,19 +122,6 @@ const PageDeploymentsIndex = () => {
               </Link>
             ),
           },
-          {
-            type: "divider",
-          },
-          {
-            key: "reaktor",
-            label: (
-              <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/diagram`}
-              >
-                Inspect Parent Reaktor
-              </Link>
-            ),
-          },
         ];
 
         const contentStyle = {
@@ -206,54 +164,21 @@ const PageDeploymentsIndex = () => {
     },
   ];
 
-  const clearFilters = () => {
-    setSearchParams({});
-  };
-
   return (
-    <>
-      <PageHeader
-        title="Deployments"
-        subtitle="Reaktors that are deployed are ready for action. They can be externally triggered through API REST endpoints."
-      />
-      <Flex vertical gap="large">
-        <Flex justify="between" align="center" gap="large">
-          <Input
-            placeholder="Search deployment"
-            value=""
-            onChange={(e) => console.log(e.target.value)}
-            variant="filled"
-            style={{ flex: 1 }}
-          />
-          <Select
-            variant="filled"
-            placeholder="Filter by Reaktor"
-            value={blueprintId} // fallback to "all" if no param
-            style={{ flex: 1 }}
-            onChange={handleChange}
-            options={selectOptions}
-            suffixIcon={<ChevronDown size="1.25em" />}
-          />
-          <Button
-            size="small"
-            color="default"
-            variant="link"
-            onClick={() => clearFilters()}
-            style={{ fontSize: fontSizeSM }}
-            disabled={!blueprintId}
-          >
-            Clear
-          </Button>
-        </Flex>
-        <Table
-          size="middle"
-          bordered
-          columns={tableColumns}
-          dataSource={filteredDeployments}
-        />
+    <Flex vertical gap="large">
+      <Flex justify="flex-end">
+        <Button type="primary" icon={<Rocket size="1em" />}>
+          Deploy
+        </Button>
       </Flex>
-    </>
+      <Table
+        size="middle"
+        bordered
+        columns={tableColumns}
+        dataSource={filteredDeployments}
+      />
+    </Flex>
   );
 };
 
-export default PageDeploymentsIndex;
+export default Deployments;

@@ -1,4 +1,4 @@
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Dropdown } from "antd";
 import { ChevronRight } from "lucide-react";
 import { useLocation, Link } from "wouter";
 import { useSelector } from "react-redux";
@@ -24,6 +24,15 @@ const Breadcrumbs = () => {
     return blueprint?.label || reaktorId;
   };
 
+  const getDeploymentLabel = (appId, reaktorId, deploymentId) => {
+    const app = apps.find((a) => a.id === appId);
+    const blueprint = app?.blueprints?.find((bp) => bp.id === reaktorId);
+    const deployment = blueprint?.deployments?.find(
+      (d) => d.id === deploymentId
+    );
+    return deployment?.label || deploymentId;
+  };
+
   const { org, breadcrumbs } = getBreadcrumbsFromFlatConfig(
     location,
     breadcrumbConfig,
@@ -31,6 +40,7 @@ const Breadcrumbs = () => {
       org: currentOrgLabel,
       getAppLabel,
       getBlueprintLabel,
+      getDeploymentLabel,
     }
   );
 
@@ -50,7 +60,7 @@ const Breadcrumbs = () => {
   return (
     <Breadcrumb
       items={fullBreadcrumbs.map(({ label, href, clickable }) => ({
-        title: clickable && href ? <Link href={href}>{label}</Link> : label,
+        title: clickable ? <Link href={href}>{label}</Link> : label,
       }))}
       separator={<ChevronRight size="1em" style={{ height: "100%" }} />}
     />
