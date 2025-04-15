@@ -61,7 +61,6 @@ export const userSlice = createSlice({
           currentUserMemberships: foundUser.memberships,
           currentOrganization,
         });
-
         persistState(state);
       }
     },
@@ -77,8 +76,22 @@ export const userSlice = createSlice({
           currentUserMemberships: state.currentUser.memberships,
           currentOrganization: foundOrg,
         });
+        persistState(state);
+      }
+    },
 
-        console.log(state);
+    setBorderRadius: (state, action) => {
+      state.currentOrganization.theme.borderRadius = action.payload;
+      persistState(state);
+    },
+
+    setThemeColor: (state, action) => {
+      const { mode, key, value } = action.payload;
+      if (
+        state.currentOrganization.theme?.[mode] &&
+        typeof state.currentOrganization.theme[mode][key] !== "undefined"
+      ) {
+        state.currentOrganization.theme[mode][key] = value;
         persistState(state);
       }
     },
@@ -90,7 +103,12 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setLogin, setCurrentOrganization, setLogout } =
-  userSlice.actions;
+export const {
+  setLogin,
+  setCurrentOrganization,
+  setLogout,
+  setBorderRadius,
+  setThemeColor,
+} = userSlice.actions;
 
 export default userSlice.reducer;

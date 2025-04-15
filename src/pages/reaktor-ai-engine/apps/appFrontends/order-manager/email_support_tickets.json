@@ -1,0 +1,1331 @@
+[
+  {
+    "id": 1,
+    "createdAt": "2025-04-10T16:05:38.484650",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "LogiX AG"
+    },
+    "orderId": 284634,
+    "subject": "Order delay explanation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.484650",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.484650",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      }
+    ],
+    "status": "waiting_for_customer",
+    "resolvedBy": null,
+    "aiConfidence": 0.87,
+    "handoffToHuman": false
+  },
+  {
+    "id": 2,
+    "createdAt": "2025-04-11T16:05:38.484722",
+    "customer": {
+      "name": "Lukas Schmitt",
+      "email": "lukas.schmitt@example.com",
+      "company": "LogiX AG"
+    },
+    "orderId": 414595,
+    "subject": "Order delay explanation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.484722",
+        "message": "Hello, can you tell me when my order will be delivered?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.484722",
+        "message": "Your package is scheduled to arrive in 2-3 business days."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:16:38.484722",
+        "message": "Thanks. Also, can you confirm the carrier?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:21:38.484722",
+        "message": "Can you please clarify your request?"
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.87,
+    "handoffToHuman": false
+  },
+  {
+    "id": 3,
+    "createdAt": "2025-04-11T16:05:38.484781",
+    "customer": {
+      "name": "Tom Becker",
+      "email": "tom.becker@example.com",
+      "company": "Tolle Firma GmbH"
+    },
+    "orderId": 670241,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.484781",
+        "message": "The delivery address needs to be changed. Can you help?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.484781",
+        "message": "The delivery address has been updated as requested."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.88,
+    "handoffToHuman": false
+  },
+  {
+    "id": 4,
+    "createdAt": "2025-04-10T16:05:38.484818",
+    "customer": {
+      "name": "Sophie Richter",
+      "email": "sophie.richter@example.com",
+      "company": "Tolle Firma GmbH"
+    },
+    "orderId": 937283,
+    "subject": "Wrong item delivered",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.484818",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.484818",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:16:38.484818",
+        "message": "Do you have an estimated delivery date?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:21:38.484818",
+        "message": "Your package is scheduled to arrive in 2-3 business days."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.88,
+    "handoffToHuman": true
+  },
+  {
+    "id": 5,
+    "createdAt": "2025-04-10T16:05:38.484861",
+    "customer": {
+      "name": "Felix Zimmer",
+      "email": "felix.zimmer@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 469522,
+    "subject": "Order delay explanation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.484861",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.484861",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:16:38.484861",
+        "message": "Can you send me the tracking link?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:21:38.484861",
+        "message": "The tracking number is 1Z999AA10123456784."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.88,
+    "handoffToHuman": false
+  },
+  {
+    "id": 6,
+    "createdAt": "2025-04-09T16:05:38.484910",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 538166,
+    "subject": "Change delivery address",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.484910",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.484910",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.96,
+    "handoffToHuman": false
+  },
+  {
+    "id": 7,
+    "createdAt": "2025-04-12T16:05:38.484944",
+    "customer": {
+      "name": "Lukas Schmitt",
+      "email": "lukas.schmitt@example.com",
+      "company": "Beispiel AG"
+    },
+    "orderId": 920673,
+    "subject": "Wrong item delivered",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.484944",
+        "message": "Can you send me the invoice again?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.484944",
+        "message": "Your invoice has been re-sent to your email address."
+      }
+    ],
+    "status": "waiting_for_customer",
+    "resolvedBy": null,
+    "aiConfidence": 0.95,
+    "handoffToHuman": false
+  },
+  {
+    "id": 8,
+    "createdAt": "2025-04-09T16:05:38.484981",
+    "customer": {
+      "name": "Jens Maier",
+      "email": "jens.maier@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 794470,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.484981",
+        "message": "I placed an order last week but haven't heard anything. Can you check?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.484981",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      }
+    ],
+    "status": "waiting_for_customer",
+    "resolvedBy": null,
+    "aiConfidence": 0.95,
+    "handoffToHuman": false
+  },
+  {
+    "id": 9,
+    "createdAt": "2025-04-11T16:05:38.485014",
+    "customer": {
+      "name": "Felix Zimmer",
+      "email": "felix.zimmer@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 479504,
+    "subject": "Delivery date?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.485014",
+        "message": "Hello, can you tell me when my order will be delivered?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.485014",
+        "message": "Your package is scheduled to arrive in 2-3 business days."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:16:38.485014",
+        "message": "Can you send me the tracking link?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:21:38.485014",
+        "message": "The tracking number is 1Z999AA10123456784."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.95,
+    "handoffToHuman": false
+  },
+  {
+    "id": 10,
+    "createdAt": "2025-04-09T16:05:38.485053",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "GreenEnergy Systems"
+    },
+    "orderId": 788689,
+    "subject": "How to return product?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.485053",
+        "message": "My order has not arrived yet. What\u2019s the status?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.485053",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:16:38.485053",
+        "message": "One more thing: when was the order placed?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:21:38.485053",
+        "message": "Your order was placed on the date specified in your confirmation email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.92,
+    "handoffToHuman": false
+  },
+  {
+    "id": 11,
+    "createdAt": "2025-04-10T16:05:38.485088",
+    "customer": {
+      "name": "Jens Maier",
+      "email": "jens.maier@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 593948,
+    "subject": "Where is my order?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.485088",
+        "message": "Can you send me the invoice again?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.485088",
+        "message": "Your invoice has been re-sent to your email address."
+      }
+    ],
+    "status": "waiting_for_customer",
+    "resolvedBy": null,
+    "aiConfidence": 0.97,
+    "handoffToHuman": false
+  },
+  {
+    "id": 12,
+    "createdAt": "2025-04-10T16:05:38.485121",
+    "customer": {
+      "name": "Tom Becker",
+      "email": "tom.becker@example.com",
+      "company": "NovaWerk"
+    },
+    "orderId": 957802,
+    "subject": "Request for cancellation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.485121",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.485121",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.87,
+    "handoffToHuman": false
+  },
+  {
+    "id": 13,
+    "createdAt": "2025-04-12T16:05:38.485147",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "UrbanTech AG"
+    },
+    "orderId": 524833,
+    "subject": "Missing tracking link",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485147",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485147",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.87,
+    "handoffToHuman": false
+  },
+  {
+    "id": 14,
+    "createdAt": "2025-04-09T16:05:38.485173",
+    "customer": {
+      "name": "Paul Schneider",
+      "email": "paul.schneider@example.com",
+      "company": "InnovativTech"
+    },
+    "orderId": 906353,
+    "subject": "Delivery date?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.485173",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.485173",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.97,
+    "handoffToHuman": false
+  },
+  {
+    "id": 15,
+    "createdAt": "2025-04-12T16:05:38.485198",
+    "customer": {
+      "name": "Jens Maier",
+      "email": "jens.maier@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 674056,
+    "subject": "How to return product?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485198",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485198",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.92,
+    "handoffToHuman": false
+  },
+  {
+    "id": 16,
+    "createdAt": "2025-04-12T16:05:38.485223",
+    "customer": {
+      "name": "Laura Neumann",
+      "email": "laura.neumann@example.com",
+      "company": "LogiX AG"
+    },
+    "orderId": 947022,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485223",
+        "message": "Is there a way to get the tracking number?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485223",
+        "message": "The tracking number is 1Z999AA10123456784."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.94,
+    "handoffToHuman": false
+  },
+  {
+    "id": 17,
+    "createdAt": "2025-04-10T16:05:38.485247",
+    "customer": {
+      "name": "Jens Maier",
+      "email": "jens.maier@example.com",
+      "company": "InnovativTech"
+    },
+    "orderId": 808984,
+    "subject": "Order delay explanation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.485247",
+        "message": "I placed an order last week but haven't heard anything. Can you check?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.485247",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.92,
+    "handoffToHuman": false
+  },
+  {
+    "id": 18,
+    "createdAt": "2025-04-10T16:05:38.485292",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "UrbanTech AG"
+    },
+    "orderId": 317749,
+    "subject": "Where is my order?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.485292",
+        "message": "The item is damaged. What are the next steps?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.485292",
+        "message": "We\u2019re sorry to hear that. Please send us a photo of the damaged item to proceed with a replacement."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.93,
+    "handoffToHuman": false
+  },
+  {
+    "id": 19,
+    "createdAt": "2025-04-12T16:05:38.485325",
+    "customer": {
+      "name": "Jens Maier",
+      "email": "jens.maier@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 412655,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485325",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485325",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:16:38.485325",
+        "message": "One more thing: when was the order placed?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:21:38.485325",
+        "message": "Your order was placed on the date specified in your confirmation email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.98,
+    "handoffToHuman": false
+  },
+  {
+    "id": 20,
+    "createdAt": "2025-04-09T16:05:38.485383",
+    "customer": {
+      "name": "Tom Becker",
+      "email": "tom.becker@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 828278,
+    "subject": "How to return product?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.485383",
+        "message": "When exactly did I place my order?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.485383",
+        "message": "Your order was placed on the date specified in your confirmation email."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.92,
+    "handoffToHuman": false
+  },
+  {
+    "id": 21,
+    "createdAt": "2025-04-11T16:05:38.485414",
+    "customer": {
+      "name": "Paul Schneider",
+      "email": "paul.schneider@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 521435,
+    "subject": "Product arrived damaged",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.485414",
+        "message": "I placed an order last week but haven't heard anything. Can you check?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.485414",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:16:38.485414",
+        "message": "Can you send me the tracking link?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:21:38.485414",
+        "message": "The tracking number is 1Z999AA10123456784."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.85,
+    "handoffToHuman": false
+  },
+  {
+    "id": 22,
+    "createdAt": "2025-04-08T16:05:38.485458",
+    "customer": {
+      "name": "Lukas Schmitt",
+      "email": "lukas.schmitt@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 567673,
+    "subject": "Order delay explanation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-08T16:05:38.485458",
+        "message": "Can you send me the invoice again?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-08T16:09:38.485458",
+        "message": "Your invoice has been re-sent to your email address."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-08T16:16:38.485458",
+        "message": "Okay, and when was it shipped?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-08T16:21:38.485458",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.85,
+    "handoffToHuman": false
+  },
+  {
+    "id": 23,
+    "createdAt": "2025-04-11T16:05:38.485490",
+    "customer": {
+      "name": "Maria Klein",
+      "email": "maria.klein@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 231804,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.485490",
+        "message": "I placed an order last week but haven't heard anything. Can you check?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.485490",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:16:38.485490",
+        "message": "Okay, and when was it shipped?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:21:38.485490",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.97,
+    "handoffToHuman": false
+  },
+  {
+    "id": 24,
+    "createdAt": "2025-04-12T16:05:38.485521",
+    "customer": {
+      "name": "Lukas Schmitt",
+      "email": "lukas.schmitt@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 982782,
+    "subject": "Request for cancellation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485521",
+        "message": "The item is damaged. What are the next steps?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485521",
+        "message": "We\u2019re sorry to hear that. Please send us a photo of the damaged item to proceed with a replacement."
+      }
+    ],
+    "status": "waiting_for_customer",
+    "resolvedBy": null,
+    "aiConfidence": 0.86,
+    "handoffToHuman": false
+  },
+  {
+    "id": 25,
+    "createdAt": "2025-04-09T16:05:38.485559",
+    "customer": {
+      "name": "Paul Schneider",
+      "email": "paul.schneider@example.com",
+      "company": "Beispiel AG"
+    },
+    "orderId": 752510,
+    "subject": "Product arrived damaged",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.485559",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.485559",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.91,
+    "handoffToHuman": false
+  },
+  {
+    "id": 26,
+    "createdAt": "2025-04-12T16:05:38.485600",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "Beispiel AG"
+    },
+    "orderId": 326819,
+    "subject": "Wrong item delivered",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485600",
+        "message": "I placed an order last week but haven't heard anything. Can you check?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485600",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:16:38.485600",
+        "message": "Okay, and when was it shipped?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:21:38.485600",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.91,
+    "handoffToHuman": false
+  },
+  {
+    "id": 27,
+    "createdAt": "2025-04-12T16:05:38.485647",
+    "customer": {
+      "name": "Tom Becker",
+      "email": "tom.becker@example.com",
+      "company": "Tolle Firma GmbH"
+    },
+    "orderId": 433092,
+    "subject": "Missing tracking link",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485647",
+        "message": "The delivery address needs to be changed. Can you help?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485647",
+        "message": "The delivery address has been updated as requested."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.85,
+    "handoffToHuman": true
+  },
+  {
+    "id": 28,
+    "createdAt": "2025-04-10T16:05:38.485674",
+    "customer": {
+      "name": "Paul Schneider",
+      "email": "paul.schneider@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 863047,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.485674",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.485674",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:16:38.485674",
+        "message": "One more thing: when was the order placed?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:21:38.485674",
+        "message": "Your order was placed on the date specified in your confirmation email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.88,
+    "handoffToHuman": false
+  },
+  {
+    "id": 29,
+    "createdAt": "2025-04-07T16:05:38.485707",
+    "customer": {
+      "name": "Felix Zimmer",
+      "email": "felix.zimmer@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 379919,
+    "subject": "Request for cancellation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-07T16:05:38.485707",
+        "message": "When exactly did I place my order?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-07T16:09:38.485707",
+        "message": "Your order was placed on the date specified in your confirmation email."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-07T16:16:38.485707",
+        "message": "One more thing: when was the order placed?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-07T16:21:38.485707",
+        "message": "Your order was placed on the date specified in your confirmation email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.97,
+    "handoffToHuman": false
+  },
+  {
+    "id": 30,
+    "createdAt": "2025-04-07T16:05:38.485747",
+    "customer": {
+      "name": "Sophie Richter",
+      "email": "sophie.richter@example.com",
+      "company": "GreenEnergy Systems"
+    },
+    "orderId": 631981,
+    "subject": "Product arrived damaged",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-07T16:05:38.485747",
+        "message": "Hello, can you tell me when my order will be delivered?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-07T16:09:38.485747",
+        "message": "Your package is scheduled to arrive in 2-3 business days."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.98,
+    "handoffToHuman": false
+  },
+  {
+    "id": 31,
+    "createdAt": "2025-04-12T16:05:38.485798",
+    "customer": {
+      "name": "Lukas Schmitt",
+      "email": "lukas.schmitt@example.com",
+      "company": "Beispiel AG"
+    },
+    "orderId": 483032,
+    "subject": "Delivery date?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.485798",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.485798",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:16:38.485798",
+        "message": "Thanks. Also, can you confirm the carrier?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:21:38.485798",
+        "message": "Can you please clarify your request?"
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.86,
+    "handoffToHuman": false
+  },
+  {
+    "id": 32,
+    "createdAt": "2025-04-10T16:05:38.486011",
+    "customer": {
+      "name": "Nina Hoffmann",
+      "email": "nina.hoffmann@example.com",
+      "company": "Beispiel AG"
+    },
+    "orderId": 255972,
+    "subject": "How to return product?",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.486011",
+        "message": "The delivery address needs to be changed. Can you help?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.486011",
+        "message": "The delivery address has been updated as requested."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:16:38.486011",
+        "message": "Thanks. Also, can you confirm the carrier?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:21:38.486011",
+        "message": "Can you please clarify your request?"
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.98,
+    "handoffToHuman": false
+  },
+  {
+    "id": 33,
+    "createdAt": "2025-04-08T16:05:38.486059",
+    "customer": {
+      "name": "Nina Hoffmann",
+      "email": "nina.hoffmann@example.com",
+      "company": "DeltaSoft"
+    },
+    "orderId": 298140,
+    "subject": "Product arrived damaged",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-08T16:05:38.486059",
+        "message": "The delivery address needs to be changed. Can you help?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-08T16:09:38.486059",
+        "message": "The delivery address has been updated as requested."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-08T16:16:38.486059",
+        "message": "Do you have an estimated delivery date?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-08T16:21:38.486059",
+        "message": "Your package is scheduled to arrive in 2-3 business days."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.92,
+    "handoffToHuman": false
+  },
+  {
+    "id": 34,
+    "createdAt": "2025-04-07T16:05:38.486099",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "SmartLogik GmbH"
+    },
+    "orderId": 460284,
+    "subject": "Wrong item delivered",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-07T16:05:38.486099",
+        "message": "Hi, I'd like to cancel my order please."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-07T16:09:38.486099",
+        "message": "Your order has been cancelled. You\u2019ll receive a confirmation email shortly."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.92,
+    "handoffToHuman": false
+  },
+  {
+    "id": 35,
+    "createdAt": "2025-04-10T16:05:38.486138",
+    "customer": {
+      "name": "Laura Neumann",
+      "email": "laura.neumann@example.com",
+      "company": "UrbanTech AG"
+    },
+    "orderId": 650710,
+    "subject": "Wrong item delivered",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:05:38.486138",
+        "message": "The product I received is not what I ordered."
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:09:38.486138",
+        "message": "We\u2019re sorry for the mistake. We\u2019ll send a replacement right away."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-10T16:16:38.486138",
+        "message": "Can you send me the tracking link?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-10T16:21:38.486138",
+        "message": "The tracking number is 1Z999AA10123456784."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.94,
+    "handoffToHuman": false
+  },
+  {
+    "id": 36,
+    "createdAt": "2025-04-09T16:05:38.486183",
+    "customer": {
+      "name": "Nina Hoffmann",
+      "email": "nina.hoffmann@example.com",
+      "company": "NeoIndustries"
+    },
+    "orderId": 987059,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-09T16:05:38.486183",
+        "message": "The delivery address needs to be changed. Can you help?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-09T16:09:38.486183",
+        "message": "The delivery address has been updated as requested."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.91,
+    "handoffToHuman": false
+  },
+  {
+    "id": 37,
+    "createdAt": "2025-04-12T16:05:38.486227",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "UrbanTech AG"
+    },
+    "orderId": 971373,
+    "subject": "Wrong item delivered",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:05:38.486227",
+        "message": "The item is damaged. What are the next steps?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:09:38.486227",
+        "message": "We\u2019re sorry to hear that. Please send us a photo of the damaged item to proceed with a replacement."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-12T16:16:38.486227",
+        "message": "Thanks. Also, can you confirm the carrier?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-12T16:21:38.486227",
+        "message": "Can you please clarify your request?"
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.96,
+    "handoffToHuman": false
+  },
+  {
+    "id": 38,
+    "createdAt": "2025-04-11T16:05:38.486260",
+    "customer": {
+      "name": "Laura Neumann",
+      "email": "laura.neumann@example.com",
+      "company": "GreenEnergy Systems"
+    },
+    "orderId": 569878,
+    "subject": "Order delay explanation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.486260",
+        "message": "The delivery address needs to be changed. Can you help?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.486260",
+        "message": "The delivery address has been updated as requested."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:16:38.486260",
+        "message": "Thanks. Also, can you confirm the carrier?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:21:38.486260",
+        "message": "Can you please clarify your request?"
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.94,
+    "handoffToHuman": false
+  },
+  {
+    "id": 39,
+    "createdAt": "2025-04-11T16:05:38.486293",
+    "customer": {
+      "name": "Felix Zimmer",
+      "email": "felix.zimmer@example.com",
+      "company": "DeltaSoft"
+    },
+    "orderId": 871154,
+    "subject": "Need invoice copy",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-11T16:05:38.486293",
+        "message": "Is there a way to get the tracking number?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-11T16:09:38.486293",
+        "message": "The tracking number is 1Z999AA10123456784."
+      }
+    ],
+    "status": "open",
+    "resolvedBy": null,
+    "aiConfidence": 0.97,
+    "handoffToHuman": false
+  },
+  {
+    "id": 40,
+    "createdAt": "2025-04-08T16:05:38.486319",
+    "customer": {
+      "name": "Anna Krause",
+      "email": "anna.krause@example.com",
+      "company": "UrbanTech AG"
+    },
+    "orderId": 729846,
+    "subject": "Request for cancellation",
+    "thread": [
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-08T16:05:38.486319",
+        "message": "I placed an order last week but haven't heard anything. Can you check?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-08T16:09:38.486319",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      },
+      {
+        "sender": "customer",
+        "timestamp": "2025-04-08T16:16:38.486319",
+        "message": "Okay, and when was it shipped?"
+      },
+      {
+        "sender": "ai-agent",
+        "name": "AI Agent",
+        "timestamp": "2025-04-08T16:21:38.486319",
+        "message": "Your order was shipped recently. I\u2019ve sent the details to your email."
+      }
+    ],
+    "status": "resolved",
+    "resolvedBy": "ai-agent",
+    "aiConfidence": 0.94,
+    "handoffToHuman": false
+  }
+]

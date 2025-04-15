@@ -64,7 +64,7 @@ const PageReaktorsIndex = () => {
       dataIndex: "label",
       key: "label",
       render: (_, reaktor) => (
-        <Link to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/diagram`}>
+        <Link to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}`}>
           {reaktor.label}
         </Link>
       ),
@@ -213,6 +213,9 @@ const PageReaktorsIndex = () => {
           bordered
           columns={tableColumns}
           dataSource={filteredReaktors}
+          pagination={{
+            showSizeChanger: true,
+          }}
         />
       </Flex>
     </>

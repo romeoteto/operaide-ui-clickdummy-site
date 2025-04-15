@@ -1,0 +1,164 @@
+[
+  {
+    "id": "invoice-bot",
+    "name": "Invoice Bot",
+    "version": "1.0.0",
+    "description": "Automates invoice generation and delivery.",
+    "keywords": [
+      "finance",
+      "invoicing",
+      "automation"
+    ],
+    "categories": [
+      "Finance",
+      "Administration"
+    ],
+    "official": true,
+    "expectedOperaideVersion": "^2.1.0"
+  },
+  {
+    "id": "expense-tracker",
+    "name": "Expense Tracker",
+    "version": "2.3.1",
+    "description": "Tracks and categorizes business expenses.",
+    "keywords": [
+      "finance",
+      "tracking",
+      "reports"
+    ],
+    "categories": [
+      "Finance"
+    ],
+    "official": false,
+    "expectedOperaideVersion": "^2.0.3"
+  },
+  {
+    "id": "hr-helper",
+    "name": "HR Helper",
+    "version": "1.4.2",
+    "description": "Automates HR-related tasks and onboarding.",
+    "keywords": [
+      "HR",
+      "onboarding",
+      "employee"
+    ],
+    "categories": [
+      "Human Resources"
+    ],
+    "official": true,
+    "expectedOperaideVersion": "^2.2.1"
+  },
+  {
+    "id": "meeting-scheduler",
+    "name": "Meeting Scheduler",
+    "version": "3.2.0",
+    "description": "Automatically schedules meetings across teams.",
+    "keywords": [
+      "calendar",
+      "automation",
+      "meeting"
+    ],
+    "categories": [
+      "Productivity"
+    ],
+    "official": false,
+    "expectedOperaideVersion": "^2.0.5"
+  },
+  {
+    "id": "legal-doc-assistant",
+    "name": "Legal Doc Assistant",
+    "version": "2.0.5",
+    "description": "Drafts and reviews legal documents.",
+    "keywords": [
+      "legal",
+      "documents",
+      "automation"
+    ],
+    "categories": [
+      "Legal"
+    ],
+    "official": true,
+    "expectedOperaideVersion": "^2.2.0"
+  },
+  {
+    "id": "data-cleaner",
+    "name": "Data Cleaner",
+    "version": "1.0.3",
+    "description": "Cleans and validates large datasets.",
+    "keywords": [
+      "data",
+      "validation",
+      "cleaning"
+    ],
+    "categories": [
+      "Data Processing"
+    ],
+    "official": false,
+    "expectedOperaideVersion": "^2.1.3"
+  },
+  {
+    "id": "email-responder",
+    "name": "Email Responder",
+    "version": "1.2.4",
+    "description": "Responds to customer emails automatically.",
+    "keywords": [
+      "email",
+      "automation",
+      "support"
+    ],
+    "categories": [
+      "Customer Service"
+    ],
+    "official": true,
+    "expectedOperaideVersion": "^2.2.2"
+  },
+  {
+    "id": "crm-syncer",
+    "name": "CRM Syncer",
+    "version": "2.1.0",
+    "description": "Keeps CRM data synced across platforms.",
+    "keywords": [
+      "CRM",
+      "sync",
+      "data"
+    ],
+    "categories": [
+      "Sales",
+      "Administration"
+    ],
+    "official": false,
+    "expectedOperaideVersion": "^2.0.8"
+  },
+  {
+    "id": "contract-analyzer",
+    "name": "Contract Analyzer",
+    "version": "3.0.1",
+    "description": "Analyzes contracts and highlights key terms.",
+    "keywords": [
+      "contract",
+      "legal",
+      "analysis"
+    ],
+    "categories": [
+      "Legal"
+    ],
+    "official": true,
+    "expectedOperaideVersion": "^2.1.5"
+  },
+  {
+    "id": "recruitment-bot",
+    "name": "Recruitment Bot",
+    "version": "1.1.2",
+    "description": "Automates resume screening and candidate matching.",
+    "keywords": [
+      "HR",
+      "recruitment",
+      "AI"
+    ],
+    "categories": [
+      "Human Resources"
+    ],
+    "official": true,
+    "expectedOperaideVersion": "^2.0.9"
+  }
+]

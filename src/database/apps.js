@@ -1,7 +1,6 @@
-import imageKnowledgeChat from "../assets/reaktor-images/undraw_chat_qmyo.svg";
-import imageOrderManager from "../assets/reaktor-images/undraw_order-delivered_puaw.svg";
-import imageICP from "../assets/reaktor-images/undraw_to-do_06xe.svg";
-import imageLeadNurturer from "../assets/reaktor-images/undraw_web-search_9qqc.svg";
+import AppFrontendOrderManager from "../pages/reaktor-ai-engine/apps/appFrontends/order-manager";
+
+export const frontendMap = { "order-manager": AppFrontendOrderManager };
 
 export const apps = [
   {
@@ -12,7 +11,6 @@ export const apps = [
       "A chat-based application that is able to retrieve data from a knowledge base.",
     keywords: ["chat", "knowledge"],
     categories: ["Chatbot"],
-    imageSrc: imageKnowledgeChat,
     official: true,
     expectedOperaideVersion: "^2.0.2",
     blueprints: [
@@ -58,10 +56,9 @@ export const apps = [
     id: "order-manager",
     name: "Order Manager",
     version: "2.1.3",
-    description: "Automates the processing of customer orders.",
+    description: "Agents that automate the processing of customer orders.",
     keywords: ["customer service", "erp", "chat", "order management"],
     categories: ["Customer Service", "Administration", "Chatbot"],
-    imageSrc: imageOrderManager,
     expectedOperaideVersion: "^2.0.2",
     blueprints: [
       {
@@ -91,7 +88,6 @@ export const apps = [
       "A virtual sales development representative that boosts your sales activity.",
     keywords: ["sales", "leads", "nurturing", "contact updates"],
     categories: ["Sales"],
-    imageSrc: imageICP,
     expectedOperaideVersion: "^2.0.2",
     blueprints: [
       {

@@ -3,6 +3,19 @@ import imageOrderManager from "../assets/reaktor-images/undraw_order-delivered_p
 import imageICP from "../assets/reaktor-images/undraw_to-do_06xe.svg";
 import imageLeadNurturer from "../assets/reaktor-images/undraw_web-search_9qqc.svg";
 
+import operaideLogoLight from "../assets/logo-light.svg";
+import operaideLogoDark from "../assets/logo-dark.svg";
+import operaideSignetLight from "../assets/signet-light.svg";
+import operaideSignetDark from "../assets/signet-dark.svg";
+
+import orgLogoLight from "../assets/org/logo-light.png";
+import orgSignetLight from "../assets/org/signet-light.png";
+import orgLogoDark from "../assets/org/logo-dark.png";
+import orgSignetDark from "../assets/org/signet-dark.png";
+
+import logoGeonica from "../assets/org/logo-geonica.png";
+import signetGeonica from "../assets/org/signet-geonica.png";
+
 export const blueprints = [
   {
     id: "op.demo.knowledge-chat",
@@ -120,46 +133,127 @@ export const blueprints = [
   },
 ];
 
+export const borderRadiusValues = [
+  { id: "square", value: 0, label: "Square" },
+  { id: "rounded", value: 8, label: "Rounded" },
+];
+
+// Global System Theming
+export const globalThemeOperaide = {
+  light: {
+    logo: operaideLogoLight,
+    signet: operaideSignetLight,
+    colorPrimary: "#02C4C0",
+    colorInfo: "#02C4C0",
+  },
+  dark: {
+    logo: operaideLogoDark,
+    signet: operaideSignetDark,
+    colorPrimary: "#02C4C0",
+    colorInfo: "#02C4C0",
+  },
+  borderRadius: borderRadiusValues[1],
+};
+
+export const globalThemeCustomer = {
+  light: {
+    logo: orgLogoLight,
+    signet: orgSignetLight,
+    colorPrimary: "#0000C8",
+    colorInfo: "#00E7A1",
+  },
+  dark: {
+    logo: orgLogoDark,
+    signet: orgSignetDark,
+    colorPrimary: "#00E7A1",
+    colorInfo: "#00E7A1",
+  },
+  borderRadius: borderRadiusValues[1],
+};
+
+export const currentGlobalTheme = globalThemeCustomer;
+
+// Global System Theming
+
 export const organizations = [
-  { value: 1, label: "Auto Weller GmbH & Co. KG" },
-  { value: 2, label: "Emil Frey Gruppe" },
-  { value: 3, label: "Autohaus S+K GmbH" },
-  { value: 4, label: "Toyota Dello GmbH" },
-  { value: 5, label: "H. Böger und Sohn" },
-  { value: 6, label: "Autohaus Nix GmbH" },
-  { value: 7, label: "Autohaus Klee GmbH" },
-  { value: 8, label: "Autohaus Mühlbauer" },
-  { value: 9, label: "Autohaus Sorg" },
-  { value: 10, label: "Autohaus Gehrmann" },
-  { value: 11, label: "Autohaus Schubert" },
-  { value: 12, label: "Autohaus Köhler" },
-  { value: 13, label: "Autohaus Henschel" },
-  { value: 14, label: "Autohaus Sander" },
-  { value: 15, label: "Autohaus Engel" },
-  { value: 16, label: "Autohaus Lutz" },
-  { value: 17, label: "Autohaus Weber" },
-  { value: 18, label: "Autohaus Grimm" },
-  { value: 19, label: "Autohaus Fink" },
-  { value: 20, label: "Autohaus Beck" },
-  { value: 21, label: "Autohaus Scholz" },
-  { value: 22, label: "Autohaus Wagner" },
-  { value: 23, label: "Autohaus Meier" },
-  { value: 24, label: "Autohaus Lehmann" },
-  { value: 25, label: "Autohaus Richter" },
-  { value: 26, label: "Autohaus Schäfer" },
-  { value: 27, label: "Autohaus Krüger" },
-  { value: 28, label: "Autohaus Hofmann" },
-  { value: 29, label: "Autohaus Schmitt" },
-  { value: 30, label: "Autohaus S+K Toyota" },
-  { value: 31, label: "Toyota Zentrum Hamburg" },
-  { value: 32, label: "Toyota Zentrum Berlin" },
-  { value: 33, label: "Toyota Zentrum München" },
-  { value: 34, label: "Toyota Zentrum Stuttgart im Schwobaländle" },
-  { value: 35, label: "Toyota Zentrum Frankfurt" },
-  { value: 36, label: "Toyota Zentrum Köln" },
-  { value: 37, label: "Toyota Zentrum Düsseldorf" },
-  { value: 38, label: "Toyota Zentrum Dortmund" },
-  { value: 39, label: "objective partner AG" },
+  {
+    value: 1,
+    label: "Senseca Germany GmbH",
+    createdAt: "2025-03-14",
+    creatorId: 1,
+    theme: {
+      type: "org",
+      light: {
+        logo: orgLogoLight,
+        signet: orgSignetLight,
+        colorPrimary: "#00E7A1",
+        colorInfo: "#00E7A1",
+      },
+      dark: {
+        logo: orgLogoDark,
+        signet: orgSignetDark,
+        colorPrimary: "#00E7A1",
+        colorInfo: "#00E7A1",
+      },
+      borderRadius: borderRadiusValues[0],
+    },
+  },
+  {
+    value: 2,
+    label: "Senseca Italy S.r.l.",
+    createdAt: "2025-03-18",
+    creatorId: 1,
+    theme: {
+      type: "org",
+      light: {
+        logo: orgLogoLight,
+        signet: orgSignetLight,
+        colorPrimary: "#FF66B3",
+        colorInfo: "#FF66B3",
+      },
+      dark: {
+        logo: orgLogoDark,
+        signet: orgSignetDark,
+        colorPrimary: "#FF66B3",
+        colorInfo: "#FF66B3",
+      },
+      borderRadius: borderRadiusValues[1],
+    },
+  },
+  {
+    value: 3,
+    label: "GEONICA",
+    createdAt: "2025-04-05",
+    creatorId: 1,
+    theme: {
+      type: "org",
+      light: {
+        logo: logoGeonica,
+        signet: signetGeonica,
+        colorPrimary: "#91B942",
+        colorInfo: "#91B942",
+      },
+      dark: {
+        logo: logoGeonica,
+        signet: signetGeonica,
+        colorPrimary: "#91B942",
+        colorInfo: "#91B942",
+      },
+      borderRadius: borderRadiusValues[0],
+    },
+  },
+  {
+    value: 4,
+    label: "Senseca France",
+    createdAt: "2025-03-14",
+    creatorId: 1,
+    theme: {
+      type: "system",
+      light: currentGlobalTheme.light,
+      dark: currentGlobalTheme.dark,
+      borderRadius: currentGlobalTheme.borderRadius,
+    },
+  },
 ];
 
 /** EXPERIMENTAL */
@@ -238,7 +332,7 @@ export const users = [
     id: 1,
     prename: "Stefan",
     surname: "Superadmin",
-    email: "stefan.superadmin@toyota.de",
+    email: "stefan.superadmin@senseca.com",
     isSuperAdmin: true /**replace with new global role */,
     createdAt: "2024-10-03",
     lastLogin: "2025-03-29",
@@ -252,13 +346,13 @@ export const users = [
     id: 2,
     prename: "Oliver",
     surname: "Orgadmin",
-    email: "oliver.orgadmin@toyota.de",
+    email: "oliver.orgadmin@senseca.com",
     isSuperAdmin: false /**replace with new global role */,
     createdAt: "2025-03-11",
     lastLogin: "2025-03-15",
     memberships: [
-      { orgValue: 33, roleValue: 1 },
-      { orgValue: 37, roleValue: 2 },
+      { orgValue: 1, roleValue: 1 },
+      { orgValue: 2, roleValue: 2 },
     ],
     globalRole: 2,
   },
@@ -266,11 +360,11 @@ export const users = [
     id: 3,
     prename: "Anna",
     surname: "Endanwenderin",
-    email: "anna.endanwenderin@toyota.de",
+    email: "anna.endanwenderin@senseca.com",
     isSuperAdmin: false /**replace with new global role */,
     createdAt: "2025-03-11",
     lastLogin: "2025-03-15",
-    memberships: [{ orgValue: 23, roleValue: 2 }],
+    memberships: [{ orgValue: 3, roleValue: 2 }],
     globalRole: 2,
   },
 ];

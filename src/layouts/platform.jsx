@@ -28,17 +28,13 @@ import {
   Divider,
   Typography,
 } from "antd";
-import { useLocation, Link } from "wouter";
+import { useLocation } from "wouter";
 
-import logoLight from "../assets/logo-light.svg";
-import signetLight from "../assets/signet-light.svg";
-import logoDark from "../assets/logo-dark.svg";
-import signetDark from "../assets/signet-dark.svg";
 import Breadcrumbs from "../components/breadcrumbs2";
 import UserMenu3 from "../components/userMenu3";
 
 const { Header, Sider, Content } = Layout;
-const { Text, Link: AntLink } = Typography;
+const { Text } = Typography;
 
 const PlatformLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -52,9 +48,8 @@ const PlatformLayout = ({ children }) => {
       fontSizeSM,
       fontSizeLG,
       paddingXS,
-      paddingMD,
-      paddingXXS,
-      padding,
+      logo,
+      signet,
       paddingSM,
     },
   } = theme.useToken();
@@ -82,10 +77,9 @@ const PlatformLayout = ({ children }) => {
     "/integrations/services",
     "/settings",
     "/system-admin",
-    "/app-store",
+    "/store",
   ];
 
-  const appearance = useSelector((state) => state.appSettings.appearance);
   const userIsSuperAdmin = useSelector(
     (state) => state.user.currentUser.isSuperAdmin
   );
@@ -169,9 +163,9 @@ const PlatformLayout = ({ children }) => {
       ],
     },
     {
-      key: "/app-store",
+      key: "/store",
       icon: <Store size={"1em"} />,
-      label: <Link href="/app-store">App Store</Link>,
+      label: "App Store",
     },
   ];
 
@@ -229,7 +223,7 @@ const PlatformLayout = ({ children }) => {
   }
   /** Bottom Menu Logic */
 
-  const version = "Ada 2.0";
+  const version = "Operaide 2.1.2 (Ada)";
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -261,16 +255,12 @@ const PlatformLayout = ({ children }) => {
         >
           {collapsed ? (
             <img
-              src={appearance === "dark" ? signetDark : signetLight}
+              src={signet}
               alt="operaide signet"
               style={{ height: "28px" }}
             />
           ) : (
-            <img
-              src={appearance === "dark" ? logoDark : logoLight}
-              alt="operaide logo"
-              style={{ height: "28px" }}
-            />
+            <img src={logo} alt="operaide logo" style={{ height: "28px" }} />
           )}
         </div>
 
@@ -362,7 +352,7 @@ const PlatformLayout = ({ children }) => {
             left: collapsed ? 50 : 250,
             right: 0,
             zIndex: 100,
-            padding: "0px 14px 0px 14px",
+            padding: "0px 24px 0px 14px",
             height: 58,
             background: colorBgContainer,
             display: "flex",

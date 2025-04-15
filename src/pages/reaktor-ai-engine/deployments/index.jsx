@@ -64,7 +64,7 @@ const PageDeploymentsIndex = () => {
       key: "label",
       render: (_, deployment) => (
         <Link
-          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/dashboard`}
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}`}
         >
           {deployment.label}
         </Link>
@@ -94,7 +94,7 @@ const PageDeploymentsIndex = () => {
       key: "blueprintLabel",
       render: (_, deployment) => (
         <Link
-          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/diagram`}
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}`}
         >
           {deployment.blueprintLabel}
         </Link>
@@ -109,7 +109,7 @@ const PageDeploymentsIndex = () => {
             key: "dashboard",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/dashboard`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}`}
               >
                 Inspect Deployment
               </Link>
@@ -158,7 +158,7 @@ const PageDeploymentsIndex = () => {
             key: "reaktor",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/diagram`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}`}
               >
                 Inspect Parent Reaktor
               </Link>
@@ -250,6 +250,9 @@ const PageDeploymentsIndex = () => {
           bordered
           columns={tableColumns}
           dataSource={filteredDeployments}
+          pagination={{
+            showSizeChanger: true,
+          }}
         />
       </Flex>
     </>

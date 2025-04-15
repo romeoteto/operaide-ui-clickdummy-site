@@ -13,8 +13,10 @@ import {
   Tooltip,
   theme,
 } from "antd";
-import { Ellipsis, Rocket, Trash2, Download, Box } from "lucide-react";
+import { Ellipsis, Rocket, Trash2, Download, Box, Monitor } from "lucide-react";
 import { Link } from "wouter";
+import { frontendMap } from "../../../../database/apps";
+import { useLocation } from "wouter";
 
 const { Text, Title: AntTitle } = Typography;
 
@@ -32,6 +34,8 @@ const ReaktorTable = ({ app }) => {
     },
   } = theme.useToken();
 
+  const [_, navigate] = useLocation();
+
   const contentStyle = {
     backgroundColor: colorBgElevated,
     borderRadius: borderRadiusLG,
@@ -41,6 +45,8 @@ const ReaktorTable = ({ app }) => {
     boxShadow: "none",
   };
 
+  const hasFrontend = Object.keys(frontendMap).includes(app.id);
+
   const expandedRowRender = (reaktor) => {
     const expandColumns = [
       {
@@ -49,7 +55,7 @@ const ReaktorTable = ({ app }) => {
         key: "label",
         render: (_, deployment) => (
           <Link
-            to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/dashboard`}
+            to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}`}
           >
             {deployment.label}
           </Link>
@@ -66,7 +72,7 @@ const ReaktorTable = ({ app }) => {
               key: "dashboard",
               label: (
                 <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/dashboard`}
+                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}`}
                 >
                   Inspect Deployment
                 </Link>
@@ -162,7 +168,7 @@ const ReaktorTable = ({ app }) => {
       dataIndex: "label",
       key: "label",
       render: (_, reaktor) => (
-        <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/diagram`}>
+        <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}`}>
           {reaktor.label}
         </Link>
       ),
@@ -204,7 +210,7 @@ const ReaktorTable = ({ app }) => {
           {
             key: "diagram",
             label: (
-              <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/diagram`}>
+              <Link to={`/reaktor-ai-engine/${app.id}/${reaktor.id}`}>
                 Inspect Reaktor
               </Link>
             ),
@@ -258,6 +264,7 @@ const ReaktorTable = ({ app }) => {
 
   const Title = () => (
     <Flex
+      justify="space-between"
       style={{
         paddingLeft: padding,
         paddingRight: padding,
@@ -265,15 +272,27 @@ const ReaktorTable = ({ app }) => {
         paddingBottom: paddingSM,
       }}
     >
-      <Avatar
-        shape="square"
-        icon={<Box size="1em" />}
-        style={{ background: colorPrimary, marginRight: margin }}
-      />
-      <Flex vertical>
-        <AntTitle level={5}>{app.name}</AntTitle>
-        <Text type="secondary">{app.description}</Text>
+      <Flex>
+        <Avatar
+          shape="square"
+          icon={<Box size="1em" />}
+          style={{ background: colorPrimary, marginRight: margin }}
+        />
+        <Flex vertical>
+          <AntTitle level={5}>{app.name}</AntTitle>
+          <Text type="secondary">{app.description}</Text>
+        </Flex>
       </Flex>
+      {hasFrontend && (
+        <Button
+          onClick={() => navigate(`/reaktor-ai-engine/apps/${app.id}`)}
+          type="primary"
+          size="small"
+          icon={<Monitor size="1em" />}
+        >
+          Open App
+        </Button>
+      )}
     </Flex>
   );
 

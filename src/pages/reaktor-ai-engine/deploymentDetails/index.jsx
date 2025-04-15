@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, useLocation } from "wouter";
+import { useParams, useSearchParams } from "wouter";
 import { apps } from "../../../database/apps";
 import PageHeader from "../../../components/pageHeader";
 import { Info, CircleGauge, Settings2, Workflow, Play } from "lucide-react";
@@ -9,16 +8,9 @@ import Dashboard from "./dashboard";
 
 export default function PageDeploymentDetails() {
   const params = useParams();
-  const [activeKey, setActiveKey] = useState(0);
 
-  const [location, navigate] = useLocation();
-
-  useEffect(() => {
-    const index = tabs.findIndex((tab) => tab.href === location);
-    if (index !== -1) {
-      setActiveKey(index);
-    }
-  }, [location]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeKey = searchParams.get("activeKey") || 0;
 
   const {
     "reaktor-id": reaktorId,
@@ -42,43 +34,33 @@ export default function PageDeploymentDetails() {
     {
       icon: CircleGauge,
       label: "Dashboard",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/${deploymentId}/dashboard`,
       component: <Dashboard />,
     },
     {
       icon: Settings2,
       label: "Settings",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/${deploymentId}/settings`,
     },
     {
       icon: Play,
       label: "Execution",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/${deploymentId}/execution`,
     },
     {
       icon: Workflow,
       label: "Diagram",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/${deploymentId}/diagram`,
     },
     {
       icon: Info,
       label: "Info",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/${deploymentId}/info`,
     },
   ];
-
-  const onTabClick = (key) => {
-    const href = tabs[key].href;
-    navigate(href);
-  };
 
   return (
     <div>
       <PageHeader title={deployment.label} subtitle={deployment.description} />
       <TabNav
         tabs={tabs}
-        activeKey={activeKey}
-        onTabClick={(key) => onTabClick(key)}
+        activeKey={Number(activeKey)}
+        onTabClick={(key) => setSearchParams({ activeKey: key })}
       />
       {tabs[activeKey]?.component}
     </div>

@@ -2,12 +2,11 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../state/userSlice";
 
 import { Flex, Typography, Button, Form, Input, Row, Col, theme } from "antd";
-import signet from "../assets/signet-light.svg";
 
 import { Mail, Lock } from "lucide-react";
 import LoginForm from "../components/loginForm";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function PageLogin() {
   const {
@@ -18,6 +17,9 @@ export default function PageLogin() {
       borderRadius,
       colorBorderSecondary,
       lineWidth,
+      signet,
+      margin,
+      fontSizeSM,
     },
   } = theme.useToken();
 
@@ -61,6 +63,17 @@ export default function PageLogin() {
           </Flex>
         </Col>
       </Row>
+      <Text
+        style={{
+          position: "absolute",
+          bottom: margin,
+          fontSize: fontSizeSM,
+          textAlign: "center",
+        }}
+      >
+        Senseca AI Platform powered by <br></br>© Operaide{" "}
+        {new Date().getFullYear()}
+      </Text>
     </Flex>
   );
 }

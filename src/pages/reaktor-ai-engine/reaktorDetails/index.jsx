@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useParams, useLocation } from "wouter";
+import { useParams, useSearchParams } from "wouter";
 import { apps } from "../../../database/apps";
 import { Workflow, Settings2, Rocket, Info } from "lucide-react";
 import TabNav from "../../../components/tabNav";
@@ -10,23 +9,16 @@ import Deployments from "./deployments";
 
 export default function ReaktorDetails() {
   const params = useParams();
-  const [activeKey, setActiveKey] = useState(0);
 
-  const [location, navigate] = useLocation();
-
-  useEffect(() => {
-    const index = tabs.findIndex((tab) => tab.href === location);
-    if (index !== -1) {
-      setActiveKey(index);
-    }
-  }, [location]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeKey = searchParams.get("activeKey") || 0;
 
   const { "reaktor-id": reaktorId, "app-id": appId } = params;
 
   const app = apps.find((app) => app.id === appId);
   const blueprint = app?.blueprints?.find((bp) => bp.id === reaktorId);
 
-  const { label, description, deployments } = blueprint;
+  const { label, description } = blueprint;
 
   const diagram = String.raw`
 graph TD
@@ -67,33 +59,24 @@ graph TD
     {
       icon: Workflow,
       label: "Diagram",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/diagram`,
       component: <Diagram chart={diagram} />,
     },
     {
       icon: Settings2,
       label: "Default Settings",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/default-settings`,
     },
     {
       icon: Rocket,
       label: "Deployments",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/deployments`,
       component: <Deployments />,
     },
 
     {
       icon: Info,
       label: "Info",
-      href: `/reaktor-ai-engine/${appId}/${reaktorId}/info`,
       component: <ReaktorInfo blueprint={blueprint} app={app} />,
     },
   ];
-
-  const onTabClick = (key) => {
-    const href = tabs[key].href;
-    navigate(href);
-  };
 
   return (
     <>
@@ -102,8 +85,8 @@ graph TD
       <div>
         <TabNav
           tabs={tabs}
-          activeKey={activeKey}
-          onTabClick={(key) => onTabClick(key)}
+          activeKey={Number(activeKey)}
+          onTabClick={(key) => setSearchParams({ activeKey: key })}
         />
         {tabs[activeKey]?.component}
       </div>

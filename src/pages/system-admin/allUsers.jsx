@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Typography, Tag, Input, Flex } from "antd";
 import { Link } from "wouter";
 import { users } from "../../database/database";
+import PageHeader from "../../components/pageHeader";
 
 const { Text } = Typography;
 
@@ -10,6 +11,7 @@ const AllUsers = () => {
     ...user,
     fullName: `${user.prename} ${user.surname}`,
     membershipCount: user.memberships.length,
+    key: user.id,
   }));
 
   const tableColumns = [
@@ -48,14 +50,20 @@ const AllUsers = () => {
   ];
 
   return (
-    <Flex vertical gap="large">
-      <Input placeholder="Search user" variant="filled" />
-      <Table
-        size="middle"
-        columns={tableColumns}
-        dataSource={usersWithFullNameAndMembershipCount}
-      />
-    </Flex>
+    <>
+      <PageHeader
+        title="All Users"
+        subtitle="Here you can see and edit all users in your Operaide instance."
+      />{" "}
+      <Flex vertical gap="large">
+        <Input placeholder="Search user" variant="filled" />
+        <Table
+          size="middle"
+          columns={tableColumns}
+          dataSource={usersWithFullNameAndMembershipCount}
+        />
+      </Flex>
+    </>
   );
 };
 

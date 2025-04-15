@@ -1,16 +1,20 @@
 import React from "react";
 
-import { Avatar, Card, Col, Row, theme } from "antd";
-import { Box, Atom, Download } from "lucide-react";
+import { Avatar, Card, Col, Row, Typography, theme } from "antd";
+import { Box, Atom, Download, Monitor } from "lucide-react";
 import { Link } from "wouter";
-import { apps } from "../../../database/apps";
+import { apps, frontendMap } from "../../../database/apps";
 
 const { Meta } = Card;
+const { Link: AntLink } = Typography;
 
 const AppCard = ({ app }) => {
   const {
     token: { colorPrimary },
   } = theme.useToken();
+
+  const showFrontend = Object.keys(frontendMap).includes(app.id);
+
   return (
     <Card
       style={{
@@ -20,6 +24,14 @@ const AppCard = ({ app }) => {
         justifyContent: "space-between",
       }}
       actions={[
+        showFrontend && (
+          <Link
+            key="app-frontend-link"
+            to={`/reaktor-ai-engine/apps/${app.id}`}
+          >
+            <Monitor size="1em" />
+          </Link>
+        ),
         <Link
           key="reaktors-link"
           href={`/reaktor-ai-engine/reaktors?appId=${app.id}`}
@@ -27,7 +39,7 @@ const AppCard = ({ app }) => {
           <Atom size="1em" />
         </Link>,
         <Download key="reaktors-download" size="1em" />,
-      ]}
+      ].filter(Boolean)}
     >
       <div style={{ flex: 1 }}>
         <Meta

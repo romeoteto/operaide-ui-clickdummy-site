@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { ConfigProvider, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { ConfigProvider, Drawer, theme as antTheme } from "antd";
 import { Route, Switch, Redirect, useLocation } from "wouter";
 
 import PlatformLayout from "./layouts/platform";
@@ -9,136 +9,132 @@ import SystemAdminRedirect from "./components/redirect/SystemAdminRedirect";
 
 import Home from "./pages/home";
 import PageAppsIndex from "./pages/reaktor-ai-engine/apps";
-
 import PageSettings from "./pages/settings";
-
 import PageDeploymentDetails from "./pages/reaktor-ai-engine/deploymentDetails";
 import PageLogin from "./pages/login";
 import PageSystemAdmin from "./pages/system-admin";
 import EditUser from "./pages/system-admin/edit-user";
-import AppStoreLayout from "./appStore/layout";
-import PageAppStoreHome from "./appStore/pages/home";
-import PageAppStoreCategory from "./appStore/pages/category";
 import PageReaktorsIndex from "./pages/reaktor-ai-engine/reaktors";
 import ReaktorDetails from "./pages/reaktor-ai-engine/reaktorDetails";
 import PageDeploymentsIndex from "./pages/reaktor-ai-engine/deployments";
+import AppFrontends from "./pages/reaktor-ai-engine/apps/appFrontends";
 
+import PageAppStore from "./pages/appStore";
+
+import { currentGlobalTheme } from "./database/database";
+
+// ✅ Import Redux action
+import { setResolvedAppearance } from "./state/appSettingsSlice"; // adjust path if needed
+import SystemAdminLayout from "./layouts/systemAdmin";
+
+// ✅ Custom hook to resolve appearance based on system settings
+function useResolvedAppearance(appearanceSetting, onResolve) {
+  const getSystemPref = () =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
+  const [resolved, setResolved] = useState(
+    appearanceSetting === "system" ? getSystemPref() : appearanceSetting
+  );
+
+  useEffect(() => {
+    const update = (newVal) => {
+      setResolved(newVal);
+      onResolve?.(newVal); // notify Redux
+    };
+
+    if (appearanceSetting !== "system") {
+      update(appearanceSetting);
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e) => update(e.matches ? "dark" : "light");
+
+    update(getSystemPref());
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, [appearanceSetting, onResolve]);
+
+  return resolved;
+}
+
+// ✅ Main App component
 export default function App() {
   const [location] = useLocation();
+  const dispatch = useDispatch();
+
   const userIsLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const accentColorValue = useSelector(
-    (state) => state.appSettings.accentColor
-  ).value;
-  const appearance = useSelector((state) => state.appSettings.appearance);
+  const appearance = useSelector((state) => state.appSettings.appearance); // "light" | "dark" | "system"
+  const currentOrgTheme = useSelector(
+    (state) => state.user.currentOrganization?.theme
+  );
 
-  const platformTheme = {
-    algorithm:
-      appearance === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
+  // Use the hook and sync resolved appearance into Redux
+  const resolvedAppearance = useResolvedAppearance(appearance, (resolved) => {
+    dispatch(setResolvedAppearance(resolved));
+  });
+
+  const isDarkMode = resolvedAppearance === "dark";
+
+  const orgTheme = {
+    algorithm: isDarkMode ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
     token: {
-      colorPrimary: accentColorValue,
-      colorInfo: accentColorValue,
-      colorSuccess: "#05FDBB",
-      colorWarning: "#EEE3AB",
-      colorError: "#ED6E90",
-      colorBgLayout: appearance === "dark" ? "#000000" : "#fafafa",
+      colorPrimary: isDarkMode
+        ? currentOrgTheme?.dark.colorPrimary
+        : currentOrgTheme?.light.colorPrimary,
+      colorInfo: isDarkMode
+        ? currentOrgTheme?.dark.colorInfo
+        : currentOrgTheme?.light.colorInfo,
+      borderRadius: currentOrgTheme?.borderRadius.value,
+      logo: isDarkMode
+        ? currentOrgTheme?.dark.logo
+        : currentOrgTheme?.light.logo,
+      signet: isDarkMode
+        ? currentOrgTheme?.dark.signet
+        : currentOrgTheme?.light.signet,
     },
   };
 
-  const appStoreTheme = {
-    algorithm:
-      appearance === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
+  // Experimental
+
+  const systemTheme = {
+    algorithm: isDarkMode ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
     token: {
-      colorPrimary: "#02C4C0",
-      colorInfo: "#02C4C0",
+      colorPrimary: isDarkMode
+        ? currentGlobalTheme.dark.colorPrimary
+        : currentGlobalTheme.light.colorPrimary,
+      colorInfo: isDarkMode
+        ? currentGlobalTheme.dark.colorInfo
+        : currentGlobalTheme.light.colorInfo,
+      borderRadius: currentGlobalTheme.borderRadius.value,
+      logo: isDarkMode
+        ? currentGlobalTheme.dark.logo
+        : currentGlobalTheme.light.logo,
+      signet: isDarkMode
+        ? currentGlobalTheme.dark.signet
+        : currentGlobalTheme.light.signet,
     },
   };
+  // Experimental
 
   return userIsLoggedIn ? (
     <>
-      {location.startsWith("/app-store") ? (
-        <ConfigProvider theme={appStoreTheme}>
-          <AppStoreLayout>
+      {location.startsWith("/app/ext") ? (
+        <Switch></Switch>
+      ) : location.startsWith("/system-admin") ? (
+        <ConfigProvider theme={systemTheme}>
+          <SystemAdminLayout>
             <Switch>
-              <Route path="/app-store" component={PageAppStoreHome} />
-              <Route
-                path="/app-store/:category-id"
-                component={PageAppStoreCategory}
-              />
-              <Route
-                path="/app-store/:app-id"
-                component={<div>I am the app details page</div>}
-              />
-            </Switch>
-          </AppStoreLayout>
-        </ConfigProvider>
-      ) : (
-        <ConfigProvider theme={platformTheme}>
-          <PlatformLayout>
-            <Switch>
-              <Route path="/" component={Home} />
-
-              {/** Reaktor AI Engine Index */}
-              <Route path="/reaktor-ai-engine/apps" component={PageAppsIndex} />
-              {/** Reaktor AI Engine Index */}
-
-              {/** Reaktor AI Engine Index */}
-              <Route
-                path="/reaktor-ai-engine/reaktors"
-                component={PageReaktorsIndex}
-              />
-              {/** Reaktor AI Engine Index */}
-
-              {/** Reaktor AI Engine Index */}
-              <Route
-                path="/reaktor-ai-engine/deployments"
-                component={PageDeploymentsIndex}
-              />
-              {/** Reaktor AI Engine Index */}
-
-              {/** Reaktor Details */}
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:page"
-                component={ReaktorDetails}
-              />
-              {/** Reaktor Details */}
-
-              {/** Deployment Details */}
-              <Route
-                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id/:page"
-                component={PageDeploymentDetails}
-              />
-              {/** Deployment Details */}
-
-              {/** Data Studio */}
-              <Route path="/data-studio/:page">
-                <PageHeader title="Documents" subtitle="Some text." />
-              </Route>
-              {/** Data Studio */}
-
-              {/** Integrations */}
-              <Route path="/integrations/ai-provider">
-                <PageHeader title="AI Provider" subtitle="Some text." />
-              </Route>
-              <Route path="/integrations/services">
-                <PageHeader title="Services" subtitle="Some text." />
-              </Route>
-              {/** Integrations */}
-
-              {/** Settings */}
-              <Route
-                path="/settings"
-                component={() => <Redirect to="/settings/general" />}
-              />
-              <Route path="/settings/*" component={() => <PageSettings />} />
-              {/** Settings */}
-
-              {/** System Admin */}
               <Route
                 path="/system-admin"
                 component={() => <SystemAdminRedirect />}
               />
               <Route path="/system-admin/:page" component={PageSystemAdmin} />
-
               <Route
                 path="/system-admin/edit-user/:user-id/account"
                 component={EditUser}
@@ -151,14 +147,53 @@ export default function App() {
                 path="/system-admin/edit-user/:user-id/memberships"
                 component={EditUser}
               />
-              {/** System Admin */}
+            </Switch>
+          </SystemAdminLayout>
+        </ConfigProvider>
+      ) : (
+        <ConfigProvider theme={orgTheme}>
+          <PlatformLayout>
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/store" component={PageAppStore} />
+              <Route path="/reaktor-ai-engine/apps" component={PageAppsIndex} />
+              <Route
+                path="/reaktor-ai-engine/apps/:app-id"
+                component={AppFrontends}
+              />
+              <Route
+                path="/reaktor-ai-engine/reaktors"
+                component={PageReaktorsIndex}
+              />
+              <Route
+                path="/reaktor-ai-engine/deployments"
+                component={PageDeploymentsIndex}
+              />
+              <Route
+                path="/reaktor-ai-engine/:app-id/:reaktor-id"
+                component={ReaktorDetails}
+              />
+              <Route
+                path="/reaktor-ai-engine/:app-id/:reaktor-id/:deployment-id"
+                component={PageDeploymentDetails}
+              />
+              <Route path="/data-studio/:page">
+                <PageHeader title="Documents" subtitle="Some text." />
+              </Route>
+              <Route path="/integrations/ai-provider">
+                <PageHeader title="AI Provider" subtitle="Some text." />
+              </Route>
+              <Route path="/integrations/services">
+                <PageHeader title="Services" subtitle="Some text." />
+              </Route>
+              <Route path="/settings" component={PageSettings} />
             </Switch>
           </PlatformLayout>
         </ConfigProvider>
       )}
     </>
   ) : (
-    <ConfigProvider theme={platformTheme}>
+    <ConfigProvider theme={systemTheme}>
       <PageLogin />
     </ConfigProvider>
   );

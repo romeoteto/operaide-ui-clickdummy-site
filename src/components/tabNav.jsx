@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs, theme } from "antd";
+
 export default function TabNav({ tabs, activeKey, onTabClick }) {
   const {
     token: { colorBgContainer, marginXS },
@@ -10,7 +11,7 @@ export default function TabNav({ tabs, activeKey, onTabClick }) {
         position: "sticky",
         top: -24,
         backgroundColor: colorBgContainer,
-        zIndex: 1,
+        zIndex: 10,
       }}
     >
       <Tabs

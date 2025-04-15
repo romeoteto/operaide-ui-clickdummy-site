@@ -6,9 +6,9 @@ This is a clickdummy of our Operaide platform. Its purpose is to showcase latest
 
 The clickdummy simulates a user login and roles. Currently three different users are available for testing:
 
-- anna.endanwenderin@toyota.de
-- oliver.orgadmin@toyota.de
-- stefan.superadmin@toyota.de
+- anna.endanwenderin@senseca.com
+- oliver.orgadmin@senseca.com
+- stefan.superadmin@senseca.com
 
 You don't need a password on the login screen, just type the email to load the respective user settings. User login is not persisted between browser reload. So if you do, the login screen will show up again.
 

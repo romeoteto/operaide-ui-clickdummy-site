@@ -60,7 +60,7 @@ export default function Home() {
           </a>
         </Col>
         <Col span={8}>
-          <Link href="/app-store">
+          <Link href="/store">
             <Card hoverable>
               <Space>
                 <Avatar

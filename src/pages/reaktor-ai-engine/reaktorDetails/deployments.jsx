@@ -46,7 +46,7 @@ const Deployments = () => {
       key: "label",
       render: (_, deployment) => (
         <Link
-          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/dashboard`}
+          to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}`}
         >
           {deployment.label}
         </Link>
@@ -80,7 +80,7 @@ const Deployments = () => {
             key: "dashboard",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/dashboard`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}`}
               >
                 Inspect Deployment
               </Link>
@@ -176,6 +176,9 @@ const Deployments = () => {
         bordered
         columns={tableColumns}
         dataSource={filteredDeployments}
+        pagination={{
+          showSizeChanger: true,
+        }}
       />
     </Flex>
   );

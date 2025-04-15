@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { organizations, accentColors } from "../database/database";
 
 const initialState = {
-  appearance: "system",
-  accentColor: accentColors[0],
+  appearance: "light",
+  resolvedAppearance: "light", // the actual resolved value
 };
 
 export const appSettingsSlice = createSlice({
   name: "appSettings",
   initialState,
   reducers: {
-    setAccentColor: (state, action) => {
-      state.accentColor = action.payload;
-    },
     setAppearance: (state, action) => {
       state.appearance = action.payload;
+    },
+    setResolvedAppearance(state, action) {
+      state.resolvedAppearance = action.payload;
     },
   },
 });
 
-export const { setAccentColor, setAppearance } = appSettingsSlice.actions;
+export const { setAppearance, setResolvedAppearance } =
+  appSettingsSlice.actions;
 
 export default appSettingsSlice.reducer;
