@@ -94,6 +94,17 @@ const PlatformLayout = ({ children }) => {
   const canSeeSysAdmin =
     userIsSuperAdmin || currentPermissions.global.systemAdmin.length > 0;
 
+  const canSeeReaktorAIEngine =
+    userIsSuperAdmin ||
+    currentPermissions.org.reaktors.length > 0 ||
+    currentPermissions.org.deployments.length > 0;
+
+  const canSeeDataStudio =
+    userIsSuperAdmin || currentPermissions.org.dataStudio.length > 0;
+
+  const canSeeIntegrations =
+    userIsSuperAdmin || currentPermissions.org.integrations.length > 0;
+
   /** Upper menu logic */
   const upperMenuItems = [
     {
@@ -102,66 +113,79 @@ const PlatformLayout = ({ children }) => {
       label: "Home",
     },
     {
-      key: "/reaktor-ai-engine",
-      icon: <Atom size={"1em"} />,
-      label: "Reaktor AI Engine",
-      children: [
-        {
-          key: "/reaktor-ai-engine/apps",
-          label: "Apps",
-          icon: <Boxes size={"1em"} />,
-        },
-        {
-          key: "/reaktor-ai-engine/reaktors",
-          label: "Reaktors",
-          icon: <Atom size={"1em"} />,
-        },
-        {
-          key: "/reaktor-ai-engine/deployments",
-          label: "Deployments",
-          icon: <Rocket size={"1em"} />,
-        },
-      ],
+      key: "/reaktor-ai-engine/apps",
+      label: "Apps",
+      icon: <Boxes size={"1em"} />,
     },
-    {
-      key: "/data-studio",
-      label: "Data Studio",
-      icon: <Database size={"1em"} />,
-      children: [
-        {
-          key: "/data-studio/documents",
-          label: "Documents",
-          icon: <Files size={"1em"} />,
-        },
-        {
-          key: "/data-studio/document-groups",
-          label: "Document Groups",
-          icon: <FolderOpen size={"1em"} />,
-        },
-        {
-          key: "/data-studio/vector-db",
-          label: "VectorDB",
-          icon: <Database size={"1em"} />,
-        },
-      ],
-    },
-    {
-      key: "/integrations",
-      label: "Integrations",
-      icon: <Blocks size={"1em"} />,
-      children: [
-        {
-          key: "/integrations/ai-provider",
-          label: "AI Provider",
-          icon: <Brain size={"1em"} />,
-        },
-        {
-          key: "/integrations/services",
-          label: "Services",
-          icon: <Blocks size={"1em"} />,
-        },
-      ],
-    },
+    ...(canSeeReaktorAIEngine
+      ? [
+          {
+            key: "/reaktor-ai-engine",
+            icon: <Atom size={"1em"} />,
+            label: "Reaktor AI Engine",
+            children: [
+              {
+                key: "/reaktor-ai-engine/reaktors",
+                label: "Reaktors",
+                icon: <Atom size={"1em"} />,
+              },
+              {
+                key: "/reaktor-ai-engine/deployments",
+                label: "Deployments",
+                icon: <Rocket size={"1em"} />,
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(canSeeDataStudio
+      ? [
+          {
+            key: "/data-studio",
+            label: "Data Studio",
+            icon: <Database size={"1em"} />,
+            children: [
+              {
+                key: "/data-studio/documents",
+                label: "Documents",
+                icon: <Files size={"1em"} />,
+              },
+              {
+                key: "/data-studio/document-groups",
+                label: "Document Groups",
+                icon: <FolderOpen size={"1em"} />,
+              },
+              {
+                key: "/data-studio/vector-db",
+                label: "VectorDB",
+                icon: <Database size={"1em"} />,
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(canSeeIntegrations
+      ? [
+          {
+            key: "/integrations",
+            label: "Integrations",
+            icon: <Blocks size={"1em"} />,
+            children: [
+              {
+                key: "/integrations/ai-provider",
+                label: "AI Provider",
+                icon: <Brain size={"1em"} />,
+              },
+              {
+                key: "/integrations/services",
+                label: "Services",
+                icon: <Blocks size={"1em"} />,
+              },
+            ],
+          },
+        ]
+      : []),
+
     {
       key: "/store",
       icon: <Store size={"1em"} />,
@@ -373,7 +397,7 @@ const PlatformLayout = ({ children }) => {
             </div>
           </Flex>
           <Flex align="center">
-            <UserMenu3 />
+            <UserMenu3 showOrgSelect />
           </Flex>
         </Header>
 

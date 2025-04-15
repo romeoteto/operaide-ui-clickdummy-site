@@ -98,7 +98,7 @@ const ReaktorTable = ({ app }) => {
               key: "execution",
               label: (
                 <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/execution`}
+                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}?activeKey=2`}
                 >
                   Execute Deployment
                 </Link>
@@ -108,7 +108,7 @@ const ReaktorTable = ({ app }) => {
               key: "settings",
               label: (
                 <Link
-                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}/settings`}
+                  to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/${deployment.id}?activeKey=1`}
                 >
                   Edit Settings
                 </Link>
@@ -219,7 +219,7 @@ const ReaktorTable = ({ app }) => {
             key: "settings",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${app.id}/${reaktor.id}/default-settings`}
+                to={`/reaktor-ai-engine/${app.id}/${reaktor.id}?activeKey=1`}
               >
                 Show Settings
               </Link>

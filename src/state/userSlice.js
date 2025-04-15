@@ -10,37 +10,22 @@ const persistState = (state) => {
 const loadPersistedState = () => {
   try {
     const data = localStorage.getItem("userState");
-    return data ? JSON.parse(data) : demoState;
+    return data ? JSON.parse(data) : emptyState;
   } catch (err) {
     console.error("Failed to load persisted state", err);
-    return demoState;
+    return emptyState;
   }
 };
 
 // Default (logged-out) state
-const demoState = {
+const emptyState = {
   isLoggedIn: false,
   currentUser: {},
   currentOrganization: {},
   currentPermissions: {},
 };
 
-// Development state (optional for dev mode)
-const devState = {
-  isLoggedIn: true,
-  currentUser: users[0],
-  currentOrganization: organizations.find(
-    (org) => users[0].memberships[0].orgValue === org.value
-  ),
-  currentPermissions: getPermissions({
-    currentUserMemberships: users[0].memberships,
-    currentOrganization: organizations.find(
-      (org) => users[0].memberships[0].orgValue === org.value
-    ),
-  }),
-};
-
-// Load from localStorage or fallback to demoState
+// Load from localStorage or fallback to emptyState
 const initialState = loadPersistedState();
 
 export const userSlice = createSlice({
@@ -98,7 +83,7 @@ export const userSlice = createSlice({
 
     setLogout: () => {
       localStorage.removeItem("userState");
-      return demoState;
+      return emptyState;
     },
   },
 });

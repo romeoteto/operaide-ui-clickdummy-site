@@ -25,6 +25,7 @@ import {
   ChevronRight,
   Languages,
   SunMoon,
+  Boxes,
 } from "lucide-react";
 import Fuse from "fuse.js";
 
@@ -33,7 +34,7 @@ import { setCurrentOrganization, setLogout } from "../../state/userSlice";
 
 const { Text, Title } = Typography;
 
-export default function UserMenu3() {
+export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
   const {
     token: {
       fontSize,
@@ -47,7 +48,7 @@ export default function UserMenu3() {
     },
   } = theme.useToken();
 
-  const [, setLocation] = useLocation();
+  const [, navigate] = useLocation();
 
   const memberships = useSelector(
     (state) => state.user.currentUser.memberships
@@ -71,7 +72,7 @@ export default function UserMenu3() {
   const Content = () => {
     const onChange = (value) => {
       dispatch(setCurrentOrganization(value));
-      setLocation("/");
+      navigate("/");
     };
 
     const onSearch = (value) => {
@@ -107,34 +108,38 @@ export default function UserMenu3() {
             <Text type="secondary">{email}</Text>
           </Flex>
           {isSuperAdmin && <Tag color="magenta">Super Admin</Tag>}
-        </Flex>
-        <div style={{ paddingLeft: paddingXXS, paddingRight: paddingXXS }}>
-          <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-        </div>
+        </Flex>{" "}
+        {showOrgSelect && (
+          <>
+            <div style={{ paddingLeft: paddingXXS, paddingRight: paddingXXS }}>
+              <Divider style={{ marginTop: 0, marginBottom: 0 }} />
+            </div>
 
-        <Form
-          layout="vertical"
-          style={{
-            paddingLeft: paddingSM,
-            paddingRight: paddingSM,
-            paddingBottom: paddingXS,
-            paddingTop: paddingXS,
-          }}
-        >
-          <Form.Item label="My Organizations" style={{ marginBottom: 0 }}>
-            <Select
-              showSearch
-              placeholder="Select an organization"
-              optionFilterProp="label"
-              onChange={onChange}
-              onSearch={onSearch}
-              options={filteredOrganizations}
-              suffixIcon={<ChevronDown size="1.25em" />}
-              size="middle"
-              value={currentOrganization}
-            />
-          </Form.Item>
-        </Form>
+            <Form
+              layout="vertical"
+              style={{
+                paddingLeft: paddingSM,
+                paddingRight: paddingSM,
+                paddingBottom: paddingXS,
+                paddingTop: paddingXS,
+              }}
+            >
+              <Form.Item label="My Organizations" style={{ marginBottom: 0 }}>
+                <Select
+                  showSearch
+                  placeholder="Select an organization"
+                  optionFilterProp="label"
+                  onChange={onChange}
+                  onSearch={onSearch}
+                  options={filteredOrganizations}
+                  suffixIcon={<ChevronDown size="1.25em" />}
+                  size="middle"
+                  value={currentOrganization}
+                />
+              </Form.Item>
+            </Form>
+          </>
+        )}
       </Flex>
     );
   };
@@ -197,6 +202,19 @@ export default function UserMenu3() {
     {
       type: "divider",
     },
+    ...(showVisitBackend
+      ? [
+          {
+            key: "extra",
+            label: "Show Apps",
+            icon: <Boxes size="1em" />,
+            onClick: () => navigate("/reaktor-ai-engine/apps"),
+          },
+          {
+            type: "divider",
+          },
+        ]
+      : []),
     {
       key: "3",
       icon: <LogOut size={fontSize} />,

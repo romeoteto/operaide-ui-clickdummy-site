@@ -114,9 +114,7 @@ const PageReaktorsIndex = () => {
           {
             key: "diagram",
             label: (
-              <Link
-                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/diagram`}
-              >
+              <Link to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}`}>
                 Inspect Reaktor
               </Link>
             ),
@@ -125,7 +123,7 @@ const PageReaktorsIndex = () => {
             key: "settings",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}/default-settings`}
+                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}?activeKey=1`}
               >
                 Show Settings
               </Link>

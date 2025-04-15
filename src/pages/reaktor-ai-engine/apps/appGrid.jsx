@@ -4,9 +4,9 @@ import { Avatar, Card, Col, Row, Typography, theme } from "antd";
 import { Box, Atom, Download, Monitor } from "lucide-react";
 import { Link } from "wouter";
 import { apps, frontendMap } from "../../../database/apps";
+import { useSelector } from "react-redux";
 
 const { Meta } = Card;
-const { Link: AntLink } = Typography;
 
 const AppCard = ({ app }) => {
   const {
@@ -14,6 +14,20 @@ const AppCard = ({ app }) => {
   } = theme.useToken();
 
   const showFrontend = Object.keys(frontendMap).includes(app.id);
+
+  const currentPermissions = useSelector(
+    (state) => state.user.currentPermissions
+  );
+
+  const userIsSuperAdmin = useSelector(
+    (state) => state.user.currentUser.isSuperAdmin
+  );
+
+  const showDownloadAction =
+    userIsSuperAdmin || currentPermissions.org.apps.includes["canDownloadApp"];
+  const showReaktorsAction =
+    userIsSuperAdmin ||
+    currentPermissions.org.reaktors.includes["canViewReaktors"];
 
   return (
     <Card
@@ -32,13 +46,15 @@ const AppCard = ({ app }) => {
             <Monitor size="1em" />
           </Link>
         ),
-        <Link
-          key="reaktors-link"
-          href={`/reaktor-ai-engine/reaktors?appId=${app.id}`}
-        >
-          <Atom size="1em" />
-        </Link>,
-        <Download key="reaktors-download" size="1em" />,
+        showReaktorsAction && (
+          <Link
+            key="reaktors-link"
+            href={`/reaktor-ai-engine/reaktors?appId=${app.id}`}
+          >
+            <Atom size="1em" />
+          </Link>
+        ),
+        showDownloadAction && <Download key="reaktors-download" size="1em" />,
       ].filter(Boolean)}
     >
       <div style={{ flex: 1 }}>

@@ -135,7 +135,7 @@ const PageDeploymentsIndex = () => {
             key: "execution",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/execution`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}?activeKey=2`}
               >
                 Execute Deployment
               </Link>
@@ -145,7 +145,7 @@ const PageDeploymentsIndex = () => {
             key: "settings",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/settings`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}?activeKey=1`}
               >
                 Edit Settings
               </Link>

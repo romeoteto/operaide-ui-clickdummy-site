@@ -26,6 +26,8 @@ import { currentGlobalTheme } from "./database/database";
 // ✅ Import Redux action
 import { setResolvedAppearance } from "./state/appSettingsSlice"; // adjust path if needed
 import SystemAdminLayout from "./layouts/systemAdmin";
+import AppFrontendsExt from "./pages/reaktor-ai-engine/apps/appFrontends/indexExt";
+import AppExtLayout from "./layouts/appExt";
 
 // ✅ Custom hook to resolve appearance based on system settings
 function useResolvedAppearance(appearanceSetting, onResolve) {
@@ -125,7 +127,13 @@ export default function App() {
   return userIsLoggedIn ? (
     <>
       {location.startsWith("/app/ext") ? (
-        <Switch></Switch>
+        <ConfigProvider theme={orgTheme}>
+          <AppExtLayout>
+            <Switch>
+              <Route path={`/app/ext/:app-id`} component={AppFrontendsExt} />
+            </Switch>
+          </AppExtLayout>
+        </ConfigProvider>
       ) : location.startsWith("/system-admin") ? (
         <ConfigProvider theme={systemTheme}>
           <SystemAdminLayout>

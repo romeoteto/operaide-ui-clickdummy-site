@@ -171,7 +171,7 @@ export const globalThemeCustomer = {
   borderRadius: borderRadiusValues[1],
 };
 
-export const currentGlobalTheme = globalThemeCustomer;
+export const currentGlobalTheme = globalThemeCustomer; //globalThemeOperaide globalThemeCustomer
 
 // Global System Theming
 
@@ -313,6 +313,11 @@ export const orgRoles = [
           "canViewRegistration",
           "canViewApiKeys",
         ],
+        apps: ["canViewApps", "canDownloadApps"],
+        reaktors: ["canViewReaktors"],
+        deployments: ["canViewDeployments"],
+        dataStudio: ["canViewDataStudio"],
+        integrations: ["canViewIntegrations"],
         appStore: ["canInstallApps"],
       },
     },
@@ -322,7 +327,15 @@ export const orgRoles = [
     label: "Member",
     permissions: {
       global: { systemAdmin: [] },
-      org: { settings: [], appStore: [] },
+      org: {
+        settings: [],
+        apps: ["canViewApps"],
+        reaktors: [],
+        deployments: [],
+        dataStudio: [],
+        integrations: [],
+        appStore: ["canInstallApps"],
+      },
     },
   },
 ];

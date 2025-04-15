@@ -3,15 +3,14 @@ import { useRoute, useLocation } from "wouter";
 import { frontendMap } from "../../../../database/apps";
 import { apps } from "../../../../database/apps";
 import PageHeader from "../../../../components/pageHeader";
-import { Fullscreen } from "lucide-react";
-import { Button, Flex } from "antd";
+import { Flex } from "antd";
 
 const NotFound = () => {
   return <div>Not Found</div>;
 };
 
-const AppFrontends = () => {
-  const [match, params] = useRoute("/reaktor-ai-engine/apps/:appId");
+const AppFrontendsExt = () => {
+  const [match, params] = useRoute("/app/ext/:appId");
   const [_, navigate] = useLocation();
 
   if (!match) return <NotFound />;
@@ -28,12 +27,6 @@ const AppFrontends = () => {
     <>
       <Flex justify="space-between">
         <PageHeader title={app.name} subtitle={app.description} />
-        <Button
-          variant="dashed"
-          color="default"
-          icon={<Fullscreen size="1em" />}
-          onClick={() => navigate(`/app/ext/${appId}`)}
-        />
       </Flex>
 
       <FrontendComponent app={app} />
@@ -41,4 +34,4 @@ const AppFrontends = () => {
   );
 };
 
-export default AppFrontends;
+export default AppFrontendsExt;

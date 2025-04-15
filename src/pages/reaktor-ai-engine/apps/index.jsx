@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import PageHeader from "../../../components/pageHeader";
 import { useSearchParams } from "wouter";
 
@@ -11,8 +12,14 @@ import AppGrid from "./appGrid";
 
 export default function PageAppsIndex() {
   const [searchString, setSearchString] = useState("");
-
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentPermissions = useSelector(
+    (state) => state.user.currentPermissions
+  );
+
+  const showSegmented =
+    currentPermissions.org.reaktors.includes("canViewReaktors");
 
   const viewType = searchParams.get("viewType");
 
@@ -43,40 +50,42 @@ export default function PageAppsIndex() {
             variant="filled"
           />
 
-          <Segmented
-            onChange={(value) => handleViewChange(value)}
-            value={viewType}
-            options={[
-              {
-                value: "cards",
-                icon: (
-                  <span
-                    style={{
-                      display: "inline-block",
-                      lineHeight: 0, // so the SVG doesn't add extra space
-                      verticalAlign: "-0.125em", // "pull" it down a hair
-                    }}
-                  >
-                    <LayoutGrid size="1em" />
-                  </span>
-                ),
-              },
-              {
-                value: "list",
-                icon: (
-                  <span
-                    style={{
-                      display: "inline-block",
-                      lineHeight: 0, // so the SVG doesn't add extra space
-                      verticalAlign: "-0.125em", // "pull" it down a hair
-                    }}
-                  >
-                    <LayoutList size="1em" />
-                  </span>
-                ),
-              },
-            ]}
-          />
+          {showSegmented && (
+            <Segmented
+              onChange={(value) => handleViewChange(value)}
+              value={viewType}
+              options={[
+                {
+                  value: "cards",
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        lineHeight: 0, // so the SVG doesn't add extra space
+                        verticalAlign: "-0.125em", // "pull" it down a hair
+                      }}
+                    >
+                      <LayoutGrid size="1em" />
+                    </span>
+                  ),
+                },
+                {
+                  value: "list",
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        lineHeight: 0, // so the SVG doesn't add extra space
+                        verticalAlign: "-0.125em", // "pull" it down a hair
+                      }}
+                    >
+                      <LayoutList size="1em" />
+                    </span>
+                  ),
+                },
+              ]}
+            />
+          )}
         </Flex>
 
         {viewType === "list" ? <AppList /> : <AppGrid />}
