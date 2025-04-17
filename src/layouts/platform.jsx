@@ -105,6 +105,15 @@ const PlatformLayout = ({ children }) => {
   const canSeeIntegrations =
     userIsSuperAdmin || currentPermissions.org.integrations.length > 0;
 
+  const canSeeExternalLinks =
+    userIsSuperAdmin || currentPermissions.org.externalLinks.length > 0;
+
+  const canSeeAppStore =
+    userIsSuperAdmin || currentPermissions.org.appStore.length > 0;
+
+  const canSeeApps =
+    userIsSuperAdmin || currentPermissions.org.apps.includes("canViewApps");
+
   /** Upper menu logic */
   const upperMenuItems = [
     {
@@ -112,11 +121,16 @@ const PlatformLayout = ({ children }) => {
       icon: <House size={"1em"} />,
       label: "Home",
     },
-    {
-      key: "/reaktor-ai-engine/apps",
-      label: "Apps",
-      icon: <Boxes size={"1em"} />,
-    },
+    ...(canSeeApps
+      ? [
+          {
+            key: "/reaktor-ai-engine/apps",
+            label: "Apps",
+            icon: <Boxes size={"1em"} />,
+          },
+        ]
+      : []),
+
     ...(canSeeReaktorAIEngine
       ? [
           {
@@ -186,65 +200,76 @@ const PlatformLayout = ({ children }) => {
         ]
       : []),
 
-    {
-      key: "/store",
-      icon: <Store size={"1em"} />,
-      label: "App Store",
-    },
+    ...(canSeeAppStore
+      ? [
+          {
+            key: "/store",
+            icon: <Store size={"1em"} />,
+            label: "App Store",
+          },
+        ]
+      : []),
+
+    ...(canSeeSettings
+      ? [
+          { type: "divider" },
+          {
+            key: "/settings",
+            label: "Settings",
+            icon: <Settings2 size="1em" />,
+          },
+        ]
+      : []),
   ];
 
-  // Only add the divider + settings item if the user is an admin
-  if (canSeeSettings) {
-    upperMenuItems.push(
-      { type: "divider" },
-      {
-        key: "/settings",
-        label: "Settings",
-        icon: <Settings2 size="1em" />,
-      }
-    );
-  }
   /** Upper menu logic */
 
   /** Bottom Menu Logic */
 
   const bottomMenuItems = [
-    {
-      key: "documentation",
-      icon: <FileText size="1em" />,
-      label: (
-        <a
-          href="https://staging.demo.operaide.ai/op-docs/docs/overview/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Documentation
-        </a>
-      ),
-    },
-    {
-      key: "community",
-      icon: <Users size="1em" />,
-      label: (
-        <a
-          href="https://operaide.bettermode.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Community
-        </a>
-      ),
-    },
+    ...(canSeeExternalLinks
+      ? [
+          {
+            key: "documentation",
+            icon: <FileText size="1em" />,
+            label: (
+              <a
+                href="https://staging.demo.operaide.ai/op-docs/docs/overview/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Documentation
+              </a>
+            ),
+          },
+          {
+            key: "community",
+            icon: <Users size="1em" />,
+            label: (
+              <a
+                href="https://operaide.bettermode.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Community
+              </a>
+            ),
+          },
+        ]
+      : []),
+
+    ...(canSeeSysAdmin
+      ? [
+          {
+            key: "/system-admin",
+            icon: <MonitorCog size="1em" />,
+            label: "System Admin",
+            onClick: ({ key }) => navigate(key),
+          },
+        ]
+      : []),
   ];
 
-  if (canSeeSysAdmin) {
-    bottomMenuItems.push({
-      key: "/system-admin",
-      icon: <MonitorCog size="1em" />,
-      label: "System Admin",
-      onClick: ({ key }) => navigate(key),
-    });
-  }
   /** Bottom Menu Logic */
 
   const version = "Operaide 2.1.2 (Ada)";

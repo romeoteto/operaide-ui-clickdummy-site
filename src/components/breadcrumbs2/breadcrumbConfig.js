@@ -110,6 +110,20 @@ export const breadcrumbConfig = [
     ],
   },
   {
+    patterns: ["/system-admin/all-users/:userId/edit"],
+    breadcrumbs: [
+      {
+        label: "System Administration",
+      },
+      {
+        label: "Edit User",
+      },
+      {
+        label: ({ userId, getUserName }) => getUserName(userId),
+      },
+    ],
+  },
+  {
     patterns: ["/system-admin/all-users"],
     breadcrumbs: [
       {

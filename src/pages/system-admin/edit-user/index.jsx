@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "wouter";
+import React from "react";
+import { useParams, useSearchParams } from "wouter";
 
 import { User, ShieldUser, Building } from "lucide-react";
 
@@ -7,12 +7,14 @@ import PageHeader from "../../../components/pageHeader";
 import TabNav from "../../../components/tabNav";
 import { users } from "../../../database/database";
 import Account from "./account";
+import Memberships from "./memberships";
 
 const EditUser = () => {
-  const [activeKey, setActiveKey] = useState(0);
-  const [location, navigate] = useLocation();
   const params = useParams();
   const { "user-id": userId } = params;
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeKey = searchParams.get("activeKey") || 0;
 
   const user = users.find((user) => user.id === Number(userId));
 
@@ -22,32 +24,18 @@ const EditUser = () => {
     {
       icon: User,
       label: "Account",
-      href: `/system-admin/edit-user/${userId}/account`,
       component: <Account user={user} />,
     },
     {
       icon: ShieldUser,
       label: "Security",
-      href: `/system-admin/edit-user/${userId}/security`,
     },
     {
       icon: Building,
       label: "Memberships",
-      href: `/system-admin/edit-user/${userId}/memberships`,
+      component: <Memberships />,
     },
   ];
-
-  const onTabClick = (key) => {
-    const href = tabs[key].href;
-    navigate(href);
-  };
-
-  useEffect(() => {
-    const index = tabs.findIndex((tab) => tab.href === location);
-    if (index !== -1) {
-      setActiveKey(index);
-    }
-  }, [location, tabs]);
 
   return (
     <>
@@ -57,8 +45,8 @@ const EditUser = () => {
       />
       <TabNav
         tabs={tabs}
-        activeKey={activeKey}
-        onTabClick={(key) => onTabClick(key)}
+        activeKey={Number(activeKey)}
+        onTabClick={(key) => setSearchParams({ activeKey: key })}
       />
       {tabs[activeKey]?.component}
     </>

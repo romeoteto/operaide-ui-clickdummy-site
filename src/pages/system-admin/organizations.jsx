@@ -70,6 +70,7 @@ const Organizations = () => {
 
         <Table
           size="middle"
+          bordered
           columns={tableColumns}
           dataSource={organizations}
           pagination={{

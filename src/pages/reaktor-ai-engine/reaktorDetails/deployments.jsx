@@ -87,8 +87,16 @@ const Deployments = () => {
             ),
           },
           {
-            key: "openApi",
-            label: <Link to={""}>Show OpenAPI Definition</Link>,
+            key: "api",
+            label: (
+              <a
+                href={"https://petstore.swagger.io/v2/swagger.json"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Show OpenAPI Definition
+              </a>
+            ),
           },
           {
             key: "api",
@@ -106,7 +114,7 @@ const Deployments = () => {
             key: "execution",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/execution`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}?activeKey=2`}
               >
                 Execute Deployment
               </Link>
@@ -116,7 +124,7 @@ const Deployments = () => {
             key: "settings",
             label: (
               <Link
-                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}/settings`}
+                to={`/reaktor-ai-engine/${deployment.appId}/${deployment.blueprintId}/${deployment.id}?activeKey=1`}
               >
                 Edit Settings
               </Link>

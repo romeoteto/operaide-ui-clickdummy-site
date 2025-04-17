@@ -171,11 +171,23 @@ export const globalThemeCustomer = {
   borderRadius: borderRadiusValues[1],
 };
 
-export const currentGlobalTheme = globalThemeCustomer; //globalThemeOperaide globalThemeCustomer
+export const currentGlobalTheme = globalThemeCustomer; //switch between globalThemeOperaide and globalThemeCustomer
 
 // Global System Theming
 
 export const organizations = [
+  {
+    value: 4,
+    label: "Senseca France",
+    createdAt: "2025-03-14",
+    creatorId: 1,
+    theme: {
+      type: "system",
+      light: currentGlobalTheme.light,
+      dark: currentGlobalTheme.dark,
+      borderRadius: currentGlobalTheme.borderRadius,
+    },
+  },
   {
     value: 1,
     label: "Senseca Germany GmbH",
@@ -208,14 +220,14 @@ export const organizations = [
       light: {
         logo: orgLogoLight,
         signet: orgSignetLight,
-        colorPrimary: "#FF66B3",
-        colorInfo: "#FF66B3",
+        colorPrimary: "#726DA8",
+        colorInfo: "#726DA8",
       },
       dark: {
         logo: orgLogoDark,
         signet: orgSignetDark,
-        colorPrimary: "#FF66B3",
-        colorInfo: "#FF66B3",
+        colorPrimary: "#726DA8",
+        colorInfo: "#726DA8",
       },
       borderRadius: borderRadiusValues[1],
     },
@@ -240,18 +252,6 @@ export const organizations = [
         colorInfo: "#91B942",
       },
       borderRadius: borderRadiusValues[0],
-    },
-  },
-  {
-    value: 4,
-    label: "Senseca France",
-    createdAt: "2025-03-14",
-    creatorId: 1,
-    theme: {
-      type: "system",
-      light: currentGlobalTheme.light,
-      dark: currentGlobalTheme.dark,
-      borderRadius: currentGlobalTheme.borderRadius,
     },
   },
 ];
@@ -318,7 +318,8 @@ export const orgRoles = [
         deployments: ["canViewDeployments"],
         dataStudio: ["canViewDataStudio"],
         integrations: ["canViewIntegrations"],
-        appStore: ["canInstallApps"],
+        appStore: ["canViewAppStore"],
+        externalLinks: ["canViewDocumentation", "canViewCommunity"],
       },
     },
   },
@@ -329,12 +330,13 @@ export const orgRoles = [
       global: { systemAdmin: [] },
       org: {
         settings: [],
-        apps: ["canViewApps"],
+        apps: ["canOnlyViewApps"],
         reaktors: [],
         deployments: [],
         dataStudio: [],
         integrations: [],
-        appStore: ["canInstallApps"],
+        appStore: [],
+        externalLinks: [],
       },
     },
   },
@@ -377,7 +379,7 @@ export const users = [
     isSuperAdmin: false /**replace with new global role */,
     createdAt: "2025-03-11",
     lastLogin: "2025-03-15",
-    memberships: [{ orgValue: 3, roleValue: 2 }],
+    memberships: [{ orgValue: 4, roleValue: 2 }],
     globalRole: 2,
   },
 ];

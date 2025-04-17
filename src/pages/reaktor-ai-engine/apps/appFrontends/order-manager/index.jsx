@@ -3,7 +3,7 @@ import { Tabs, theme } from "antd";
 import OrdersOverview from "./ordersOverview";
 import TicketsOverview from "./ticketsOverview";
 
-const AppFrontendOrderManager = ({ app }) => {
+const AppFrontendOrderManager = () => {
   const [activeKey, setActiveKey] = useState("orders");
   const {
     token: { colorBgContainer },

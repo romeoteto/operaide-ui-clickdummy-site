@@ -22,7 +22,7 @@ const AllUsers = () => {
       key: "fullName",
       render: (fullName, record) => (
         <Text>
-          <Link href={`/system-admin/edit-user/${record.id}/account`}>
+          <Link href={`/system-admin/all-users/${record.id}/edit`}>
             {fullName}
           </Link>
         </Text>
@@ -59,6 +59,7 @@ const AllUsers = () => {
         <Input placeholder="Search user" variant="filled" />
         <Table
           size="middle"
+          bordered
           columns={tableColumns}
           dataSource={usersWithFullNameAndMembershipCount}
         />

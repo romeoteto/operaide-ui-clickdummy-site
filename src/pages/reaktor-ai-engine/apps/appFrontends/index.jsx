@@ -31,8 +31,11 @@ const AppFrontends = () => {
         <Button
           variant="dashed"
           color="default"
+          type="link"
           icon={<Fullscreen size="1em" />}
-          onClick={() => navigate(`/app/ext/${appId}`)}
+          href={`/app/ext/${appId}`}
+          rel="noopener noreferrer"
+          target="_blank"
         />
       </Flex>
 

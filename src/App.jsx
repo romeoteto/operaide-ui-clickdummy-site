@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ConfigProvider, Drawer, theme as antTheme } from "antd";
-import { Route, Switch, Redirect, useLocation } from "wouter";
+import { ConfigProvider, theme as antTheme } from "antd";
+import { Route, Switch, useLocation } from "wouter";
 
 import PlatformLayout from "./layouts/platform";
 import PageHeader from "./components/pageHeader";
@@ -28,6 +28,8 @@ import { setResolvedAppearance } from "./state/appSettingsSlice"; // adjust path
 import SystemAdminLayout from "./layouts/systemAdmin";
 import AppFrontendsExt from "./pages/reaktor-ai-engine/apps/appFrontends/indexExt";
 import AppExtLayout from "./layouts/appExt";
+import AppsOnlyLayout from "./layouts/appsOnly";
+import AppsIndex from "./pages/apps";
 
 // ✅ Custom hook to resolve appearance based on system settings
 function useResolvedAppearance(appearanceSetting, onResolve) {
@@ -67,7 +69,7 @@ function useResolvedAppearance(appearanceSetting, onResolve) {
 
 // ✅ Main App component
 export default function App() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const dispatch = useDispatch();
 
   const userIsLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -76,10 +78,33 @@ export default function App() {
     (state) => state.user.currentOrganization?.theme
   );
 
-  // Use the hook and sync resolved appearance into Redux
   const resolvedAppearance = useResolvedAppearance(appearance, (resolved) => {
     dispatch(setResolvedAppearance(resolved));
   });
+
+  const currentPermissions = useSelector(
+    (state) => state.user.currentPermissions
+  );
+
+  const canOnlySeeApps =
+    currentPermissions.org?.apps.includes("canOnlyViewApps");
+
+  useEffect(() => {
+    const isAppsRoute = location.startsWith("/apps");
+    const isAppExtRoute = location.startsWith("/app/ext");
+    const isLoginRoute = location === "/login";
+
+    if (canOnlySeeApps) {
+      const isAllowed = isAppsRoute || isAppExtRoute || isLoginRoute;
+      if (!isAllowed) {
+        navigate("/apps");
+      }
+    } else {
+      if (isAppsRoute) {
+        navigate("/");
+      }
+    }
+  }, [canOnlySeeApps, location, navigate]);
 
   const isDarkMode = resolvedAppearance === "dark";
 
@@ -102,8 +127,6 @@ export default function App() {
     },
   };
 
-  // Experimental
-
   const systemTheme = {
     algorithm: isDarkMode ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
     token: {
@@ -122,7 +145,6 @@ export default function App() {
         : currentGlobalTheme.light.signet,
     },
   };
-  // Experimental
 
   return userIsLoggedIn ? (
     <>
@@ -144,19 +166,20 @@ export default function App() {
               />
               <Route path="/system-admin/:page" component={PageSystemAdmin} />
               <Route
-                path="/system-admin/edit-user/:user-id/account"
-                component={EditUser}
-              />
-              <Route
-                path="/system-admin/edit-user/:user-id/security"
-                component={EditUser}
-              />
-              <Route
-                path="/system-admin/edit-user/:user-id/memberships"
+                path="/system-admin/all-users/:user-id/edit"
                 component={EditUser}
               />
             </Switch>
           </SystemAdminLayout>
+        </ConfigProvider>
+      ) : location.startsWith("/apps") ? (
+        <ConfigProvider theme={orgTheme}>
+          <AppsOnlyLayout>
+            <Switch>
+              {/* Replace below with actual routes under /apps */}
+              <Route path="/apps/" component={AppsIndex} />
+            </Switch>
+          </AppsOnlyLayout>
         </ConfigProvider>
       ) : (
         <ConfigProvider theme={orgTheme}>

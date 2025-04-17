@@ -79,8 +79,16 @@ const ReaktorTable = ({ app }) => {
               ),
             },
             {
-              key: "openApi",
-              label: <Link to={""}>Show OpenAPI Definition</Link>,
+              key: "api",
+              label: (
+                <a
+                  href={"https://petstore.swagger.io/v2/swagger.json"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Show OpenAPI Definition
+                </a>
+              ),
             },
             {
               key: "api",

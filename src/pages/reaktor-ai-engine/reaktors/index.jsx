@@ -129,6 +129,16 @@ const PageReaktorsIndex = () => {
               </Link>
             ),
           },
+          {
+            key: "deployments",
+            label: (
+              <Link
+                to={`/reaktor-ai-engine/${reaktor.appId}/${reaktor.id}?activeKey=2`}
+              >
+                Show Deployments
+              </Link>
+            ),
+          },
         ];
 
         const contentStyle = {

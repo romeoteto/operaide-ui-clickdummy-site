@@ -127,6 +127,7 @@ export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
               <Form.Item label="My Organizations" style={{ marginBottom: 0 }}>
                 <Select
                   showSearch
+                  variant="filled"
                   placeholder="Select an organization"
                   optionFilterProp="label"
                   onChange={onChange}

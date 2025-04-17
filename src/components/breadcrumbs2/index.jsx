@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { breadcrumbConfig } from "./breadcrumbConfig";
 import { getBreadcrumbsFromFlatConfig } from "./getBreadcrumbsFromFlatConfig";
 import { apps } from "../../database/apps";
+import { users } from "../../database/database";
 
 const Breadcrumbs = () => {
   const [location] = useLocation();
@@ -33,6 +34,11 @@ const Breadcrumbs = () => {
     return deployment?.label || deploymentId;
   };
 
+  const getUserName = (userId) => {
+    const user = users.find((user) => Number(user.id) === Number(userId));
+    return `${user?.prename} ${user?.surname}` || userId;
+  };
+
   const { org, breadcrumbs } = getBreadcrumbsFromFlatConfig(
     location,
     breadcrumbConfig,
@@ -41,6 +47,7 @@ const Breadcrumbs = () => {
       getAppLabel,
       getBlueprintLabel,
       getDeploymentLabel,
+      getUserName,
     }
   );
 
