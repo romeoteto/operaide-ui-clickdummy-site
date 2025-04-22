@@ -9,53 +9,44 @@ import {
   Flex,
   Typography,
   Dropdown,
-  Avatar,
   Tooltip,
   Input,
-  Space,
   Divider,
+  Modal,
   Drawer,
   theme,
 } from "antd";
 import { Conversations, Sender, Bubble } from "@ant-design/x";
 
 import {
-  PanelLeft,
-  Bot,
-  BotMessageSquare,
+  X,
   Trash2,
   PenLine,
   Archive,
   UserPlus,
   Atom,
-  Menu,
   MessageSquare,
-  User,
   ChevronRight,
   Paperclip,
   TextSearch,
   Share2,
   SquarePen,
-  Mic,
   ArrowUp,
 } from "lucide-react";
 
 import { apps } from "../../database/apps";
 
 import UserMenu3 from "../../components/userMenu3";
-import Breadcrumbs from "../../components/breadcrumbs2";
 
 import iconMistral from "./assets/icon_mistral.png";
 import iconOpenAI from "./assets/icon_open-ai.png";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 const { Text } = Typography;
 
 const PageElara = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [showHistory, setShowHistory] = useState(false);
   const [currentChat, setCurrentChat] = useState("TechDB Chat");
-
-  const currentUser = useSelector((state) => state.user.currentUser);
 
   const {
     token: {
@@ -63,13 +54,16 @@ const PageElara = ({ children }) => {
       colorSplit,
       logo,
       borderRadius,
-      colorPrimary,
       colorTextQuaternary,
       fontSize,
       paddingSM,
       colorText,
       paddingXS,
       fontSizeLG,
+      fontSizeSM,
+      padding,
+      lineWidth,
+      margin,
     },
   } = theme.useToken();
 
@@ -81,7 +75,7 @@ const PageElara = ({ children }) => {
     <span style={{ fontSize: !screens.md && fontSizeLG }}>{children}</span>
   );
 
-  const conversationItems = Array.from({ length: 6 }).map((_, index) => {
+  const conversationItems = Array.from({ length: 40 }).map((_, index) => {
     const timestamp = index <= 3 ? 1732204800000 : 1732204800000 - 60 * 60 * 24;
     return {
       key: `item${index + 1}`,
@@ -323,52 +317,89 @@ const PageElara = ({ children }) => {
   return (
     <Layout
       style={{
-        height: "100vh",
         background: colorBgContainer,
+        height: "100dvh",
       }}
     >
       {screens.md ? (
-        <Sider
-          theme="light"
-          width={250}
-          style={{
-            position: "absolute",
-            left: collapsed ? -250 : 0,
-            transition: "all 0.2s ease-in-out",
-            top: 0,
-            bottom: 0,
-            borderRight: `1px solid ${colorSplit}`,
-            zIndex: 10,
+        <Modal
+          title="Chat History"
+          open={showHistory}
+          onCancel={() => setShowHistory(false)}
+          closeIcon={false}
+          width={{
+            md: "100%",
+            lg: "80%",
+            xl: "80%",
+            xxl: "80%",
           }}
+          styles={{
+            content: {
+              padding: paddingXS,
+            },
+            header: { padding: paddingSM },
+            wrapper: { padding: paddingSM },
+          }}
+          centered
+          footer={false}
         >
-          <Flex
-            align="center"
+          <div
             style={{
               paddingLeft: paddingSM,
               paddingRight: paddingSM,
-              height: 58,
+              marginBottom: margin,
             }}
           >
-            <Input placeholder="Search..." />
-          </Flex>
+            <Input placeholder="Search..." variant="filled" />
+          </div>
+          <Flex>
+            <Conversations
+              items={conversationItems}
+              defaultActiveKey="item1"
+              groupable={groupable}
+              menu={menuConfig}
+              style={{
+                overflowY: "auto",
+                height: 500,
+                flex: 1,
+                borderRight: `${lineWidth}px solid ${colorSplit}`,
+                paddingTop: 0,
+                paddingRight: padding,
+              }}
+            />
 
-          <Conversations
-            items={conversationItems}
-            defaultActiveKey="item1"
-            groupable={groupable}
-            menu={menuConfig}
-            style={{
-              width: "100%",
-              background: colorBgContainer,
-              borderRadius: borderRadius,
-            }}
-          />
-        </Sider>
+            <div
+              style={{
+                paddingLeft: padding,
+                paddingRight: paddingSM,
+                paddingBottom: paddingXS,
+                flex: 2,
+              }}
+            >
+              <Bubble.List
+                ref={listRef}
+                style={{
+                  overflowY: "auto",
+                  height: 500,
+                }}
+                roles={rolesAsObject}
+                items={Array.from({ length: count }).map((_, i) => {
+                  const isAI = !!(i % 2);
+                  const content = isAI
+                    ? "Mock AI content. ".repeat(20)
+                    : "Mock user content.";
+                  return { key: i, role: isAI ? "ai" : "user", content };
+                })}
+              />
+            </div>
+          </Flex>
+        </Modal>
       ) : (
         <Drawer
           closeIcon={false}
-          title={<img src={logo} alt="operaide logo" style={{ height: 24 }} />}
-          placement="left"
+          title="Chat History"
+          placement="bottom"
+          height="80vh"
           styles={{
             header: {
               height: "58px",
@@ -377,14 +408,15 @@ const PageElara = ({ children }) => {
               border: 0,
             },
             body: { padding: 0 },
+            content: { height: "80vh" },
           }}
-          onClose={() => setCollapsed(true)}
-          open={!collapsed}
+          onClose={() => setShowHistory(false)}
+          open={showHistory}
           extra={
             <Button
               type="text"
-              icon={<TextSearch size="1em" />}
-              onClick={() => setCollapsed(!collapsed)}
+              icon={<X size="1em" />}
+              onClick={() => setShowHistory(false)}
               style={iconStyle}
             />
           }
@@ -394,10 +426,14 @@ const PageElara = ({ children }) => {
             style={{
               paddingLeft: paddingSM,
               paddingRight: paddingSM,
-              height: 58,
+              position: "fixed",
+              width: "100%",
+              zIndex: 10,
+              background: colorBgContainer,
+              paddingBottom: paddingSM,
             }}
           >
-            <Input placeholder="Search..." size="large" />
+            <Input placeholder="Search..." size="large" variant="filled" />
           </Flex>
           <Conversations
             items={conversationItems}
@@ -405,22 +441,14 @@ const PageElara = ({ children }) => {
             groupable={groupable}
             menu={menuConfig}
             style={{
-              width: "100%",
               background: colorBgContainer,
               borderRadius: borderRadius,
+              marginTop: 40,
             }}
           />
         </Drawer>
       )}
-      <Layout
-        style={{
-          height: "100vh",
-          background: colorBgContainer,
-          marginLeft: collapsed ? 0 : screens.md && 250,
-          transition: "all 0.2s ease-in-out",
-          zIndex: 10,
-        }}
-      >
+      <Layout>
         <Header
           style={{
             position: "fixed",
@@ -428,37 +456,18 @@ const PageElara = ({ children }) => {
             right: 0,
             left: 0,
             zIndex: 100,
-            padding: "0px 14px",
+            padding: screens.md ? "0px 14px" : "0px 24px",
+            transition: "all 0.2s ease-in-out",
             height: 58,
             background: screens.xxl ? "transparent" : colorBgContainer,
-            transition: "all 0.2s ease-in-out",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginLeft: collapsed ? 0 : screens.md && 250,
           }}
         >
-          {screens.md ? (
-            <Tooltip title="History">
-              <Button
-                type="text"
-                icon={<TextSearch size="1em" />}
-                onClick={() => setCollapsed(!collapsed)}
-                style={iconStyle}
-              />
-            </Tooltip>
-          ) : (
-            <Button
-              type="text"
-              icon={<TextSearch size="1em" />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={iconStyle}
-            />
-          )}
-
+          <img src={logo} alt="operaide logo" style={{ height: 28 }} />
           <Flex align="center" gap="middle">
             <Dropdown
-              trigger="click"
               menu={{
                 items: dropdownItems,
                 onClick,
@@ -480,20 +489,32 @@ const PageElara = ({ children }) => {
                 style={iconStyle}
               />
             </Dropdown>
-            <Tooltip title="Invite others">
+            <Tooltip title={screens.md && "Chat history"}>
               <Button
                 type="text"
+                icon={<TextSearch size="1em" />}
+                onClick={() => setShowHistory(!showHistory)}
                 style={iconStyle}
-                icon={<UserPlus size="1em" />}
               />
             </Tooltip>
-            <Tooltip title="Share with others">
-              <Button
-                type="text"
-                style={iconStyle}
-                icon={<Share2 size="1em" />}
-              />
-            </Tooltip>
+            {screens.md && (
+              <>
+                <Tooltip title="Invite others">
+                  <Button
+                    type="text"
+                    style={iconStyle}
+                    icon={<UserPlus size="1em" />}
+                  />
+                </Tooltip>
+                <Tooltip title="Share with others">
+                  <Button
+                    type="text"
+                    style={iconStyle}
+                    icon={<Share2 size="1em" />}
+                  />
+                </Tooltip>
+              </>
+            )}
 
             <UserMenu3 showOrgSelect routeAfterChange="/elara" />
           </Flex>
@@ -502,7 +523,7 @@ const PageElara = ({ children }) => {
           style={{
             padding: 0,
             background: colorBgContainer,
-            height: "calc(100vh - 58px)",
+            height: "calc(100dvh - 58px)",
             display: "flex",
             flexDirection: "column",
           }}
@@ -538,76 +559,66 @@ const PageElara = ({ children }) => {
           </div>
 
           {/* Sender stays pinned at bottom */}
-          <div
+          <Flex
+            vertical
+            gap="small"
+            align="center"
             style={{
-              padding: "0 24px 24px",
+              paddingBottom: paddingXS,
+              background: colorBgContainer,
+              paddingLeft: 24,
+              paddingRight: 24,
             }}
           >
-            <Flex justify="center">
-              <Sender
-                autoSize={{ minRows: 2, maxRows: 6 }}
-                style={{
-                  maxWidth: 766,
-                  width: "100%",
-                  marginTop: "-12px",
-                  background: colorBgContainer,
-                }}
-                styles={{ input: { fontSize: !screens.md && fontSizeLG } }}
-                placeholder="Ask anything"
-                onSubmit={() => {
-                  setCount((i) => i + 1);
-                }}
-                actions={false}
-                footer={({ components }) => {
-                  const { SendButton, LoadingButton, SpeechButton } =
-                    components;
-                  return (
-                    <Flex justify="space-between" align="center">
-                      <Flex gap="small" align="center">
-                        {screens.md ? (
-                          <img
-                            src={logo}
-                            alt="operaide logo"
-                            style={{ height: 22 }}
-                          />
-                        ) : (
-                          <Text style={{ color: colorTextQuaternary }}>
-                            {currentChat}
-                          </Text>
-                        )}
-                      </Flex>
-                      <Flex align="center">
-                        {screens.md && (
-                          <>
-                            <Text style={{ color: colorTextQuaternary }}>
-                              {currentChat}
-                            </Text>
-                            <Divider type="vertical" />
-                          </>
-                        )}
-
-                        <Button
-                          style={iconStyle}
-                          type="text"
-                          icon={<Paperclip size="1em" />}
-                        />
-                        <Divider type="vertical" />
-                        <SpeechButton style={iconStyle} />
-                        <Divider type="vertical" />
-                        <SendButton
-                          type="primary"
-                          disabled={false}
-                          icon={<ArrowUp size="1em" />}
-                          size={!screens.md && "large"}
-                          style={{ fontSize: !screens.md ? 18 : fontSizeLG }}
-                        />
-                      </Flex>
+            <Sender
+              autoSize={{ minRows: 2, maxRows: 6 }}
+              style={{
+                maxWidth: 766,
+                width: "100%",
+                marginTop: "-12px",
+                background: colorBgContainer,
+              }}
+              styles={{ input: { fontSize: !screens.md && fontSizeLG } }}
+              placeholder="Ask anything"
+              onSubmit={() => {
+                setCount((i) => i + 1);
+              }}
+              actions={false}
+              footer={({ components }) => {
+                const { SendButton, LoadingButton, SpeechButton } = components;
+                return (
+                  <Flex justify="space-between" align="center">
+                    <Flex gap="small" align="center">
+                      <Text style={{ color: colorTextQuaternary }}>
+                        {currentChat}
+                      </Text>
                     </Flex>
-                  );
-                }}
-              />
-            </Flex>
-          </div>
+                    <Flex align="center">
+                      <Button
+                        style={iconStyle}
+                        type="text"
+                        icon={<Paperclip size="1em" />}
+                      />
+                      <Divider type="vertical" />
+                      <SpeechButton style={iconStyle} />
+                      <Divider type="vertical" />
+                      <SendButton
+                        type="primary"
+                        disabled={false}
+                        icon={<ArrowUp size="1em" />}
+                        size={!screens.md && "large"}
+                        style={{ fontSize: !screens.md ? 18 : fontSizeLG }}
+                      />
+                    </Flex>
+                  </Flex>
+                );
+              }}
+            />
+
+            <Text type="secondary" style={{ fontSize: fontSizeSM }}>
+              Powered by {version}
+            </Text>
+          </Flex>
         </Content>
       </Layout>{" "}
     </Layout>

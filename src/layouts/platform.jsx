@@ -316,7 +316,7 @@ const PlatformLayout = ({ children }) => {
               style={{ height: "28px" }}
             />
           ) : (
-            <img src={logo} alt="operaide logo" style={{ height: "28px" }} />
+            <img src={logo} alt="operaide logo" style={{ height: 28 }} />
           )}
         </div>
 
