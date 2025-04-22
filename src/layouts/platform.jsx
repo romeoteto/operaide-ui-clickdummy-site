@@ -17,6 +17,8 @@ import {
   Info,
   Store,
   Rocket,
+  BotMessageSquare,
+  Inbox,
 } from "lucide-react";
 import {
   Button,
@@ -26,7 +28,8 @@ import {
   theme,
   Tooltip,
   Divider,
-  Typography,
+  Badge,
+  Avatar,
 } from "antd";
 import { useLocation } from "wouter";
 
@@ -34,7 +37,6 @@ import Breadcrumbs from "../components/breadcrumbs2";
 import UserMenu3 from "../components/userMenu3";
 
 const { Header, Sider, Content } = Layout;
-const { Text } = Typography;
 
 const PlatformLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -78,6 +80,7 @@ const PlatformLayout = ({ children }) => {
     "/settings",
     "/system-admin",
     "/store",
+    "/elara",
   ];
 
   const userIsSuperAdmin = useSelector(
@@ -110,6 +113,9 @@ const PlatformLayout = ({ children }) => {
 
   const canSeeAppStore =
     userIsSuperAdmin || currentPermissions.org.appStore.length > 0;
+
+  const canSeeElara =
+    userIsSuperAdmin || currentPermissions.org.elara.length > 0;
 
   const canSeeApps =
     userIsSuperAdmin || currentPermissions.org.apps.includes("canViewApps");
@@ -291,6 +297,7 @@ const PlatformLayout = ({ children }) => {
           top: 0,
           bottom: 0,
           borderRight: `1px solid ${colorSplit}`,
+          transition: "all 0.2s ease-in-out",
         }}
       >
         <div
@@ -392,6 +399,7 @@ const PlatformLayout = ({ children }) => {
           marginLeft: collapsed ? 50 : 250,
           display: "flex",
           flexDirection: "column",
+          transition: "all 0.2s ease-in-out",
         }}
       >
         <Header
@@ -407,9 +415,10 @@ const PlatformLayout = ({ children }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            transition: "all 0.2s ease-in-out",
           }}
         >
-          <Flex align="center">
+          <Flex align="center" gap="small">
             <Button
               type="text"
               icon={<PanelLeft size={"1em"} />}
@@ -417,12 +426,25 @@ const PlatformLayout = ({ children }) => {
               style={{ fontSize: "16px" }}
             />
 
-            <div style={{ marginLeft: marginXS }}>
-              <Breadcrumbs />
-            </div>
+            <Breadcrumbs />
           </Flex>
-          <Flex align="center">
-            <UserMenu3 showOrgSelect />
+          <Flex align="center" gap="middle">
+            <Button
+              color="primary"
+              variant="solid"
+              type="link"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="/elara"
+              icon={<BotMessageSquare size="1em" />}
+            >
+              Ask Elara
+            </Button>
+            <Badge dot>
+              <Avatar icon={<Inbox size="1em" />} />
+            </Badge>
+
+            <UserMenu3 showOrgSelect routeAfterChange="/" />
           </Flex>
         </Header>
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Badge, Descriptions } from "antd";
 
 const ReaktorInfo = ({ blueprint, app }) => {
+  const isDeployed = blueprint.deployments.length > 0;
   const items = [
     {
       key: "type",
@@ -13,35 +14,31 @@ const ReaktorInfo = ({ blueprint, app }) => {
       label: "ID",
       children: blueprint.id,
     },
-    {
-      key: "version",
-      label: "Version",
-      children: blueprint.version,
-    },
 
     {
       key: "status",
       label: "Status",
-      children: <Badge status="processing" text="Deployed" />,
-      span: 2,
+      children: (
+        <Badge
+          status={isDeployed ? "processing" : "default"}
+          text={isDeployed ? "Deployed" : "Not Deployed"}
+        />
+      ),
     },
     {
       key: "deployments",
       label: "Number of Deployments",
       children: blueprint.deployments.length,
-      span: 1,
     },
     {
       key: "parentAppName",
       label: "Parent App",
       children: app.name,
-      span: 2,
     },
     {
       key: "parentAppID",
       label: "Parent App ID",
       children: app.id,
-      span: 1,
     },
     {
       key: "parentAppDescription",
@@ -50,6 +47,6 @@ const ReaktorInfo = ({ blueprint, app }) => {
       span: 3,
     },
   ];
-  return <Descriptions size="middle" bordered items={items} column={3} />;
+  return <Descriptions size="middle" bordered items={items} column={2} />;
 };
 export default ReaktorInfo;

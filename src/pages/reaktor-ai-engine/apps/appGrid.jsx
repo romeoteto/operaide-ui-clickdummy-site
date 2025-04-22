@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Avatar, Card, Col, Row, Typography, theme } from "antd";
+import { Avatar, Card, Col, Row, theme } from "antd";
 import { Box, Atom, Download, Monitor } from "lucide-react";
 import { Link } from "wouter";
 import { apps, frontendMap } from "../../../database/apps";

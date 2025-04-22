@@ -195,7 +195,6 @@ const ReaktorTable = ({ app }) => {
         </Tooltip>
       ),
     },
-    { title: "Version", dataIndex: "version", key: "version" },
     {
       title: "Status",
       key: "state",

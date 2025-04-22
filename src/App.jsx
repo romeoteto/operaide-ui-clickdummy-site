@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ConfigProvider, theme as antTheme } from "antd";
+import { theme as antTheme } from "antd";
 import { Route, Switch, useLocation } from "wouter";
+
+import { XProvider } from "@ant-design/x";
 
 import PlatformLayout from "./layouts/platform";
 import PageHeader from "./components/pageHeader";
@@ -17,7 +19,7 @@ import EditUser from "./pages/system-admin/edit-user";
 import PageReaktorsIndex from "./pages/reaktor-ai-engine/reaktors";
 import ReaktorDetails from "./pages/reaktor-ai-engine/reaktorDetails";
 import PageDeploymentsIndex from "./pages/reaktor-ai-engine/deployments";
-import AppFrontends from "./pages/reaktor-ai-engine/apps/appFrontends";
+import AppRenderer from "./pages/apps/appRenderer";
 
 import PageAppStore from "./pages/appStore";
 
@@ -26,10 +28,10 @@ import { currentGlobalTheme } from "./database/database";
 // ✅ Import Redux action
 import { setResolvedAppearance } from "./state/appSettingsSlice"; // adjust path if needed
 import SystemAdminLayout from "./layouts/systemAdmin";
-import AppFrontendsExt from "./pages/reaktor-ai-engine/apps/appFrontends/indexExt";
-import AppExtLayout from "./layouts/appExt";
+
 import AppsOnlyLayout from "./layouts/appsOnly";
 import AppsIndex from "./pages/apps";
+import PageElara from "./pages/elara";
 
 // ✅ Custom hook to resolve appearance based on system settings
 function useResolvedAppearance(appearanceSetting, onResolve) {
@@ -91,17 +93,12 @@ export default function App() {
 
   useEffect(() => {
     const isAppsRoute = location.startsWith("/apps");
-    const isAppExtRoute = location.startsWith("/app/ext");
     const isLoginRoute = location === "/login";
 
     if (canOnlySeeApps) {
-      const isAllowed = isAppsRoute || isAppExtRoute || isLoginRoute;
+      const isAllowed = isAppsRoute || isLoginRoute;
       if (!isAllowed) {
         navigate("/apps");
-      }
-    } else {
-      if (isAppsRoute) {
-        navigate("/");
       }
     }
   }, [canOnlySeeApps, location, navigate]);
@@ -148,16 +145,8 @@ export default function App() {
 
   return userIsLoggedIn ? (
     <>
-      {location.startsWith("/app/ext") ? (
-        <ConfigProvider theme={orgTheme}>
-          <AppExtLayout>
-            <Switch>
-              <Route path={`/app/ext/:app-id`} component={AppFrontendsExt} />
-            </Switch>
-          </AppExtLayout>
-        </ConfigProvider>
-      ) : location.startsWith("/system-admin") ? (
-        <ConfigProvider theme={systemTheme}>
+      {location.startsWith("/system-admin") ? (
+        <XProvider theme={systemTheme}>
           <SystemAdminLayout>
             <Switch>
               <Route
@@ -171,26 +160,33 @@ export default function App() {
               />
             </Switch>
           </SystemAdminLayout>
-        </ConfigProvider>
+        </XProvider>
       ) : location.startsWith("/apps") ? (
-        <ConfigProvider theme={orgTheme}>
+        <XProvider theme={orgTheme}>
           <AppsOnlyLayout>
             <Switch>
-              {/* Replace below with actual routes under /apps */}
               <Route path="/apps/" component={AppsIndex} />
+              <Route path={`/apps/:app-id`} component={AppRenderer} />
             </Switch>
           </AppsOnlyLayout>
-        </ConfigProvider>
+        </XProvider>
+      ) : location.startsWith("/elara") ? (
+        <XProvider theme={orgTheme}>
+          <Switch>
+            <Route path="/elara" component={PageElara} />
+          </Switch>
+        </XProvider>
       ) : (
-        <ConfigProvider theme={orgTheme}>
+        <XProvider theme={orgTheme}>
           <PlatformLayout>
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/store" component={PageAppStore} />
+
               <Route path="/reaktor-ai-engine/apps" component={PageAppsIndex} />
               <Route
                 path="/reaktor-ai-engine/apps/:app-id"
-                component={AppFrontends}
+                component={() => <AppRenderer showPopoutButton />}
               />
               <Route
                 path="/reaktor-ai-engine/reaktors"
@@ -220,12 +216,12 @@ export default function App() {
               <Route path="/settings" component={PageSettings} />
             </Switch>
           </PlatformLayout>
-        </ConfigProvider>
+        </XProvider>
       )}
     </>
   ) : (
-    <ConfigProvider theme={systemTheme}>
+    <XProvider theme={systemTheme}>
       <PageLogin />
-    </ConfigProvider>
+    </XProvider>
   );
 }

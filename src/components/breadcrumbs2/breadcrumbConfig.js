@@ -13,6 +13,22 @@ export const breadcrumbConfig = [
       },
     ],
   },
+
+  // EXPERIMENTAL
+  {
+    patterns: ["/elara"],
+    org: { show: true, clickable: false },
+    breadcrumbs: [
+      {
+        label: "Elara",
+      },
+      {
+        label: "TechDB Chat",
+      },
+    ],
+  },
+  // EXPERIMENTAL
+
   {
     patterns: ["/reaktor-ai-engine/apps/:appId"],
     org: { show: true, clickable: false },

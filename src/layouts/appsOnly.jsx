@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { Layout, theme, Typography } from "antd";
 
@@ -12,6 +13,12 @@ const AppsOnlyLayout = ({ children }) => {
     token: { colorBgContainer, logo, paddingXXL },
   } = theme.useToken();
 
+  const currentPermissions = useSelector(
+    (state) => state.user.currentPermissions
+  );
+  const canOnlySeeApps =
+    currentPermissions.org.apps.includes("canOnlyViewApps");
+
   return (
     <Layout>
       <Header
@@ -21,7 +28,7 @@ const AppsOnlyLayout = ({ children }) => {
           width: "100%",
           right: 0,
           zIndex: 100,
-          padding: "0px 48px 0px 48px",
+          padding: "0px 24px",
           height: 58,
           background: colorBgContainer,
           display: "flex",
@@ -30,15 +37,18 @@ const AppsOnlyLayout = ({ children }) => {
         }}
       >
         <img src={logo} alt="operaide logo" style={{ height: "28px" }} />
-
-        <UserMenu3 showOrgSelect />
+        <UserMenu3
+          showVisitBackend={!canOnlySeeApps}
+          routeAfterChange="/apps"
+        />
+        {/**need a logic here that changing an org redirects to "/apps" */}
       </Header>
 
       <Content
         id="area"
         style={{
           marginTop: 58,
-          padding: "24px 48px",
+          padding: 24,
           background: colorBgContainer,
           minHeight: "calc(100vh - 150px)", //150px = header height + footer height
         }}

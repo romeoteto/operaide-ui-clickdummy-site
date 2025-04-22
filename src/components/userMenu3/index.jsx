@@ -26,6 +26,7 @@ import {
   Languages,
   SunMoon,
   Boxes,
+  MonitorCog,
 } from "lucide-react";
 import Fuse from "fuse.js";
 
@@ -34,7 +35,7 @@ import { setCurrentOrganization, setLogout } from "../../state/userSlice";
 
 const { Text, Title } = Typography;
 
-export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
+export default function UserMenu3({ showVisitBackend, routeAfterChange }) {
   const {
     token: {
       fontSize,
@@ -72,7 +73,7 @@ export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
   const Content = () => {
     const onChange = (value) => {
       dispatch(setCurrentOrganization(value));
-      navigate("/");
+      navigate(routeAfterChange);
     };
 
     const onSearch = (value) => {
@@ -109,38 +110,33 @@ export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
           </Flex>
           {isSuperAdmin && <Tag color="magenta">Super Admin</Tag>}
         </Flex>{" "}
-        {showOrgSelect && (
-          <>
-            <div style={{ paddingLeft: paddingXXS, paddingRight: paddingXXS }}>
-              <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-            </div>
-
-            <Form
-              layout="vertical"
-              style={{
-                paddingLeft: paddingSM,
-                paddingRight: paddingSM,
-                paddingBottom: paddingXS,
-                paddingTop: paddingXS,
-              }}
-            >
-              <Form.Item label="My Organizations" style={{ marginBottom: 0 }}>
-                <Select
-                  showSearch
-                  variant="filled"
-                  placeholder="Select an organization"
-                  optionFilterProp="label"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  options={filteredOrganizations}
-                  suffixIcon={<ChevronDown size="1.25em" />}
-                  size="middle"
-                  value={currentOrganization}
-                />
-              </Form.Item>
-            </Form>
-          </>
-        )}
+        <div style={{ paddingLeft: paddingXXS, paddingRight: paddingXXS }}>
+          <Divider style={{ marginTop: 0, marginBottom: 0 }} />
+        </div>
+        <Form
+          layout="vertical"
+          style={{
+            paddingLeft: paddingSM,
+            paddingRight: paddingSM,
+            paddingBottom: paddingXS,
+            paddingTop: paddingXS,
+          }}
+        >
+          <Form.Item label="My Organizations" style={{ marginBottom: 0 }}>
+            <Select
+              showSearch
+              variant="filled"
+              placeholder="Select an organization"
+              optionFilterProp="label"
+              onChange={onChange}
+              onSearch={onSearch}
+              options={filteredOrganizations}
+              suffixIcon={<ChevronDown size="1.25em" />}
+              size="middle"
+              value={currentOrganization}
+            />
+          </Form.Item>
+        </Form>
       </Flex>
     );
   };
@@ -158,9 +154,21 @@ export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
   ];
 
   const appearanceItems = [
-    { key: "dark", label: "Dark", icon: <Moon size="1em" /> },
-    { key: "light", label: "Light", icon: <Sun size="1em" /> },
-    { key: "system", label: "System", icon: <Monitor size="1em" /> },
+    {
+      key: "dark",
+      label: "Dark",
+      icon: <Moon size="1em" style={{ fontSize }} />,
+    },
+    {
+      key: "light",
+      label: "Light",
+      icon: <Sun size="1em" style={{ fontSize }} />,
+    },
+    {
+      key: "system",
+      label: "System",
+      icon: <Monitor size="1em" style={{ fontSize }} />,
+    },
   ];
 
   const dropdownItems = [
@@ -207,9 +215,9 @@ export default function UserMenu3({ showOrgSelect, showVisitBackend }) {
       ? [
           {
             key: "extra",
-            label: "Show Apps",
-            icon: <Boxes size="1em" />,
-            onClick: () => navigate("/reaktor-ai-engine/apps"),
+            label: "Go to Backend",
+            icon: <MonitorCog size="1em" />,
+            onClick: () => navigate("/"),
           },
           {
             type: "divider",

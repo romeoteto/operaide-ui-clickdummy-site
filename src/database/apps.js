@@ -1,4 +1,4 @@
-import AppFrontendOrderManager from "../pages/reaktor-ai-engine/apps/appFrontends/order-manager";
+import AppFrontendOrderManager from "../pages/apps/order-manager";
 
 export const frontendMap = { "order-manager": AppFrontendOrderManager };
 
@@ -16,20 +16,18 @@ export const apps = [
     blueprints: [
       {
         id: "document-chat",
-        version: "1.1",
         label: "Chat with Vector Store",
+        enablesElara: true,
         description:
           "A chatbot that is able to chat with documents in a vector store.",
         deployments: [
           {
             id: "Xfk3X34k96x9tSfdc",
-            version: "1.1",
             label: "TechDB Chat",
             description: "Answers based on documents from TechDB.",
           },
           {
             id: "xqEmaFQsPEWtq8TQX",
-            version: "1.1",
             label: "Product Chat",
             description: "Answers based on product folders.",
           },
@@ -37,14 +35,12 @@ export const apps = [
       },
       {
         id: "vecorization-reaktor",
-        version: "1.1",
         label: "Document Vectorization Reaktor",
         description:
           "A Reaktor that takes documents and builds a knowledge base for the chat.",
         deployments: [
           {
             id: "PdF3X89096x7sStdc",
-            version: "1.1",
             label: "PDF Vectorizer",
             description: "Vectorizes PDF files.",
           },
@@ -63,7 +59,6 @@ export const apps = [
     blueprints: [
       {
         id: "analyze-orders",
-        version: "2.1.3",
         label: "Analyzing Orders Agent",
         description:
           "An agent that takes orders from e-mails, extracts data and puts them to an ERP system.",
@@ -71,11 +66,17 @@ export const apps = [
       },
       {
         id: "status-chat",
-        version: "1.2",
         label: "Order Status Chat",
+        enablesElara: true,
         description:
           "This agent connects to ERP systems and can answer customer questions about order status.",
-        deployments: [],
+        deployments: [
+          {
+            id: "xqEmaFQs392kh4TQX",
+            label: "Chat with Order Status",
+            description: "Responses with the current status of an order.",
+          },
+        ],
       },
     ],
   },
@@ -92,15 +93,20 @@ export const apps = [
     blueprints: [
       {
         id: "icp-searcher",
-        version: "3.0",
         label: "ICP Searcher",
+        enablesElara: true,
         description:
           "Researches companies and contacts based on your ICP definition.",
-        deployments: [],
+        deployments: [
+          {
+            id: "xqEmaFw93EWtq8TQX",
+            label: "ICP Searcher",
+            description: "Returns a list of companies that fit your ICP.",
+          },
+        ],
       },
       {
         id: "lead-nurturer",
-        version: "2.7",
         label: "Lead Nurturer",
         description:
           "Researches all relevant data and information about your prospects and enters them into your CRM.",
@@ -108,7 +114,6 @@ export const apps = [
       },
       {
         id: "sales-contact-listener",
-        version: "1.0",
         label: "Sales Contact Listener",
         description:
           "Listens to updates of your contacts and informs you when to reach out.",
