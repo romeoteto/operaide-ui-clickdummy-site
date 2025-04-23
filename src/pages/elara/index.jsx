@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint";
 
+import { systemPrompts } from "./systemPrompts";
+
 import {
   Button,
   Layout,
@@ -12,11 +14,19 @@ import {
   Tooltip,
   Input,
   Divider,
+  Avatar,
   Modal,
   Drawer,
   theme,
 } from "antd";
-import { Conversations, Sender, Bubble } from "@ant-design/x";
+import {
+  Conversations,
+  Sender,
+  Bubble,
+  Welcome,
+  useXAgent,
+  useXChat,
+} from "@ant-design/x";
 
 import {
   X,
@@ -32,21 +42,101 @@ import {
   Share2,
   SquarePen,
   ArrowUp,
+  BotMessageSquare,
 } from "lucide-react";
 
 import { apps } from "../../database/apps";
 
 import UserMenu3 from "../../components/userMenu3";
+import MarkdownRenderer from "./markdownRenderer";
 
 import iconMistral from "./assets/icon_mistral.png";
 import iconOpenAI from "./assets/icon_open-ai.png";
 
+// EXPERIMENTAL
+import OpenAI from "openai";
+// EXPERIMENTAL
+
 const { Header, Content } = Layout;
 const { Text } = Typography;
 
-const PageElara = ({ children }) => {
+// EXPERIMENTAL
+const client = new OpenAI({
+  apiKey:
+    "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",
+  dangerouslyAllowBrowser: true,
+});
+// EXPERIMENTAL
+
+const PageElara = () => {
   const [showHistory, setShowHistory] = useState(false);
-  const [currentChat, setCurrentChat] = useState("TechDB Chat");
+  const [currentChat, setCurrentChat] = useState({
+    key: "Xfk3X34k96x9tSfdc",
+    label: "TechDB Chat",
+  });
+  const systemPromptRef = useRef("You are a helpful assistant.");
+  const listRef = useRef(null);
+
+  // EXPERIMENTAL
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onSuccess, onUpdate, onError } = callbacks;
+
+      let content = "";
+
+      const formattedMessages = [
+        {
+          role: "system",
+          content: systemPromptRef.current, // <== Customize this system prompt
+        },
+        ...messages.map((m, i) => ({
+          role: i % 2 === 0 ? "user" : "assistant",
+          content: m,
+        })),
+      ];
+
+      try {
+        const stream = await client.chat.completions.create({
+          model: "gpt-4o",
+          messages: formattedMessages,
+          stream: true,
+        });
+
+        for await (const chunk of stream) {
+          content += chunk.choices[0]?.delta?.content || "";
+          onUpdate(content);
+        }
+
+        onSuccess(content);
+      } catch (error) {
+        // onError(error); // Uncomment if you want to handle error
+        console.error(error);
+      }
+    },
+  });
+
+  const { onRequest, messages, setMessages } = useXChat({ agent });
+
+  const itemsOpenAI = messages.map(({ message, id }, index) => ({
+    key: id,
+    content: message,
+    isAI: !!(index % 2),
+  }));
+
+  const onNewConversation = ({ key }) => {
+    const obj = findItemByKey(dropdownItems, key);
+    setCurrentChat({ key: obj.key, label: obj.label });
+    const prompt = systemPrompts.find((p) => p.deploymentId === key)?.prompt;
+    systemPromptRef.current = prompt || "You are a helpful assistant.";
+    setMessages([]);
+  };
+
+  // EXPERIMENTAL
+
+  const currentOrganization = useSelector(
+    (state) => state.user.currentOrganization
+  );
 
   const {
     token: {
@@ -59,6 +149,7 @@ const PageElara = ({ children }) => {
       paddingSM,
       colorText,
       paddingXS,
+      colorPrimary,
       fontSizeLG,
       fontSizeSM,
       padding,
@@ -75,7 +166,7 @@ const PageElara = ({ children }) => {
     <span style={{ fontSize: !screens.md && fontSizeLG }}>{children}</span>
   );
 
-  const conversationItems = Array.from({ length: 40 }).map((_, index) => {
+  const conversationItems = Array.from({ length: 10 }).map((_, index) => {
     const timestamp = index <= 3 ? 1732204800000 : 1732204800000 - 60 * 60 * 24;
     return {
       key: `item${index + 1}`,
@@ -259,9 +350,8 @@ const PageElara = ({ children }) => {
   const rolesAsObject = {
     ai: {
       placement: "start",
-      typing: { step: 5, interval: 20 },
       /* avatar: { icon: <Bot size="1em" />, style: { background: colorPrimary } }, */
-      header: currentChat,
+      header: currentChat.label,
       styles: {
         content: {
           background: "transparent",
@@ -286,9 +376,6 @@ const PageElara = ({ children }) => {
     },
   };
 
-  const listRef = useRef(null);
-  const [count, setCount] = useState(3);
-
   const findItemByKey = (items, key) => {
     for (const item of items) {
       if (item.key === key) {
@@ -304,14 +391,79 @@ const PageElara = ({ children }) => {
     return null;
   };
 
-  const onClick = ({ key }) => {
-    const obj = findItemByKey(dropdownItems, key);
-    setCurrentChat(obj.label);
-  };
-
   const iconStyle = {
     fontSize: 18,
     color: colorText,
+  };
+
+  const ChatSender = () => {
+    return (
+      <Sender
+        autoSize={{ minRows: 2, maxRows: 6 }}
+        style={{
+          maxWidth: 766,
+          width: "100%",
+          background: colorBgContainer,
+        }}
+        styles={{ input: { fontSize: !screens.md && fontSizeLG } }}
+        placeholder="Ask anything"
+        onSubmit={onRequest}
+        actions={false}
+        footer={({ components }) => {
+          const { SendButton, SpeechButton } = components;
+          return (
+            <Flex justify="space-between" align="center">
+              <Flex gap="small" align="center">
+                <Text>{currentChat.label}</Text>
+              </Flex>
+              <Flex align="center">
+                <Button
+                  style={iconStyle}
+                  type="text"
+                  icon={<Paperclip size="1em" />}
+                />
+                <Divider type="vertical" />
+                <SpeechButton style={iconStyle} />
+                <Divider type="vertical" />
+                <SendButton
+                  type="primary"
+                  disabled={false}
+                  icon={<ArrowUp size="1em" />}
+                  size={!screens.md && "large"}
+                  style={{ fontSize: !screens.md ? 18 : fontSizeLG }}
+                />
+              </Flex>
+            </Flex>
+          );
+        }}
+      />
+    );
+  };
+
+  const StartScreen = () => {
+    return (
+      <Flex
+        vertical
+        justify="center"
+        align="center"
+        style={{ height: "100%", paddingLeft: 24, paddingRight: 24 }}
+        gap="large"
+      >
+        <Welcome
+          variant="borderless"
+          icon={
+            <Avatar
+              size={48}
+              style={{ backgroundColor: colorPrimary }}
+              icon={<BotMessageSquare size="1em" />}
+            />
+          }
+          title="Hello, I'm Elara"
+          description={`I am your personal assistant at ${currentOrganization.label}. How can I help you today?`}
+        />
+        <ChatSender />
+      </Flex>
+    );
   };
 
   return (
@@ -379,16 +531,20 @@ const PageElara = ({ children }) => {
               <Bubble.List
                 ref={listRef}
                 style={{
-                  overflowY: "auto",
                   height: 500,
+                  overflow: "auto",
                 }}
                 roles={rolesAsObject}
-                items={Array.from({ length: count }).map((_, i) => {
-                  const isAI = !!(i % 2);
-                  const content = isAI
-                    ? "Mock AI content. ".repeat(20)
-                    : "Mock user content.";
-                  return { key: i, role: isAI ? "ai" : "user", content };
+                items={itemsOpenAI.map((item) => {
+                  return {
+                    key: item.key,
+                    role: item.isAI ? "ai" : "user",
+                    content: item.isAI ? (
+                      <MarkdownRenderer content={item.content} />
+                    ) : (
+                      item.content
+                    ),
+                  };
                 })}
               />
             </div>
@@ -470,7 +626,7 @@ const PageElara = ({ children }) => {
             <Dropdown
               menu={{
                 items: dropdownItems,
-                onClick,
+                onClick: onNewConversation,
                 expandIcon: (
                   <span>
                     <ChevronRight
@@ -497,7 +653,7 @@ const PageElara = ({ children }) => {
                 style={iconStyle}
               />
             </Tooltip>
-            {screens.md && (
+            {screens.md && itemsOpenAI.length > 0 && (
               <>
                 <Tooltip title="Invite others">
                   <Button
@@ -529,33 +685,42 @@ const PageElara = ({ children }) => {
           }}
         >
           {/* Scrollable bubble area */}
+
           <div style={{ flex: 1, overflowY: "auto" }}>
-            <Flex
-              justify="center"
-              style={{
-                padding: "0px 24px",
-                height: "100%",
-              }}
-            >
-              <Bubble.List
-                ref={listRef}
+            {itemsOpenAI.length > 0 ? (
+              <Flex
+                justify="center"
                 style={{
-                  flexGrow: 1,
-                  maxWidth: 766,
-                  paddingBottom: 36,
-                  marginTop: screens.xxl ? 0 : 58,
-                  transition: "all 0.2s ease-in-out",
+                  padding: "0px 24px",
+                  height: "100%",
                 }}
-                roles={rolesAsObject}
-                items={Array.from({ length: count }).map((_, i) => {
-                  const isAI = !!(i % 2);
-                  const content = isAI
-                    ? "Mock AI content. ".repeat(20)
-                    : "Mock user content.";
-                  return { key: i, role: isAI ? "ai" : "user", content };
-                })}
-              />
-            </Flex>
+              >
+                <Bubble.List
+                  ref={listRef}
+                  style={{
+                    flexGrow: 1,
+                    maxWidth: 766,
+                    paddingBottom: 36,
+                    marginTop: screens.xxl ? 0 : 58,
+                    transition: "all 0.2s ease-in-out",
+                  }}
+                  roles={rolesAsObject}
+                  items={itemsOpenAI.map((item) => {
+                    return {
+                      key: item.key,
+                      role: item.isAI ? "ai" : "user",
+                      content: item.isAI ? (
+                        <MarkdownRenderer content={item.content} />
+                      ) : (
+                        item.content
+                      ),
+                    };
+                  })}
+                />
+              </Flex>
+            ) : (
+              <StartScreen />
+            )}
           </div>
 
           {/* Sender stays pinned at bottom */}
@@ -570,57 +735,21 @@ const PageElara = ({ children }) => {
               paddingRight: 24,
             }}
           >
-            <Sender
-              autoSize={{ minRows: 2, maxRows: 6 }}
-              style={{
-                maxWidth: 766,
-                width: "100%",
-                marginTop: "-12px",
-                background: colorBgContainer,
-              }}
-              styles={{ input: { fontSize: !screens.md && fontSizeLG } }}
-              placeholder="Ask anything"
-              onSubmit={() => {
-                setCount((i) => i + 1);
-              }}
-              actions={false}
-              footer={({ components }) => {
-                const { SendButton, LoadingButton, SpeechButton } = components;
-                return (
-                  <Flex justify="space-between" align="center">
-                    <Flex gap="small" align="center">
-                      <Text style={{ color: colorTextQuaternary }}>
-                        {currentChat}
-                      </Text>
-                    </Flex>
-                    <Flex align="center">
-                      <Button
-                        style={iconStyle}
-                        type="text"
-                        icon={<Paperclip size="1em" />}
-                      />
-                      <Divider type="vertical" />
-                      <SpeechButton style={iconStyle} />
-                      <Divider type="vertical" />
-                      <SendButton
-                        type="primary"
-                        disabled={false}
-                        icon={<ArrowUp size="1em" />}
-                        size={!screens.md && "large"}
-                        style={{ fontSize: !screens.md ? 18 : fontSizeLG }}
-                      />
-                    </Flex>
-                  </Flex>
-                );
-              }}
-            />
+            {itemsOpenAI.length > 0 && (
+              <Flex
+                justify="center"
+                style={{ marginTop: "-12px", width: "100%" }}
+              >
+                <ChatSender />
+              </Flex>
+            )}
 
             <Text type="secondary" style={{ fontSize: fontSizeSM }}>
               Powered by {version}
             </Text>
           </Flex>
         </Content>
-      </Layout>{" "}
+      </Layout>
     </Layout>
   );
 };

@@ -65,16 +65,16 @@ export const apps = [
         deployments: [],
       },
       {
-        id: "status-chat",
-        label: "Order Status Chat",
+        id: "order-chat",
+        label: "Order Chat",
         enablesElara: true,
         description:
-          "This agent connects to ERP systems and can answer customer questions about order status.",
+          "This agent connects to ERP systems and can answer questions about orders.",
         deployments: [
           {
             id: "xqEmaFQs392kh4TQX",
-            label: "Chat with Order Status",
-            description: "Responses with the current status of an order.",
+            label: "Chat with Orders",
+            description: "Answers questions about orders in your ERP system.",
           },
         ],
       },

@@ -21,3 +21,27 @@ You don't need a password on the login screen, just type the email to load the r
 ### Some additional remarks
 
 Currently the roles simulate only the visibility of some menu entries in the sidebar and the possibility to select organizations in the user menu. There is no logic implemented on Reaktor visibility for example or any other defined logic related to roles, rights and permissions. The role concept should only showcase UI behavior and is NOT a meaningful definition of roles and permissions in the system.
+
+## ELARA
+
+The clickdummy features Elara - a chatbot UI that enables users to chat with "chat-ready" Reaktors.
+
+### Chat types
+
+Elara currently simulates two types of chat:
+
+1. If you choose "Chat with Orders" from the top bar menu you chat with the order database from the "Order Manager" app. This app contains of two Reaktors: one Reaktor ("Analyzing Orders Agent") that analyzes orders and puts them into an ERP and "Order Chat" that simulates chatting with these order data in the ERP.
+2. If you choose any other chat type you simply chat with a GPT-4o model from a standard OpenAI API.
+
+### Chat implementation
+
+The chat UI is entirely based on the following:
+
+- Ant Design X library for chat UI components
+- Simple OpenAI API integration with streaming
+- markdown-it dependency (and plugins) for markdown rendering
+- highlight.js dependency for code rendering
+
+### OpenAI API
+
+Watchout: currently the OpenAI key is hardcoded in the chat component. This is my private key so please handle it with care!
