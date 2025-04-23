@@ -1,11 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import MarkdownIt from "markdown-it";
 import { full as emoji } from "markdown-it-emoji";
 import hljs from "highlight.js";
 import { Typography, theme } from "antd";
-import "highlight.js/styles/github.css";
-import "highlight.js/styles/github-dark.css";
 
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint";
 
@@ -20,6 +18,27 @@ const MarkdownRenderer = ({ content }) => {
   );
   const isDarkMode = currentTheme === "dark";
 
+  useEffect(() => {
+    const existingLink = document.getElementById("hljs-theme");
+
+    if (existingLink) {
+      existingLink.remove();
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.id = "hljs-theme";
+    link.href = isDarkMode
+      ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+      : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+
+    document.head.appendChild(link);
+
+    return () => {
+      if (link) link.remove();
+    };
+  }, [isDarkMode]);
+
   const mdParser = useMemo(() => {
     const md = new MarkdownIt({
       html: true,
@@ -30,12 +49,10 @@ const MarkdownRenderer = ({ content }) => {
         const preStyle = `background-color: ${token.colorFillQuaternary}; padding: 0; border-radius: ${token.borderRadiusLG}px; border: ${token.lineWidth}px solid ${token.colorBorderSecondary};`;
         const headerStyle = `padding: ${token.paddingXS}px ${token.paddingSM}px; border-bottom: ${token.lineWidth}px solid ${token.colorBorderSecondary}; font-size: ${token.fontSizeSM}px; color: ${token.colorTextTertiary}`;
 
-        const themeClass = isDarkMode ? "hljs-dark" : "hljs-light";
-
         if (lang && hljs.getLanguage(lang)) {
           try {
             return (
-              `<pre style="${preStyle}"><div style="${headerStyle}">${languageLabel}</div><code class="hljs ${themeClass}">` +
+              `<pre style="${preStyle}"><div style="${headerStyle}">${languageLabel}</div><code class="hljs">` +
               hljs.highlight(str, { language: lang, ignoreIllegals: true })
                 .value +
               "</code></pre>"
@@ -44,7 +61,7 @@ const MarkdownRenderer = ({ content }) => {
         }
 
         return (
-          `<pre style="${preStyle}"><div style="${headerStyle}">${languageLabel}</div><code class="hljs ${themeClass}">` +
+          `<pre style="${preStyle}"><div style="${headerStyle}">${languageLabel}</div><code class="hljs">` +
           md.utils.escapeHtml(str) +
           "</code></pre>"
         );
