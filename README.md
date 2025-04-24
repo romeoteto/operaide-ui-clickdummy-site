@@ -24,7 +24,7 @@ Currently the roles simulate only the visibility of some menu entries in the sid
 
 ## ELARA
 
-The clickdummy features Elara - a chatbot UI that enables users to chat with "chat-ready" Reaktors.
+The clickdummy features Elara - our chatbot UI product that enables users to chat with "chat-ready" Reaktors.
 
 ### Chat types
 
