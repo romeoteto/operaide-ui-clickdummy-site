@@ -17,7 +17,6 @@ export const apps = [
       {
         id: "document-chat",
         label: "Chat with Vector Store",
-        enablesElara: true,
         description:
           "A chatbot that is able to chat with documents in a vector store.",
         deployments: [
@@ -78,6 +77,20 @@ export const apps = [
           },
         ],
       },
+      {
+        id: "customer-chat",
+        label: "Customer Order Chat",
+        enablesElara: true,
+        description:
+          "This agent connects to ERP systems and can answer customer questions about their orders.",
+        deployments: [
+          {
+            id: "dl5maFQ2jd93h4TQX",
+            label: "Customer Order Chat",
+            description: "Answers customer questions about their order.",
+          },
+        ],
+      },
     ],
   },
 
@@ -94,7 +107,6 @@ export const apps = [
       {
         id: "icp-searcher",
         label: "ICP Searcher",
-        enablesElara: true,
         description:
           "Researches companies and contacts based on your ICP definition.",
         deployments: [

@@ -48,6 +48,14 @@ const OrdersOverview = () => {
         );
         return `${total.toFixed(2)} €`;
       },
+      sorter: (a, b) => {
+        const getTotal = (record) =>
+          record.orderData.reduce(
+            (acc, item) => acc + parseFloat(item.itemTotalPrice),
+            0
+          );
+        return getTotal(a) - getTotal(b);
+      },
     },
     {
       title: "",

@@ -9,6 +9,7 @@ import {
   Dropdown,
   Divider,
   Space,
+  Tag,
   Button,
   theme,
 } from "antd";
@@ -23,7 +24,13 @@ const PageReaktorsIndex = () => {
   const appId = searchParams.get("appId");
 
   const {
-    token: { colorBgElevated, borderRadiusLG, boxShadowSecondary, fontSizeSM },
+    token: {
+      colorBgElevated,
+      borderRadiusLG,
+      boxShadowSecondary,
+      fontSizeSM,
+      colorPrimary,
+    },
   } = theme.useToken();
 
   const reaktors = apps.flatMap((app) =>
@@ -91,6 +98,14 @@ const PageReaktorsIndex = () => {
       title: "Parent App",
       dataIndex: "appName",
       key: "appName",
+    },
+    {
+      title: "Enables Elara",
+      dataIndex: "enablesElara",
+      key: "enablesElara",
+      render: (bool) => {
+        return bool && <Tag>TRUE</Tag>;
+      },
     },
     {
       title: "Status",

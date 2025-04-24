@@ -4,7 +4,7 @@
     "createdAt": "2025-02-24T09:45:28.456501",
     "customerData": {
       "companyName": "Tolle Firma GmbH",
-      "companyStreet": "Hauptstra\u00dfe",
+      "companyStreet": "Hauptstraße",
       "companyStreetNumber": "109",
       "companyZip": "47443",
       "companyCity": "Berlin"
@@ -13,11 +13,11 @@
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Messf\u00fchler ADP34ex",
+        "itemDescription": "Messfühler ADP34ex",
         "itemQuantity": 4,
         "itemNumber": "85439853",
         "itemSinglePrice": "192.51",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "770.04",
         "itemTax": "146.31",
         "itemTotalPriceIncludingTax": "916.35"
@@ -29,22 +29,24 @@
         "itemQuantity": 4,
         "itemNumber": "44332211",
         "itemSinglePrice": "38.50",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "154.00",
         "itemTax": "29.26",
         "itemTotalPriceIncludingTax": "183.26"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-24T09:45:28.456501",
+    "orderNumber": "YRR-00001"
   },
   {
     "id": 2,
     "createdAt": "2025-02-24T08:43:30.802870",
     "customerData": {
       "companyName": "KreativWerk GmbH",
-      "companyStreet": "Hauptstra\u00dfe",
+      "companyStreet": "Hauptstraße",
       "companyStreetNumber": "66",
       "companyZip": "87888",
-      "companyCity": "M\u00fcnchen"
+      "companyCity": "München"
     },
     "orderData": [
       {
@@ -54,12 +56,14 @@
         "itemQuantity": 8,
         "itemNumber": "22334455",
         "itemSinglePrice": "134.40",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1075.20",
         "itemTax": "204.29",
         "itemTotalPriceIncludingTax": "1279.49"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-20T08:43:30.802870",
+    "orderNumber": "TNU-00002"
   },
   {
     "id": 3,
@@ -79,19 +83,21 @@
         "itemQuantity": 2,
         "itemNumber": "55667788",
         "itemSinglePrice": "289.99",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "579.98",
         "itemTax": "110.20",
         "itemTotalPriceIncludingTax": "690.18"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-15T14:21:20.998595",
+    "orderNumber": "DDI-00003"
   },
   {
     "id": 4,
     "createdAt": "2025-02-13T14:29:31.263364",
     "customerData": {
       "companyName": "Tolle Firma GmbH",
-      "companyStreet": "Ringstra\u00dfe",
+      "companyStreet": "Ringstraße",
       "companyStreetNumber": "98",
       "companyZip": "22855",
       "companyCity": "Frankfurt"
@@ -104,22 +110,24 @@
         "itemQuantity": 2,
         "itemNumber": "22334455",
         "itemSinglePrice": "134.40",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "268.80",
         "itemTax": "51.07",
         "itemTotalPriceIncludingTax": "319.87"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-10T14:29:31.263364",
+    "orderNumber": "DNW-00004"
   },
   {
     "id": 5,
     "createdAt": "2025-02-05T08:04:34.230336",
     "customerData": {
       "companyName": "Beispiel AG",
-      "companyStreet": "Seestra\u00dfe",
+      "companyStreet": "Seestraße",
       "companyStreetNumber": "100",
       "companyZip": "93479",
-      "companyCity": "M\u00fcnchen"
+      "companyCity": "München"
     },
     "orderData": [
       {
@@ -129,7 +137,7 @@
         "itemQuantity": 6,
         "itemNumber": "77483920",
         "itemSinglePrice": "88.90",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "533.40",
         "itemTax": "101.35",
         "itemTotalPriceIncludingTax": "634.75"
@@ -141,12 +149,14 @@
         "itemQuantity": 7,
         "itemNumber": "99017283",
         "itemSinglePrice": "45.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "315.00",
         "itemTax": "59.85",
         "itemTotalPriceIncludingTax": "374.85"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-01T08:04:34.230336",
+    "orderNumber": "HFD-00005"
   },
   {
     "id": 6,
@@ -162,11 +172,11 @@
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Steuerger\u00e4t SG-900",
+        "itemDescription": "Steuergerät SG-900",
         "itemQuantity": 5,
         "itemNumber": "11223344",
         "itemSinglePrice": "320.75",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1603.75",
         "itemTax": "304.71",
         "itemTotalPriceIncludingTax": "1908.46"
@@ -174,16 +184,18 @@
       {
         "id": 2,
         "position": 2,
-        "itemDescription": "Messf\u00fchler ADP34ex",
+        "itemDescription": "Messfühler ADP34ex",
         "itemQuantity": 5,
         "itemNumber": "85439853",
         "itemSinglePrice": "192.51",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "962.55",
         "itemTax": "182.88",
         "itemTotalPriceIncludingTax": "1145.43"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-20T12:05:03.282783",
+    "orderNumber": "ZEA-00006"
   },
   {
     "id": 7,
@@ -193,7 +205,7 @@
       "companyStreet": "Tulpenweg",
       "companyStreetNumber": "26",
       "companyZip": "19431",
-      "companyCity": "K\u00f6ln"
+      "companyCity": "Köln"
     },
     "orderData": [
       {
@@ -203,22 +215,24 @@
         "itemQuantity": 2,
         "itemNumber": "22334455",
         "itemSinglePrice": "134.40",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "268.80",
         "itemTax": "51.07",
         "itemTotalPriceIncludingTax": "319.87"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-24T08:14:15.639378",
+    "orderNumber": "XTM-00007"
   },
   {
     "id": 8,
     "createdAt": "2025-02-20T17:41:45.461899",
     "customerData": {
       "companyName": "LogiX AG",
-      "companyStreet": "Seestra\u00dfe",
+      "companyStreet": "Seestraße",
       "companyStreetNumber": "20",
       "companyZip": "11594",
-      "companyCity": "N\u00fcrnberg"
+      "companyCity": "Nürnberg"
     },
     "orderData": [
       {
@@ -228,7 +242,7 @@
         "itemQuantity": 1,
         "itemNumber": "12345678",
         "itemSinglePrice": "399.99",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "399.99",
         "itemTax": "76.00",
         "itemTotalPriceIncludingTax": "475.99"
@@ -240,12 +254,14 @@
         "itemQuantity": 10,
         "itemNumber": "77483920",
         "itemSinglePrice": "88.90",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "889.00",
         "itemTax": "168.91",
         "itemTotalPriceIncludingTax": "1057.91"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-08T17:41:45.461899",
+    "orderNumber": "SJM-00008"
   },
   {
     "id": 9,
@@ -255,29 +271,31 @@
       "companyStreet": "Musterweg",
       "companyStreetNumber": "106",
       "companyZip": "85291",
-      "companyCity": "N\u00fcrnberg"
+      "companyCity": "Nürnberg"
     },
     "orderData": [
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Steuerger\u00e4t SG-900",
+        "itemDescription": "Steuergerät SG-900",
         "itemQuantity": 3,
         "itemNumber": "11223344",
         "itemSinglePrice": "320.75",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "962.25",
         "itemTax": "182.83",
         "itemTotalPriceIncludingTax": "1145.08"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-10T15:57:16.060533",
+    "orderNumber": "OZZ-00009"
   },
   {
     "id": 10,
     "createdAt": "2025-02-06T11:48:51.557398",
     "customerData": {
       "companyName": "NeoIndustries",
-      "companyStreet": "S\u00e4ulingstra\u00dfe",
+      "companyStreet": "Säulingstraße",
       "companyStreetNumber": "1",
       "companyZip": "12387",
       "companyCity": "Bremen"
@@ -290,7 +308,7 @@
         "itemQuantity": 4,
         "itemNumber": "44332211",
         "itemSinglePrice": "38.50",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "154.00",
         "itemTax": "29.26",
         "itemTotalPriceIncludingTax": "183.26"
@@ -302,22 +320,24 @@
         "itemQuantity": 9,
         "itemNumber": "22334455",
         "itemSinglePrice": "134.40",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1209.60",
         "itemTax": "229.82",
         "itemTotalPriceIncludingTax": "1439.42"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-02T11:48:51.557398",
+    "orderNumber": "TUW-00010"
   },
   {
     "id": 11,
     "createdAt": "2025-02-02T12:22:55.985067",
     "customerData": {
       "companyName": "InnovativTech Solutions",
-      "companyStreet": "Hauptstra\u00dfe",
+      "companyStreet": "Hauptstraße",
       "companyStreetNumber": "46",
       "companyZip": "93571",
-      "companyCity": "K\u00f6ln"
+      "companyCity": "Köln"
     },
     "orderData": [
       {
@@ -327,12 +347,14 @@
         "itemQuantity": 2,
         "itemNumber": "12345678",
         "itemSinglePrice": "399.99",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "799.98",
         "itemTax": "152.00",
         "itemTotalPriceIncludingTax": "951.98"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-02-21T12:22:55.985067",
+    "orderNumber": "FSS-00011"
   },
   {
     "id": 12,
@@ -342,7 +364,7 @@
       "companyStreet": "Lindenweg",
       "companyStreetNumber": "69",
       "companyZip": "50983",
-      "companyCity": "M\u00fcnchen"
+      "companyCity": "München"
     },
     "orderData": [
       {
@@ -352,19 +374,21 @@
         "itemQuantity": 9,
         "itemNumber": "99017283",
         "itemSinglePrice": "45.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "405.00",
         "itemTax": "76.95",
         "itemTotalPriceIncludingTax": "481.95"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-23T11:38:05.518660",
+    "orderNumber": "NKD-00012"
   },
   {
     "id": 13,
     "createdAt": "2025-02-21T14:06:40.217866",
     "customerData": {
       "companyName": "NeoIndustries",
-      "companyStreet": "Ringstra\u00dfe",
+      "companyStreet": "Ringstraße",
       "companyStreetNumber": "74",
       "companyZip": "24141",
       "companyCity": "Berlin"
@@ -377,12 +401,14 @@
         "itemQuantity": 3,
         "itemNumber": "99887766",
         "itemSinglePrice": "210.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "630.00",
         "itemTax": "119.70",
         "itemTotalPriceIncludingTax": "749.70"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-01T14:06:40.217866",
+    "orderNumber": "SML-00013"
   },
   {
     "id": 14,
@@ -392,7 +418,7 @@
       "companyStreet": "Lindenweg",
       "companyStreetNumber": "117",
       "companyZip": "83836",
-      "companyCity": "N\u00fcrnberg"
+      "companyCity": "Nürnberg"
     },
     "orderData": [
       {
@@ -402,12 +428,14 @@
         "itemQuantity": 4,
         "itemNumber": "12345678",
         "itemSinglePrice": "399.99",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1599.96",
         "itemTax": "303.99",
         "itemTotalPriceIncludingTax": "1903.95"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-11T14:38:43.483261",
+    "orderNumber": "XCK-00014"
   },
   {
     "id": 15,
@@ -423,11 +451,11 @@
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Steuerger\u00e4t SG-900",
+        "itemDescription": "Steuergerät SG-900",
         "itemQuantity": 5,
         "itemNumber": "11223344",
         "itemSinglePrice": "320.75",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1603.75",
         "itemTax": "304.71",
         "itemTotalPriceIncludingTax": "1908.46"
@@ -439,19 +467,21 @@
         "itemQuantity": 3,
         "itemNumber": "99017283",
         "itemSinglePrice": "45.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "135.00",
         "itemTax": "25.65",
         "itemTotalPriceIncludingTax": "160.65"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-31T14:31:43.629742",
+    "orderNumber": "HMK-00015"
   },
   {
     "id": 16,
     "createdAt": "2025-02-21T09:59:07.220321",
     "customerData": {
       "companyName": "PixelCraft Ltd",
-      "companyStreet": "Bergstra\u00dfe",
+      "companyStreet": "Bergstraße",
       "companyStreetNumber": "48",
       "companyZip": "66469",
       "companyCity": "Bremen"
@@ -464,7 +494,7 @@
         "itemQuantity": 10,
         "itemNumber": "77483920",
         "itemSinglePrice": "88.90",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "889.00",
         "itemTax": "168.91",
         "itemTotalPriceIncludingTax": "1057.91"
@@ -476,12 +506,14 @@
         "itemQuantity": 7,
         "itemNumber": "55667788",
         "itemSinglePrice": "289.99",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "2029.93",
         "itemTax": "385.69",
         "itemTotalPriceIncludingTax": "2415.62"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-01T09:59:07.220321",
+    "orderNumber": "PZN-00016"
   },
   {
     "id": 17,
@@ -497,36 +529,38 @@
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Steuerger\u00e4t SG-900",
+        "itemDescription": "Steuergerät SG-900",
         "itemQuantity": 3,
         "itemNumber": "11223344",
         "itemSinglePrice": "320.75",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "962.25",
         "itemTax": "182.83",
         "itemTotalPriceIncludingTax": "1145.08"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-02T09:11:18.466799",
+    "orderNumber": "NOL-00017"
   },
   {
     "id": 18,
     "createdAt": "2025-02-15T13:42:55.785347",
     "customerData": {
       "companyName": "Tolle Firma GmbH",
-      "companyStreet": "S\u00e4ulingstra\u00dfe",
+      "companyStreet": "Säulingstraße",
       "companyStreetNumber": "39",
       "companyZip": "78690",
-      "companyCity": "K\u00f6ln"
+      "companyCity": "Köln"
     },
     "orderData": [
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Messf\u00fchler ADP34ex",
+        "itemDescription": "Messfühler ADP34ex",
         "itemQuantity": 8,
         "itemNumber": "85439853",
         "itemSinglePrice": "192.51",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1540.08",
         "itemTax": "292.62",
         "itemTotalPriceIncludingTax": "1832.70"
@@ -538,19 +572,21 @@
         "itemQuantity": 6,
         "itemNumber": "77483920",
         "itemSinglePrice": "88.90",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "533.40",
         "itemTax": "101.35",
         "itemTotalPriceIncludingTax": "634.75"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-03T13:42:55.785347",
+    "orderNumber": "LQJ-00018"
   },
   {
     "id": 19,
     "createdAt": "2025-02-03T08:02:32.870664",
     "customerData": {
       "companyName": "LogiX AG",
-      "companyStreet": "Hauptstra\u00dfe",
+      "companyStreet": "Hauptstraße",
       "companyStreetNumber": "85",
       "companyZip": "74945",
       "companyCity": "Leipzig"
@@ -559,11 +595,11 @@
       {
         "id": 1,
         "position": 1,
-        "itemDescription": "Messf\u00fchler ADP34ex",
+        "itemDescription": "Messfühler ADP34ex",
         "itemQuantity": 7,
         "itemNumber": "85439853",
         "itemSinglePrice": "192.51",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1347.57",
         "itemTax": "256.04",
         "itemTotalPriceIncludingTax": "1603.61"
@@ -575,19 +611,21 @@
         "itemQuantity": 5,
         "itemNumber": "44332211",
         "itemSinglePrice": "38.50",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "192.50",
         "itemTax": "36.58",
         "itemTotalPriceIncludingTax": "229.08"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-30T08:02:32.870664",
+    "orderNumber": "JSS-00019"
   },
   {
     "id": 20,
     "createdAt": "2025-02-17T09:51:10.426655",
     "customerData": {
       "companyName": "DeltaSoft Systems",
-      "companyStreet": "Bahnhofstra\u00dfe",
+      "companyStreet": "Bahnhofstraße",
       "companyStreetNumber": "69",
       "companyZip": "44342",
       "companyCity": "Hamburg"
@@ -600,19 +638,21 @@
         "itemQuantity": 7,
         "itemNumber": "55667788",
         "itemSinglePrice": "289.99",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "2029.93",
         "itemTax": "385.69",
         "itemTotalPriceIncludingTax": "2415.62"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-29T09:51:10.426655",
+    "orderNumber": "AAW-00020"
   },
   {
     "id": 21,
     "createdAt": "2025-02-12T14:32:25.140715",
     "customerData": {
       "companyName": "NeoIndustries",
-      "companyStreet": "Ringstra\u00dfe",
+      "companyStreet": "Ringstraße",
       "companyStreetNumber": "59",
       "companyZip": "91870",
       "companyCity": "Stuttgart"
@@ -625,19 +665,21 @@
         "itemQuantity": 2,
         "itemNumber": "44332211",
         "itemSinglePrice": "38.50",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "77.00",
         "itemTax": "14.63",
         "itemTotalPriceIncludingTax": "91.63"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-24T14:32:25.140715",
+    "orderNumber": "VPU-00021"
   },
   {
     "id": 22,
     "createdAt": "2025-02-18T10:45:48.510663",
     "customerData": {
       "companyName": "InnovativTech Solutions",
-      "companyStreet": "Bergstra\u00dfe",
+      "companyStreet": "Bergstraße",
       "companyStreetNumber": "87",
       "companyZip": "46842",
       "companyCity": "Stuttgart"
@@ -650,12 +692,14 @@
         "itemQuantity": 1,
         "itemNumber": "77483920",
         "itemSinglePrice": "88.90",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "88.90",
         "itemTax": "16.89",
         "itemTotalPriceIncludingTax": "105.79"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-18T10:45:48.510663",
+    "orderNumber": "WQA-00022"
   },
   {
     "id": 23,
@@ -675,7 +719,7 @@
         "itemQuantity": 5,
         "itemNumber": "99887766",
         "itemSinglePrice": "210.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1050.00",
         "itemTax": "199.50",
         "itemTotalPriceIncludingTax": "1249.50"
@@ -687,22 +731,24 @@
         "itemQuantity": 9,
         "itemNumber": "99017283",
         "itemSinglePrice": "45.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "405.00",
         "itemTax": "76.95",
         "itemTotalPriceIncludingTax": "481.95"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-08T10:29:25.807368",
+    "orderNumber": "UTV-00023"
   },
   {
     "id": 24,
     "createdAt": "2025-02-17T16:28:01.024274",
     "customerData": {
       "companyName": "TechTide GmbH",
-      "companyStreet": "Seestra\u00dfe",
+      "companyStreet": "Seestraße",
       "companyStreetNumber": "72",
       "companyZip": "72077",
-      "companyCity": "N\u00fcrnberg"
+      "companyCity": "Nürnberg"
     },
     "orderData": [
       {
@@ -712,7 +758,7 @@
         "itemQuantity": 6,
         "itemNumber": "22334455",
         "itemSinglePrice": "134.40",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "806.40",
         "itemTax": "153.22",
         "itemTotalPriceIncludingTax": "959.62"
@@ -720,16 +766,18 @@
       {
         "id": 2,
         "position": 2,
-        "itemDescription": "Messf\u00fchler ADP34ex",
+        "itemDescription": "Messfühler ADP34ex",
         "itemQuantity": 4,
         "itemNumber": "85439853",
         "itemSinglePrice": "192.51",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "770.04",
         "itemTax": "146.31",
         "itemTotalPriceIncludingTax": "916.35"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-13T16:28:01.024274",
+    "orderNumber": "BTL-00024"
   },
   {
     "id": 25,
@@ -749,22 +797,24 @@
         "itemQuantity": 5,
         "itemNumber": "22334455",
         "itemSinglePrice": "134.40",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "672.00",
         "itemTax": "127.68",
         "itemTotalPriceIncludingTax": "799.68"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-03-05T11:16:13.126959",
+    "orderNumber": "LXM-00025"
   },
   {
     "id": 26,
     "createdAt": "2025-02-24T11:56:13.119029",
     "customerData": {
       "companyName": "Tolle Firma GmbH",
-      "companyStreet": "Ringstra\u00dfe",
+      "companyStreet": "Ringstraße",
       "companyStreetNumber": "24",
       "companyZip": "35430",
-      "companyCity": "K\u00f6ln"
+      "companyCity": "Köln"
     },
     "orderData": [
       {
@@ -774,7 +824,7 @@
         "itemQuantity": 6,
         "itemNumber": "99887766",
         "itemSinglePrice": "210.00",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "1260.00",
         "itemTax": "239.40",
         "itemTotalPriceIncludingTax": "1499.40"
@@ -786,11 +836,13 @@
         "itemQuantity": 1,
         "itemNumber": "44332211",
         "itemSinglePrice": "38.50",
-        "currency": "\u20ac",
+        "currency": "€",
         "itemTotalPrice": "38.50",
         "itemTax": "7.32",
         "itemTotalPriceIncludingTax": "45.82"
       }
-    ]
+    ],
+    "expectedDeliveryDate": "2025-04-09T11:56:13.119029",
+    "orderNumber": "AWT-00026"
   }
 ]

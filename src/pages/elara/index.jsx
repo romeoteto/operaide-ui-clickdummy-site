@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint";
@@ -72,11 +72,23 @@ const client = new OpenAI({
 const PageElara = () => {
   const [showHistory, setShowHistory] = useState(false);
   const [currentChat, setCurrentChat] = useState({
-    key: "Xfk3X34k96x9tSfdc",
-    label: "TechDB Chat",
+    key: "gpt",
+    label: "GPT-4o",
   });
   const systemPromptRef = useRef("You are a helpful assistant.");
   const listRef = useRef(null);
+  const senderRef = useRef(null); //not implemented yet but: this should be used to re-focus the sender programmatically
+
+  const [isStreaming, setIsStreaming] = useState(false);
+
+  // refocus the sender after stream
+  useEffect(() => {
+    if (!isStreaming) {
+      senderRef.current?.focus({
+        cursor: "start",
+      });
+    }
+  }, [isStreaming]);
 
   // EXPERIMENTAL
   const [agent] = useXAgent({
@@ -98,6 +110,7 @@ const PageElara = () => {
       ];
 
       try {
+        setIsStreaming(true);
         const stream = await client.chat.completions.create({
           model: "gpt-4o",
           messages: formattedMessages,
@@ -110,9 +123,11 @@ const PageElara = () => {
         }
 
         onSuccess(content);
+        setIsStreaming(false);
       } catch (error) {
         // onError(error); // Uncomment if you want to handle error
         console.error(error);
+        setIsStreaming(false);
       }
     },
   });
@@ -156,6 +171,9 @@ const PageElara = () => {
       padding,
       lineWidth,
       margin,
+      fontSizeHeading4,
+      fontSizeHeading5,
+      colorTextTertiary,
     },
   } = theme.useToken();
 
@@ -401,6 +419,7 @@ const PageElara = () => {
     return (
       <Sender
         autoSize={{ minRows: 2, maxRows: 6 }}
+        ref={senderRef}
         style={{
           maxWidth: 766,
           width: "100%",
@@ -478,9 +497,18 @@ const PageElara = () => {
         <ChatSender />
         {suggestions.length > 0 && (
           <Prompts
+            wrap
             items={suggestions}
             onItemClick={(info) => {
               onRequest(info.data.prompt);
+            }}
+            styles={{
+              list: {
+                maxWidth: "766px",
+              },
+              item: {
+                width: "calc(50% - 6px)",
+              },
             }}
           />
         )}

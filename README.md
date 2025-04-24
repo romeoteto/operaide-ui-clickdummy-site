@@ -28,10 +28,28 @@ The clickdummy features Elara - a chatbot UI that enables users to chat with "ch
 
 ### Chat types
 
-Elara currently simulates two types of chat:
+Elara currently simulates three types of chat:
 
-1. If you choose "Chat with Orders" from the top bar menu you chat with the order database from the "Order Manager" app. This app contains of two Reaktors: one Reaktor ("Analyzing Orders Agent") that analyzes orders and puts them into an ERP and "Order Chat" that simulates chatting with these order data in the ERP.
-2. If you choose any other chat type you simply chat with a GPT-4o model from a standard OpenAI API.
+#### Chat with Orders
+
+This is a chat that enables employees of the company to chat with the order database.
+
+#### Customer Order Chat
+
+This is a chat that allows customers to retrieve information about their order. To make it work a customer needs to provide the order number and the zip code. Otherwise the chat will not provide any information. This is some sample data that will work:
+
+| Order Number | ZIP Code |
+| ------------ | -------- |
+| YRR-00001    | 47443    |
+| TNU-00002    | 87888    |
+| DDI-00003    | 47994    |
+| DNW-00004    | 22855    |
+| HFD-00005    | 93479    |
+| ZEA-00006    | 31372    |
+
+#### Basic chat
+
+This is just a simple chat with a GPT-4o model.
 
 ### Chat implementation
 
