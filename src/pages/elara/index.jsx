@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint";
 
-import { systemPrompts } from "./systemPrompts";
+import { prompts } from "./promptLibrary";
 
 import {
   Button,
@@ -24,6 +24,7 @@ import {
   Sender,
   Bubble,
   Welcome,
+  Prompts,
   useXAgent,
   useXChat,
 } from "@ant-design/x";
@@ -127,7 +128,7 @@ const PageElara = () => {
   const onNewConversation = ({ key }) => {
     const obj = findItemByKey(dropdownItems, key);
     setCurrentChat({ key: obj.key, label: obj.label });
-    const prompt = systemPrompts.find((p) => p.deploymentId === key)?.prompt;
+    const prompt = prompts.find((p) => p.deploymentId === key)?.systemPrompt;
     systemPromptRef.current = prompt || "You are a helpful assistant.";
     setMessages([]);
   };
@@ -441,6 +442,19 @@ const PageElara = () => {
   };
 
   const StartScreen = () => {
+    const suggestions = (
+      prompts.find((prompt) => prompt.deploymentId === currentChat.key)
+        ?.suggestions || []
+    ).map((s) => ({
+      ...s,
+      icon: s.icon ? (
+        <s.icon
+          size="1em"
+          style={{ color: colorPrimary, marginBottom: "-0.1em" }}
+        />
+      ) : null,
+    }));
+
     return (
       <Flex
         vertical
@@ -462,6 +476,14 @@ const PageElara = () => {
           description={`I am your personal assistant at ${currentOrganization.label}. How can I help you today?`}
         />
         <ChatSender />
+        {suggestions.length > 0 && (
+          <Prompts
+            items={suggestions}
+            onItemClick={(info) => {
+              onRequest(info.data.prompt);
+            }}
+          />
+        )}
       </Flex>
     );
   };
