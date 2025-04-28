@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint";
 
+import { useLocation } from "wouter";
+
 import { prompts } from "./promptLibrary";
 
 import {
@@ -44,9 +46,10 @@ import {
   SquarePen,
   ArrowUp,
   BotMessageSquare,
+  AppWindowMac,
 } from "lucide-react";
 
-import { apps } from "../../database/apps";
+import { apps } from "../reaktor-ai-engine/appDatabase";
 
 import UserMenu3 from "../../components/userMenu3";
 import MarkdownRenderer from "./markdownRenderer";
@@ -81,6 +84,7 @@ const PageElara = () => {
 
   const [isStreaming, setIsStreaming] = useState(false);
 
+  const [_, navigate] = useLocation();
   // refocus the sender after stream
   useEffect(() => {
     if (!isStreaming) {
@@ -701,6 +705,14 @@ const PageElara = () => {
                 icon={<TextSearch size="1em" />}
                 onClick={() => setShowHistory(!showHistory)}
                 style={iconStyle}
+              />
+            </Tooltip>
+            <Tooltip title={screens.md && "App Builder"}>
+              <Button
+                type="text"
+                icon={<AppWindowMac size={"1em"} />}
+                style={iconStyle}
+                onClick={() => navigate("/elara/app-builder")}
               />
             </Tooltip>
             {screens.md && itemsOpenAI.length > 0 && (

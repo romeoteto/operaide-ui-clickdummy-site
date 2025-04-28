@@ -1,4 +1,4 @@
-import AppFrontendOrderManager from "../pages/apps/order-manager";
+import AppFrontendOrderManager from "../apps/order-manager";
 
 export const frontendMap = { "order-manager": AppFrontendOrderManager };
 
@@ -61,7 +61,14 @@ export const apps = [
         label: "Analyzing Orders Agent",
         description:
           "An agent that takes orders from e-mails, extracts data and puts them to an ERP system.",
-        deployments: [],
+        deployments: [
+          {
+            id: "xTi8WKQs3920h4TQX",
+            label: "Analyzing Orders Agent Deployment",
+            description:
+              "An agent that takes orders from e-mails, extracts data and puts them to an ERP system.",
+          },
+        ],
       },
       {
         id: "order-chat",

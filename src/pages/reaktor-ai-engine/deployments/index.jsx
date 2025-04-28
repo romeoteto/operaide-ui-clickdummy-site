@@ -13,7 +13,7 @@ import {
 } from "antd";
 import { useSearchParams, Link } from "wouter";
 import { Ellipsis, ChevronDown, Trash2 } from "lucide-react";
-import { apps } from "../../../database/apps";
+import { apps } from "../appDatabase";
 import PageHeader from "../../../components/pageHeader";
 
 const PageDeploymentsIndex = () => {

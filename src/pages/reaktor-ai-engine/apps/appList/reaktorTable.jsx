@@ -15,7 +15,7 @@ import {
 } from "antd";
 import { Ellipsis, Rocket, Trash2, Download, Box, Monitor } from "lucide-react";
 import { Link } from "wouter";
-import { frontendMap } from "../../../../database/apps";
+import { frontendMap } from "../../appDatabase";
 import { useLocation } from "wouter";
 
 const { Text, Title: AntTitle } = Typography;

@@ -4,7 +4,7 @@ import { useLocation, Link } from "wouter";
 import { useSelector } from "react-redux";
 import { breadcrumbConfig } from "./breadcrumbConfig";
 import { getBreadcrumbsFromFlatConfig } from "./getBreadcrumbsFromFlatConfig";
-import { apps } from "../../database/apps";
+import { apps } from "../../pages/reaktor-ai-engine/appDatabase";
 import { users } from "../../database/database";
 
 const Breadcrumbs = () => {

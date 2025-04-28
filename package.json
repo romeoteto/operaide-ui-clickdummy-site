@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@ant-design/x": "^1.1.1",
+    "@codesandbox/sandpack-react": "^2.20.0",
     "@reduxjs/toolkit": "^2.6.1",
     "ag-grid-react": "^33.1.1",
     "antd": "^5.24.4",
@@ -26,6 +27,7 @@
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
+    "react-live": "^4.1.8",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
     "recharts": "^2.15.2",

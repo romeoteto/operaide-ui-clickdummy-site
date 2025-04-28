@@ -6,7 +6,7 @@ import { useLocation } from "wouter";
 
 import backgroundImage from "../../assets/app-store-hero.jpg";
 
-import { apps, frontendMap } from "../../database/apps";
+import { apps, frontendMap } from "../reaktor-ai-engine/appDatabase";
 
 const { Title, Text } = Typography;
 const { Meta } = Card;

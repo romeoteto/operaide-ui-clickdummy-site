@@ -1,6 +1,6 @@
 import React from "react";
 import { List, theme } from "antd";
-import { apps } from "../../../../database/apps";
+import { apps } from "../../appDatabase";
 
 import ReaktorTable from "./reaktorTable";
 

@@ -12,7 +12,7 @@ export default function Diagram({ chart }) {
       startOnLoad: false,
       theme: "base",
       htmlLabels: false,
-      themeVariables: {
+      /*  themeVariables: {
         primaryColor: token.colorPrimary,
         primaryTextColor: token.colorTextLightSolid,
         primaryBorderColor: token.colorPrimaryBorder,
@@ -29,7 +29,7 @@ export default function Diagram({ chart }) {
         // 👇 Fix cluster header title
         tertiaryColor: token.colorPrimary, // background of cluster title
         tertiaryTextColor: token.colorText, // text color in the header
-      },
+      }, */
     });
 
     const renderMermaid = async () => {

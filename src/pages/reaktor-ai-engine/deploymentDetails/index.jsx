@@ -1,9 +1,9 @@
 import { useParams, useSearchParams } from "wouter";
-import { apps } from "../../../database/apps";
+import { apps } from "../appDatabase";
 import PageHeader from "../../../components/pageHeader";
 import { Info, CircleGauge, Settings2, Workflow, Play } from "lucide-react";
 import TabNav from "../../../components/tabNav";
-import { Flex, Typography, Table, Tag, Image, Input, Button } from "antd";
+
 import Dashboard from "./dashboard";
 
 export default function PageDeploymentDetails() {

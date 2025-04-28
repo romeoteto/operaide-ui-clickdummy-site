@@ -12,7 +12,7 @@ import {
 import { useParams, Link } from "wouter";
 import { Ellipsis, Trash2, Rocket } from "lucide-react";
 
-import { apps } from "../../../database/apps";
+import { apps } from "../appDatabase";
 
 const Deployments = () => {
   const params = useParams();

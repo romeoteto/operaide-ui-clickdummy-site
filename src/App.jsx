@@ -25,13 +25,13 @@ import PageAppStore from "./pages/appStore";
 
 import { currentGlobalTheme } from "./database/database";
 
-// ✅ Import Redux action
 import { setResolvedAppearance } from "./state/appSettingsSlice"; // adjust path if needed
 import SystemAdminLayout from "./layouts/systemAdmin";
 
 import AppsOnlyLayout from "./layouts/appsOnly";
 import AppsIndex from "./pages/apps";
 import PageElara from "./pages/elara";
+import AppBuilder from "./pages/elara/appBuilder";
 
 // ✅ Custom hook to resolve appearance based on system settings
 function useResolvedAppearance(appearanceSetting, onResolve) {
@@ -174,6 +174,7 @@ export default function App() {
         <XProvider theme={orgTheme}>
           <Switch>
             <Route path="/elara" component={PageElara} />
+            <Route path="/elara/app-builder" component={AppBuilder} />
           </Switch>
         </XProvider>
       ) : (

@@ -1,7 +1,7 @@
-import imageKnowledgeChat from "../assets/reaktor-images/undraw_chat_qmyo.svg";
+/* import imageKnowledgeChat from "../assets/reaktor-images/undraw_chat_qmyo.svg";
 import imageOrderManager from "../assets/reaktor-images/undraw_order-delivered_puaw.svg";
 import imageICP from "../assets/reaktor-images/undraw_to-do_06xe.svg";
-import imageLeadNurturer from "../assets/reaktor-images/undraw_web-search_9qqc.svg";
+import imageLeadNurturer from "../assets/reaktor-images/undraw_web-search_9qqc.svg"; */
 
 import operaideLogoLight from "../assets/logo-light.svg";
 import operaideLogoDark from "../assets/logo-dark.svg";
@@ -16,7 +16,7 @@ import orgSignetDark from "../assets/org/signet-dark.png";
 import logoGeonica from "../assets/org/logo-geonica.png";
 import signetGeonica from "../assets/org/signet-geonica.png";
 
-export const blueprints = [
+/* export const blueprints = [
   {
     id: "op.demo.knowledge-chat",
     label: "Knowledge Chat",
@@ -131,7 +131,7 @@ export const blueprints = [
     version: "v1",
     deployments: [],
   },
-];
+]; */
 
 export const borderRadiusValues = [
   { id: "square", value: 0, label: "Square" },

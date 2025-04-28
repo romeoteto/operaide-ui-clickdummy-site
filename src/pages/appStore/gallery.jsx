@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Card, Col, Row, Drawer, Button, Flex, theme } from "antd";
 import { Box, MonitorDown, Glasses } from "lucide-react";
-import apps from "../../database/app-store.json";
+import apps from "./appStoreDatabase.json";
 
 const { Meta } = Card;
 

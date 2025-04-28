@@ -1,7 +1,6 @@
 import React from "react";
 import { useRoute, useLocation } from "wouter";
-import { frontendMap } from "../../database/apps";
-import { apps } from "../../database/apps";
+import { apps, frontendMap } from "../reaktor-ai-engine/appDatabase";
 import PageHeader from "../../components/pageHeader";
 import { Fullscreen } from "lucide-react";
 import { Button, Flex } from "antd";
