@@ -34,7 +34,7 @@
     "recharts": "^2.15.2",
     "rehype-highlight": "^7.0.2",
     "svg-pan-zoom": "^3.6.2",
-    "wouter": "^3.6.0"
+    "wouter": "^3.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
