@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { theme as antTheme } from "antd";
-import { Route, Switch } from "wouter";
-import { useCustomLocation } from "./utils/customLocation"
+import { Route, Switch, useLocation } from "wouter";
+// import { useCustomLocation } from "./utils/customLocation"
 
 import { XProvider } from "@ant-design/x";
 
@@ -73,8 +73,7 @@ function useResolvedAppearance(appearanceSetting, onResolve) {
 
 // ✅ Main App component
 export default function App() {
-  // const [location, navigate] = useLocation();
-  const [location, navigate] = useCustomLocation();
+  const [location, navigate] = useLocation();
   const dispatch = useDispatch();
 
   const userIsLoggedIn = useSelector((state) => state.user.isLoggedIn);
