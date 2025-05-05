@@ -4,9 +4,12 @@ import { ghPages } from 'vite-plugin-gh-pages';
 
 // https://vite.dev/config/
 export default defineConfig({
-  // base: '/redesigned-umbrella-e2g6gq5/',
   base: '/operaide-ui-clickdummy/',
   plugins: [react(), ghPages()],
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
   server: {
     host: "0.0.0.0", // 👈 This is the key part
   },

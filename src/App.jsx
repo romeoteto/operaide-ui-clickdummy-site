@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { theme as antTheme } from "antd";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch } from "wouter";
+import { useCustomLocation } from "./utils/customLocation"
 
 import { XProvider } from "@ant-design/x";
 
@@ -32,6 +33,7 @@ import AppsOnlyLayout from "./layouts/appsOnly";
 import AppsIndex from "./pages/apps";
 import PageElara from "./pages/elara";
 import AppBuilder from "./pages/elara/appBuilder";
+
 
 // ✅ Custom hook to resolve appearance based on system settings
 function useResolvedAppearance(appearanceSetting, onResolve) {
@@ -71,7 +73,8 @@ function useResolvedAppearance(appearanceSetting, onResolve) {
 
 // ✅ Main App component
 export default function App() {
-  const [location, navigate] = useLocation();
+  // const [location, navigate] = useLocation();
+  const [location, navigate] = useCustomLocation();
   const dispatch = useDispatch();
 
   const userIsLoggedIn = useSelector((state) => state.user.isLoggedIn);
