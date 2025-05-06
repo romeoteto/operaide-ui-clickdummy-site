@@ -1,35 +1,14 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=/operaide-ui-clickdummy/" />
-  </head>
-  <body></body>
-</html> -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting…</title>
-    <script type="text/javascript">
-      // Extrahiere Pfad, Query und Fragment
-      var pathname = window.location.pathname;
-      var search = window.location.search;
-      var hash = window.location.hash;
+    <link rel="icon" type="image/svg+xml" href="/operaide-ui-clickdummy-site/signet.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      // Entferne das Repo-Basisverzeichnis aus dem Pfad (falls vorhanden)
-      var repoName = "/reaktor-ai-engine"; // <<-- ggf. anpassen
-      if (pathname.startsWith(repoName)) {
-        pathname = pathname.slice(repoName.length);
-      }
-
-      // Baue neue URL zusammen
-      var newUrl = repoName + "/#"+ pathname + search + hash;
-      window.location.replace(newUrl);
-    </script>
+    <title>Operaide | UI Clickdummy</title>
+    <script type="module" crossorigin src="/operaide-ui-clickdummy-site/assets/index-lgUmdUy5.js"></script>
   </head>
   <body>
-    <p>Redirecting…</p>
+    <div id="root"></div>
   </body>
 </html>
-
