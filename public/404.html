@@ -9,9 +9,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/operaide-ui-clickdummy/" />
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <script type="text/javascript">
+      var pathname = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+
+      var repo = "/reaktor-ai-engine";
+
+      if (pathname.startsWith(repo)) {
+        pathname = pathname.substring(repo.length);
+      }
+
+      var newUrl = repo + "/#" + pathname + search + hash;
+      window.location.replace(newUrl);
+    </script>
   </head>
   <body>
-    <p>Redirecting to <a href="/operaide-ui-clickdummy/">/operaide-ui-clickdummy/</a>…</p>
+    <p>Redirecting…</p>
   </body>
 </html>
+
+

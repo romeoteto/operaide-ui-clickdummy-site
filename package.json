@@ -1,5 +1,5 @@
 {
-  "name": "operaide-ui-clickdummy",
+  "name": "operaide-ui-clickdummy-site",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-404": "node generate-404.js",
-    "predeploy": "npm run generate-404 && npm run build",
+    "generate-404": "node copy404.cjs",
+    "predeploy": "npm run build && npm run generate-404",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "react-live": "^4.1.8",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.5.3",
     "recharts": "^2.15.2",
     "rehype-highlight": "^7.0.2",
     "svg-pan-zoom": "^3.6.2",

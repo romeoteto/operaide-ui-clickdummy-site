@@ -15,12 +15,12 @@
 //   },
 // });
 
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { ghPages } from "vite-plugin-gh-pages";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { ghPages } from 'vite-plugin-gh-pages';
 
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/operaide-ui-clickdummy/' : '/',
+  base: '/operaide-ui-clickdummy-site/',
   plugins: [react(), ghPages()],
   build: {
     outDir: 'dist',
@@ -29,4 +29,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
   },
+  // 👇 hier wird die SPA-Fallbackregel gesetzt
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
+  // Wichtig für GitHub Pages: 404 zu index.html
+  // Dies funktioniert nur lokal – für GitHub Pages brauchen wir Schritt 2
 }));
+
